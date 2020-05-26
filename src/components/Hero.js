@@ -14,17 +14,14 @@ export default function Hero() {
                                    
                                    <div class="caption">
                                         <div class="col-md-offset-1 col-md-10">
-                                             <h3>Let's make your life happier</h3>
-                                             <h1>Healthy Living</h1>
-                                             <a href="#team" class="section-btn btn btn-default smoothScroll">Meet Our Doctors</a>
-                                        </div>
+                                             <h3>Life is like a book... Go page by page...</h3>
+                                             <h1>ARUL KADAL DIGITAL LIBRARY</h1>
+                                             </div>
                                    </div>
                               
                               </div>
 
-                              <div class="item item-second" >
-                                   
-                              </div>
+                             
 
 
 
