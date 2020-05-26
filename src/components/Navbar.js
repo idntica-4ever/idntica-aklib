@@ -28,6 +28,7 @@ export default class Navbar extends Component {
 
 
         <div id="navbarBasicExample" className="navbar-menu">
+          
           <div className="navbar-start">
           {!this.props.auth.isAuthenticated && (
             <div className="navbar-item">
@@ -47,8 +48,24 @@ export default class Navbar extends Component {
           )}
         </div>
 
+        
+
+       
+
+
 
           <div className="navbar-end">
+
+          <div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Search your books here..."/>
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+
+
             <div className="navbar-item">
               {this.props.auth.isAuthenticated && this.props.auth.user && (
                 <p>
