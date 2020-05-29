@@ -6,11 +6,7 @@ import Home from './components/Home';
 
 import Footer from './components/Footer';
 
-<<<<<<< HEAD
-//import { Auth } from 'aws-amplify';
-=======
 import { Auth } from 'aws-amplify';
->>>>>>> rjoealex commit 1
 //import { library } from '@fortawesome/fontawesome-svg-core';
 //import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
