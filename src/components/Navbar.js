@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import logo from '../images/logo.png';
 import { Auth } from 'aws-amplify';
 
 
@@ -21,9 +23,9 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/">
-            <img src="logoidntica1.png" width="112" height="28" alt="Idntica logo" />
-          </a>
+        <Link to='/'>
+<img src={logo} style={{width:"8rem", height: "3rem"}} alt="library" className="navbar-brand"/>
+</Link>
         </div>
 
 

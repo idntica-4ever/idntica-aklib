@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="content has-text-centered">
         <p>
-           Idntica 2019. Copyrighted.
+           idntica 2020 Copyrighted.
         </p>
       </div>
     </footer>
