@@ -84,10 +84,7 @@ body {
   
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
 .slider .owl-dots {
     position: absolute;
     top: 500px;
@@ -111,10 +108,7 @@ body {
   background-color: #ffffff;
   border-color: transparent;
 }
->>>>>>> rjoealex home page trial commit
-=======
 
->>>>>>> master reworked commit by rjoealex
 
 .slider .caption {
   display: flex;
@@ -123,11 +117,8 @@ body {
   text-align: center;
   background-color: rgba(248, 240, 240, 0.2);
   height: 100%;
-<<<<<<< HEAD
   color: rgb(136, 6, 6);
-=======
   color: #fff;
->>>>>>> rjoealex home page trial commit
   cursor: e-resize;
 }
 
@@ -144,10 +135,7 @@ body {
   background-image: url(../src/images/slider1.jpg);
   
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> search commit rjoe
+
 
 
 
@@ -160,7 +148,6 @@ body {
   display: flex;
   
  
-<<<<<<< HEAD
 }
 
 .searchTerm {
@@ -204,11 +191,9 @@ input[type="text"] {
   height: 35px;
   font-size: 25px;
 }
-=======
 .slider .item-second {
   background-image: url(../src/images/slider2.jpg);
-=======
->>>>>>> search commit rjoe
+
 }
 
 .searchTerm {
@@ -248,11 +233,8 @@ input[type="text"] {
 }
 
 
-<<<<<<< HEAD
->>>>>>> rjoealex home page trial commit
-=======
+
 input[type="text"] {
   height: 35px;
   font-size: 25px;
 }
->>>>>>> search commit rjoe
