@@ -1,0 +1,10 @@
+{
+    "api": { 
+      "invokeUrl": "https://xmxjdte239.execute-api.ap-south-1.amazonaws.com/v1"
+    },
+    "cognito": {
+      "REGION": "ap-south-1",
+      "USER_POOL_ID": "ap-south-1_iQVKHiPuC",
+      "APP_CLIENT_ID": "2bp52vq3biob51k1jh1po2diqf"
+    } 
+  }
