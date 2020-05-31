@@ -63,6 +63,7 @@ async componentDidMount(){
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
             </Switch>
+           
             <Footer />
           </div>
         </Router>
