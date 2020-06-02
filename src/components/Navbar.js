@@ -2,23 +2,16 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import logo from '../images/logo.png';
 import { Auth } from 'aws-amplify';
-import axios from "axios";
-import Bookquery from './Bookquery';
 
-const config = require('../config.json');
+
+
 
 
 
 export default class Navbar extends Component {
 
 
-  state = {
-    newquery: {
-        "book_query": ""
-    },
-    queries: []
-  }
-
+ 
 
 
   //handle logout
@@ -35,43 +28,7 @@ export default class Navbar extends Component {
     }
   }
 
-  // handle global search
-  handleglobalsearch = async(book_query, event) => {
-    event.preventDefault();
 
-    console.log ("Book Query Received", book_query);
-
-    try {
-
-      const params = {
-        "book_query": book_query
-      };
-
-      console.log("Fetching API");
-      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
-      this.setState({ queries: res.data });
-     console.log("Fetched Data", this.state.queries);
-
-     this.assignSearchedresults();
-     // validating search results
-
-    } catch (error) {
-      console.log(`An error has occurred: ${error}`);
-    }
-  }
-
-
-  assignSearchedresults = async () => {
-  console.log("Assigning to Bookquery");
-  console.log ("Number of results returned :", this.state.queries.length);
-  const testing = this.state.queries && this.state.queries.length > 0
-  ?this.state.queries.map(searchresult => <Bookquery book_title= {searchresult.book_title} book_author={searchresult.book_author} status_key={searchresult.status_key} key={searchresult.author_title} />)
-  : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>  
-  console.log("Testing value : ", testing);
-  }
-
-
-  onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, "book_query": event.target.value } });
 
   render() {
     return (
@@ -112,20 +69,7 @@ export default class Navbar extends Component {
 
           <div className="navbar-end">
 
-          <form onSubmit={event => this.handleglobalsearch(this.state.newquery.book_query, event)}>
-          <div class="wrap">
-
-   <div class="search">
-      <input type="text" className="searchTerm" placeholder="Search your books here..."  
-      value={this.state.newquery.book_query} 
-      onChange={this.onAddBookQueryChange}/>
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
-</div>
-
-</form>
+        
 
             <div className="navbar-item">
               {this.props.auth.isAuthenticated && this.props.auth.user && (

@@ -27,10 +27,13 @@ export default class Bookquery extends Component {
     return (
 
       <div>
-              <p className="product-title">Book Title: {this.props.book_title }</p>
-              <p className="product-id">Book Author:{ this.props.book_author}</p>
+              <p className="product-title">Book Title: {this.props.Book_Title }</p>
+              <p className="product-id">Book Author:{ this.props.Book_Author}</p>
+              <p className="product-id">Book Classification:{ this.props.Book_Classification_No}</p>
               
-              <p className="product-id">Book Status: { this.props.status_key}</p>
+              <p className="product-id">Book Scope: { this.props.Book_Scope}</p>
+              <p className="product-id">Book Status: { this.props.Book_Status}</p>
+
             </div>
 
       /*

@@ -4,7 +4,7 @@ export default function Hero() {
   return (
   
 <section id="home" class="slider" data-stellar-background-ratio="0.5">
-          <div class="container">
+          <div class="sli">
                <div class="row">
 
                          <div class="owl-carousel owl-theme">

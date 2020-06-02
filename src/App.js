@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-
+import SearchList from './components/SearchList'
 import Footer from './components/Footer';
 
 import { Auth } from 'aws-amplify';
+import SearchItem from './components/SearchItem';
+
+
+
 //import { library } from '@fortawesome/fontawesome-svg-core';
 //import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
@@ -47,6 +51,8 @@ async componentDidMount(){
 
   render() {
 
+ 
+
     const authProps = {
       isAuthenticated: this.state.isAuthenticated,
       user: this.state.user,
@@ -63,7 +69,8 @@ async componentDidMount(){
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
             </Switch>
-           
+           <SearchList />
+          <SearchItem/>
             <Footer />
           </div>
         </Router>
