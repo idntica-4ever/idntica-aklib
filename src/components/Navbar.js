@@ -35,7 +35,7 @@ export default class Navbar extends Component {
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
         <Link to='/'>
-<img src={logo} style={{width:"8rem", height: "3rem"}} alt="library" className="navbar-brand"/>
+
 </Link>
         </div>
 
@@ -45,7 +45,7 @@ export default class Navbar extends Component {
           <div className="navbar-start">
           {!this.props.auth.isAuthenticated && (
             <div className="navbar-item">
-            <a href="/" className="navbar-item">
+            <a href="/" className="button is-primary">
               Home
             </a>
             
@@ -54,7 +54,7 @@ export default class Navbar extends Component {
           )}
           {this.props.auth.isAuthenticated && (
           <div className="navbar-item">
-          <a href="/" className="navbar-item">
+          <a href="/" className="button is-primary">
               Home
           </a>  
           </div>  

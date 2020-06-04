@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Bookquery from './Bookquery';
+//import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -73,7 +74,7 @@ export default class SearchList extends Component {
         : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div> 
        
     return (
-      
+     
            <div className="bookcontainer">
   
   <div className="col">
@@ -86,7 +87,8 @@ export default class SearchList extends Component {
       value={this.state.newquery.book_query} 
       
       onChange={this.onAddBookQueryChange}/>
-      <button type="submit" className="searchButton" >
+      
+     <button type="submit" className="searchButton">
       <i className="fa fa-search" />
      </button>
    </div>
@@ -95,13 +97,14 @@ export default class SearchList extends Component {
 </form>
       
     </div>
-<ul>
-    
-  {booklist}
-</ul>
+   
+    {booklist}
 </div>
 
   )
+ 
+  
+ 
 }
 
 
