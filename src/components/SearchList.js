@@ -19,16 +19,21 @@ export default class SearchList extends Component {
     booklst: []
   }
 
-
-  
+// upercase function
+  toUpperCase = () => {
+    const upperCase = this.state.text.toUpperCase();
+    this.setState({
+        text: upperCase
+    });
+}
 
 
 
   // handle global search
   handleglobalsearch = async(book_query, event) => {
     event.preventDefault();
-
-    console.log ("Book Query Received", book_query);
+    const book_query_upper= book_query.toUpperCase();
+    console.log ("Book Query Received", book_query_upper);
 
     try {
 
@@ -37,7 +42,7 @@ export default class SearchList extends Component {
       };
 
       console.log("Fetching API");
-      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
+      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
       this.setState({ queries: res.data });
      console.log("Fetched Data", this.state.queries);
 
@@ -84,20 +89,25 @@ export default class SearchList extends Component {
 
    <div class="search">
       <input type="text" className="searchTerm" placeholder="Search your books here..."  
+
+      
       value={this.state.newquery.book_query} 
       
       onChange={this.onAddBookQueryChange}/>
       
      <button type="submit" className="searchButton">
+
       <i className="fa fa-search" />
      </button>
+            
+     
    </div>
 </div>
 
 </form>
       
     </div>
-   
+    
     {booklist}
 </div>
 
