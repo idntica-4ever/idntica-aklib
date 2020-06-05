@@ -1,10 +1,10 @@
 import React from 'react';
 import '../Search.css';
 import axios from 'axios';
-import Loader from '../loader.gif';
-import PageNavigation from './PageNavigation';
-import Bookquery from './Bookquery';
 
+import PageNavigation from './PageNavigation';
+//import Bookquery from './Bookquery';
+import BookqueryDis from './BookqueryDis';
 
 const config = require('../config.json');
 
@@ -147,7 +147,7 @@ class Search extends React.Component {
 			return (
 				<div className="results-container">
                     { results.map( result => {
-                        return( <Bookquery Book_Title= {result.Book_Title} 
+                        return( <BookqueryDis Book_Title= {result.Book_Title} 
                             Book_Author={result.Book_Author} Book_Classification_No={result.Book_Classification_No} 
                             Book_Status={result.Book_Status} Book_Scope={result.Book_Scope} key={result.author_title} />
                           
@@ -178,9 +178,9 @@ class Search extends React.Component {
         const showNextLink = totalPages > currentPageNo;
         
         const booklist = this.state.queries && this.state.queries.length > 0
-        ?this.state.queries.map(result => <Bookquery Book_Title= {result.Book_Title} 
+        ?this.state.queries.map(result => <BookqueryDis Book_Title= {result.Book_Title} 
           Book_Author={result.Book_Author} Book_Classification_No={result.Book_Classification_No} 
-          Book_Status={result.Book_Status} Book_Scope={result.Book_Scope} key={result.Author_Title} />)
+          Book_Status={result.Book_Status} Book_Scope={result.Book_Scope} Author_Title={result.Author_Title} key={result.Author_Title} />)
         : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div> 
        
 		return (
@@ -191,22 +191,19 @@ class Search extends React.Component {
 			<label className="search-label" htmlFor="search-input">
 				<input
 					type="text"
-					name="query"
+                    name="query"
+                    
 					value={ query }
 					id="search-input"
 					placeholder="Search..."
-					onChange={this.handleOnInputChange}
+                    onChange={this.handleOnInputChange}
+                    
 				/>
 				<i className="fa fa-search search-icon" aria-hidden="true"/>
 			</label>
 
-			{/*	Error Message*/}
-				{message && <p className="message">{ message }</p>}
 
-			{/*	Loader*/}
-			<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
-
-			
+		
 
 			{/*	Result*/}
 			{ this.renderSearchResults() }
@@ -220,9 +217,11 @@ class Search extends React.Component {
 				handleNextClick={ () => this.handlePageClick('next')}
 			/>
 <div>
-<ul>
-                                {booklist}
-                            </ul>
+<div className="py-5">
+              <div className="container">
+                  
+              <div className="row"> {booklist}</div></div></div>
+
 </div>
 			</div>
 		)
