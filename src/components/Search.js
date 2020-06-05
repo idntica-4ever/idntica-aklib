@@ -84,13 +84,15 @@ class Search extends React.Component {
               "book_query": query
             };
       
-            console.log("Fetching API");
+			console.log("Fetching API for query : ", query);
+			
             const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${query}`, params);
            this.setState({ queries: res.data });
            
                 const total = res.data.total;
                 
 				const totalPagesCount = this.getPageCount( total, 20 );
+				//console.log("Length : ", res.data.hits.length);
 				const resultNotFoundMsg = ! res.data.hits.length
 										? 'There are no more search results. Please try a new search'
 										: '';
@@ -104,8 +106,8 @@ class Search extends React.Component {
 					loading: false
 				} )
 			} 
-			catch (error) {
-                console.log(`An error has occurred: ${error}`);
+			catch (err) {
+                console.log(`An error has occurred: ${err}`);
               }
 	};
 
