@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Search from './components/Search'
 import Footer from './components/Footer';
-
+import SearchList from './components/SearchList';
 import { Auth } from 'aws-amplify';
 
 
@@ -69,8 +69,8 @@ async componentDidMount(){
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
             </Switch>
-          
-          <Search/>
+          <SearchList/>
+         
             <Footer />
           </div>
         </Router>
