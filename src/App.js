@@ -9,6 +9,17 @@ import SearchList from './components/SearchList';
 import { Auth } from 'aws-amplify';
 import SearchListGirdView from './components/SearchListGirdView';
 import TestPri from './components/TestPri';
+//import Amplify, { Auth } from 'aws-amplify';
+//import awsconfig from './aws-exports';
+import LogIn from './components/auth/LogIn';
+import Register from './components/auth/Register';
+import ForgotPassword from './components/auth/ForgotPassword';
+import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
+import ChangePassword from './components/auth/ChangePassword';
+import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
+import Welcome from './components/auth/Welcome';
+
+//Amplify.configure(awsconfig);
 
 
 
@@ -70,6 +81,14 @@ async componentDidMount(){
             <Navbar auth={authProps} />
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
+              <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
+              <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
+              <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
+              <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
+              <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
+              <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
+              <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
+            
             </Switch>
           <SearchList />
          
