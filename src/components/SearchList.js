@@ -41,17 +41,12 @@ export default class SearchList extends Component {
         "book_query": book_query
       };
 
-<<<<<<< HEAD
       console.log("Fetching API for query : ", book_query);
       book_query=encodeURIComponent(book_query);
       console.log("Encoded URL :", encodeURIComponent(book_query));
       //console.log("decoded URL :", decodeURIComponent(book_query));
       
       const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
-=======
-      console.log("Fetching API");
-      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
->>>>>>> 29bdd07ad1b5ed6ecf0051a43aaef877c7d2637f
       this.setState({ queries: res.data });
      console.log("Fetched Data", this.state.queries);
 
