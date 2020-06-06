@@ -7,6 +7,8 @@ import Search from './components/Search'
 import Footer from './components/Footer';
 import SearchList from './components/SearchList';
 import { Auth } from 'aws-amplify';
+import SearchListGirdView from './components/SearchListGirdView';
+import TestPri from './components/TestPri';
 
 
 
@@ -69,9 +71,9 @@ async componentDidMount(){
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
             </Switch>
-          <SearchList/>
+          <SearchList />
          
-            <Footer />
+         
           </div>
         </Router>
       </div>
