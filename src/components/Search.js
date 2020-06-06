@@ -84,7 +84,7 @@ class Search extends React.Component {
               "book_query": query
             };
       
-			console.log("Fetching API for query : ", query);
+			console.log("Fetching API for query = ", query);
 			
             const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${query}`, params);
            this.setState({ queries: res.data });
