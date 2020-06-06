@@ -4,9 +4,12 @@ import 'bulma/css/bulma.min.css';
 import './index.css';
 import App from './App';
 
-//import config from './config';
+import Amplify from 'aws-amplify';
+//import awsconfig from './aws-exports';
+
+import config from './config';
 import * as serviceWorker from './serviceWorker';
-/*
+
 Amplify.configure ({
     Auth: {
         mandatorySignId: true,
@@ -15,7 +18,7 @@ Amplify.configure ({
         userPoolWebClientId: config.cognito.APP_CLIENT_ID
     }
 });
-*/
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
