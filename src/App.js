@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Search from './components/Search'
+import HomeContent from './components/HomeContent';
 import Footer from './components/Footer';
-import SearchList from './components/SearchList';
 import { Auth } from 'aws-amplify';
+import TestPri from './components/TestPri';
 //import Amplify, { Auth } from 'aws-amplify';
 //import awsconfig from './aws-exports';
 import LogIn from './components/auth/LogIn';
@@ -16,6 +16,16 @@ import ForgotPasswordVerification from './components/auth/ForgotPasswordVerifica
 import ChangePassword from './components/auth/ChangePassword';
 import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Welcome from './components/auth/Welcome';
+import Test from './components/Test';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Hero from './components/Hero';
+import SliderEffect from './components/SliderEffect';
+import SearchListGirdView from './components/SearchListGirdView';
+import SearchBar from './components/SearchBar'
+import Search from './components/Search';
+import SearchList from './components/SearchList';
+
+
 
 //Book adding details
 import BookAdd from './components/BookAdd';
@@ -80,7 +90,7 @@ async componentDidMount(){
           <div>
             <Navbar auth={authProps} />
             <Switch>
-              <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
+             
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
               <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
               <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
@@ -88,6 +98,7 @@ async componentDidMount(){
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
+<<<<<<< HEAD
               <Route exact path="/bookadd" render={(props) => <BookAdd {...props} auth={authProps} />} />
               <Route exact path="/bookissue" render={(props) => <BookIssue {...props} auth={authProps} />} />
               <Route exact path="/newuser" render={(props) => <NewUser {...props} auth={authProps} />} />
@@ -95,7 +106,20 @@ async componentDidMount(){
             </Switch>
          
             <Footer />
+=======
+              <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
+              <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
+            
+            </Switch>
+           
+>>>>>>> 7419178c4c1bd8927c0bce57d8c5d2193b158b0b
           </div>
+          
+         
+          
+     
+      
+          <Footer />
         </Router>
       </div>
     );

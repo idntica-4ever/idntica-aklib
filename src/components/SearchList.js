@@ -29,6 +29,7 @@ export default class SearchList extends Component {
 
 
 
+
   // handle global search
   handleglobalsearch = async(book_query, event) => {
     event.preventDefault();
@@ -41,12 +42,15 @@ export default class SearchList extends Component {
         "book_query": book_query
       };
 
+      console.log("Fetching API");
+      book_query=encodeURIComponent(book_query);
+      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
       console.log("Fetching API for query : ", book_query);
       book_query=encodeURIComponent(book_query);
       console.log("Encoded URL :", encodeURIComponent(book_query));
-      //console.log("decoded URL :", decodeURIComponent(book_query));
       
-      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
+      
+      
       this.setState({ queries: res.data });
      console.log("Fetched Data", this.state.queries);
 
@@ -67,6 +71,7 @@ export default class SearchList extends Component {
     Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
   : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
   console.log("Testing value : ", testing);
+  
   }
 
   onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
@@ -81,7 +86,7 @@ export default class SearchList extends Component {
         ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
           Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.Author_Title} />)
         : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div> 
-       
+        
     return (
      
            <div className="bookcontainer">
@@ -111,8 +116,10 @@ export default class SearchList extends Component {
 </form>
       
     </div>
+   
+        {booklist}
+      
     
-    {booklist}
 </div>
 
   )

@@ -1,0 +1,179 @@
+/*------------------------------------------------------------------
+    Version: 1.0
+-------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------
+    [Table of contents]
+
+    1. IMPORT FONTS
+    2. IMPORT FILES
+    3. SKELETON
+    4. WP CORE
+    5. HEADER
+    6. SECTIONS
+    7. SECTIONS
+    8. PORTFOLIO
+    9. TESTIMONIALS
+    10. PRICING TABLES
+    11. ICON BOXES
+    12. MESSAGE BOXES
+    13. FEATURES
+    14. CONTACT
+    15. FOOTER
+    16. MISC
+    17. BUTTONS
+-------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------
+    IMPORT FONTS
+-------------------------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+/*------------------------------------------------------------------
+    IMPORT FILES
+-------------------------------------------------------------------*/
+
+
+
+@import url(flaticon.css);
+
+
+
+
+/*------------------------------------------------------------------
+    HEADER
+-------------------------------------------------------------------*/
+
+.top-navbar{
+    position: absolute;
+    top: 30px;
+    right: 10px;
+}
+
+.top-navbar .navbar-expand-lg .navbar-nav{
+	background: #2a2a72;
+	
+}
+
+
+.top-navbar .navbar-light .navbar-nav .nav-item{
+	position: relative;
+}
+.top-navbar .navbar-light .navbar-nav .nav-link{
+	padding: 5px 9px;
+	color: #ffffff;
+	position: relative;
+}
+
+.top-navbar .navbar-light .navbar-nav .nav-item::before{
+    position: absolute;
+    
+	content: '';
+    left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 0%;
+	display: block;
+	opacity: 0;
+	border-radius: 5px;
+	background-color: #068640;
+	-webkit-transition: all 700ms ease;
+	-ms-transition: all 700ms ease;
+	-o-transition: all 700ms ease;
+	transition: all 700ms ease;
+}
+
+.top-navbar .navbar-light .navbar-nav .nav-item.active::before{
+	opacity: 1;
+	height: 100%;
+}
+
+.top-navbar .navbar-light .navbar-nav .nav-item:hover::before{
+	opacity: 1;
+	height: 100%;
+}
+
+
+
+/*----------------------------------------*/
+
+
+
+
+.icon_wrap {
+    background-color: #2a2a72;
+    width: 100px;
+    height: 100px;
+    display: block;
+    line-height: 100px;
+    font-size: 65px;
+    color: #fcfcfc;
+    margin: 0 auto;
+    text-align: center;
+	border-radius: 5px;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.stat-wrap h3 {
+    font-size: 28px;
+   font-weight: 500;
+    color: rgb(2, 68, 22) ;
+    margin: 0 ;
+    padding: 0 ;
+    line-height: 2 ;
+}
+
+.stat-wrap p {
+    font-size: 38px;
+    color: #2a2a72;
+    margin: 0;
+    font-weight: 300;
+    padding: 4px 0 0;
+    line-height: 2 !important;
+}
+
+
+
+
+/*---------------------------*/
+
+
+.DigitRoll__Cell {
+    background-color: #2a2a72;
+    
+  border: none;
+  }
+  .Digit{
+      padding-left: 1rem !important;
+      line-height: 2rem;
+  }
+  .Digit2{
+    padding-left: 3.5rem !important;
+    line-height: 2rem;
+}
+  .DigitRoll {
+    text-align: center !important;
+    font-size: 38px;
+    color: #fdfdff;
+   
+    font-weight: 300;
+    border: none;
+    padding-left: 2.5rem;
+    
+  }
+  
+  .DigitRoll__Divider {
+    width: 100%;
+    text-align: center;
+  }
+  
+
+
+
+
+
+

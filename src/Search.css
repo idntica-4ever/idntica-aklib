@@ -80,3 +80,14 @@
 .hide {
 	display: none;
 }
+
+/*table book view*/
+
+.tab-row1 {
+	border-radius: 1rem;
+	background-color: lightblue;
+}
+.tab-row {
+	border: 1px solid #ddd;
+  padding: 8px;
+}
