@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Bookquery from './Bookquery';
+
 import {Table} from 'react-bootstrap';
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
 import '../Search.css';
-import SearchBar from './SearchBar';
+import Form from "./Form";
 
 
 const config = require('../config.json');
@@ -12,13 +12,17 @@ const config = require('../config.json');
 export default class SearchListGirdView extends Component {
       
         
-      state = {
-          post:{
-           query:""
-          },
+  constructor(props) {
+    super(props);
+    this.state = {
+          booklists: [],
+          newquery:{
+           book_query:""
+          }
        
-        booklist1: []
-      }
+        
+      };
+    }
     
      
      
@@ -32,11 +36,17 @@ export default class SearchListGirdView extends Component {
     
     
     
+
       // handle global search
-      handleglobalsearch = async(book_query, event) => {
-        event.preventDefault();
-        const book_query_upper= book_query.toUpperCase();
-        console.log ("Book Query Received", book_query_upper);
+      handleglobalsearch =async(book_query) => {
+        this.setState(prevState => ({
+          booklists: [...prevState.booklists, prevState.newquery],
+          newquery: { book_query: ""}
+        }));
+       const bookquery=this.state.newquery;
+        
+        
+        console.log ("Book Query Received", bookquery);
     
         try {
     
@@ -45,7 +55,7 @@ export default class SearchListGirdView extends Component {
           };
     
           console.log("Fetching API");
-          const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
+          const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${bookquery}`, params);
           this.setState({ queries: res.data });
          console.log("Fetched Data", this.state.queries);
     
@@ -58,65 +68,44 @@ export default class SearchListGirdView extends Component {
       }
     
     
-    
-      onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
-        "book_query": event.target.value } });
+      onAddBookQueryChange = e => {
+        const { book_query, value } = e.target;
+        this.setState(prevState=>({ 
+          newquery: { ...prevState.newquery, [book_query]: value } }))
+        
+        };
     
     
     
       render() {
-        if (this.state.queries) {
-            const {booklist1} = this.state;
+       
       
-           
+          
                
-                    return (
-                       
-                        <Table className="mt-4" striped bordered bover size="sm">
-                            <thead>
-                                <tr>
-                                    <th>Book Title</th>
-                                    <th>Author</th>
-                                    <th>Classification</th>
-                                    <th>Scope</th>
-                                    <th>Status</th>
-                                </tr>
-
-                            </thead>
-                            <tbody>
-                           {booklist1.map
-               (result=>
-                            
-                            <tr key={result.Author_Title}>
-                           
-                                <td>
-                                {result.Book_Title} 
-                                </td>
-                                <td>
-                                {result.Book_Author}
-                                </td>
-                                <td>
-                                {result.Book_Classification_No}
-                                </td>
-                                <td>
-                                {result.Book_Scope} 
-                                    </td>
-                               <tr> {result.Book_Status}
-                                   </tr>
+                    return (<div >
+                      <Form
+                      onAddBookQueryChange={this.onAddBookQueryChange}
+                      newquery={this.state.newquery}
+                      handleglobalsearch={this.handleglobalsearch}
+                    />
                       
-                                
-                                
-                            </tr>
-                            )}
-                            
-                            
-                            </tbody>
-                        </Table>
+                      <div className="post-container">
+          <ul>
+            {this.state.booklists.map((booklist, Author_Title) => (
+              <li key={Author_Title}>
+                <ul className="post-tile">
+                  <li className="post-tile-name">{booklist.Book_Title}</li>
+                  
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
 
+                  </div>
                       
                        
                     )
                }
                 
-                
-       }}
+              } 

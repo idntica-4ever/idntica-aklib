@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import {Table} from 'react-bootstrap';
 export default class Bookquery extends Component {
 /*
   state = {
@@ -27,14 +27,57 @@ export default class Bookquery extends Component {
     return (
 
       <div>
-              <p className="product-title">Book Title: {this.props.Book_Title }</p>
-              <p className="product-id">Book Author:{ this.props.Book_Author}</p>
-              <p className="product-id">Book Classification:{ this.props.Book_Classification_No}</p>
               
-              <p className="product-id">Book Scope: { this.props.Book_Scope}</p>
-              <p className="product-id">Book Status: { this.props.Book_Status}</p>
+
+
+              <Table className="mt-4" striped bordered bover size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Book Title</th>
+                                    <th>Author</th>
+                                    <th>Classification</th>
+                                    <th>Scope</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                           
+               
+                            
+                           <tr>
+                           
+                                <td>
+                                {this.props.Book_Title} 
+                                </td>
+                                <td>
+                                {this.props.Book_Author}
+                                </td>
+                                <td>
+                                {this.props.Book_Classification_No}
+                                </td>
+                                <td>
+                                {this.props.Book_Scope} 
+                                    </td>
+                               <td> {this.props.Book_Status}
+                                   </td>
+                      
+                                
+                                
+                            </tr>
+                            
+                            
+                            
+                            
+                            
+                            </tbody>
+                        </Table>
+
 
             </div>
+
+
+
 
       /*
       <div className="tile is-child box notification is-success">

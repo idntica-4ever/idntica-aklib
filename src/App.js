@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Search from './components/Search'
+import HomeContent from './components/HomeContent';
 import Footer from './components/Footer';
-import SearchList from './components/SearchList';
 import { Auth } from 'aws-amplify';
-import SearchListGirdView from './components/SearchListGirdView';
 import TestPri from './components/TestPri';
 //import Amplify, { Auth } from 'aws-amplify';
 //import awsconfig from './aws-exports';
@@ -18,6 +16,16 @@ import ForgotPasswordVerification from './components/auth/ForgotPasswordVerifica
 import ChangePassword from './components/auth/ChangePassword';
 import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Welcome from './components/auth/Welcome';
+import Test from './components/Test';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Hero from './components/Hero';
+import SliderEffect from './components/SliderEffect';
+import SearchListGirdView from './components/SearchListGirdView';
+import SearchBar from './components/SearchBar'
+import Search from './components/Search';
+import SearchList from './components/SearchList';
+
+
 
 //Amplify.configure(awsconfig);
 
@@ -80,7 +88,7 @@ async componentDidMount(){
           <div>
             <Navbar auth={authProps} />
             <Switch>
-              <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
+             
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
               <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
               <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
@@ -88,12 +96,18 @@ async componentDidMount(){
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
+              <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
+              <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
             
             </Switch>
-          <SearchList />
-         
-         
+           
           </div>
+          
+         
+          
+     
+      
+          <Footer />
         </Router>
       </div>
     );

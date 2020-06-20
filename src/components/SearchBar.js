@@ -14,7 +14,7 @@ export default ({ post, handleglobalsearch, onAddBookQueryChange }) => {
        
        <input type="text" className="searchTerm" placeholder="Search your books here..."  
  
-       name="query"
+       name="book_query"
        value={post.book_query} 
        
        onChange={onAddBookQueryChange}/>

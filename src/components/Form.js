@@ -1,25 +1,25 @@
 import React from "react";
 
-export default ({ handleChange, handleSubmit, post }) => {
+export default ({ handleglobalsearch, onAddBookQueryChange, newquery }) => {
+  
   return (
     <div className="form-container">
-      <form>
+   
         <div className="form-group">
           <input
             className="col-12 form-control"
-            name="query"
-            onChange={handleChange}
+            name="book_query"
+            onChange={onAddBookQueryChange}
             type="text"
-            value={post.query}
-            placeholder="Search Here"
+            value={this.state.newquery.book_query}
+            placeholder="Search Your Books Here..."
           />
         </div>
-        
        
-        <button className="btn btn-primary" onClick={handleSubmit}>
+        <button  className="btn btn-primary" onClick={handleglobalsearch}>
           Submit
         </button>
-      </form>
+      
     </div>
   );
 };
