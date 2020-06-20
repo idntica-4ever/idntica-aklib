@@ -80,6 +80,10 @@ export default class Navbar extends Component {
               <div className="buttons">
                 {!this.props.auth.isAuthenticated && (
                   <div>
+                    <a href="/newuser" className="button is-primary">
+                   <strong>New User ?</strong>
+                   </a>
+
                   <a href="/login" className="button is-light">
                     Log in
                   </a>  
@@ -91,10 +95,10 @@ export default class Navbar extends Component {
                    <strong>User Registration</strong>
                    </a>
 
-                   <a href="/" className="button is-primary">
+                   <a href="/bookadd" className="button is-primary">
                    <strong>Book Registration</strong>
                    </a>
-                   <a href="/" className="button is-primary">
+                   <a href="/bookissue" className="button is-primary">
                    <strong>Issuing Books</strong>
                    </a>
 

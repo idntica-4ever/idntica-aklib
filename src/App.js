@@ -17,6 +17,11 @@ import ChangePassword from './components/auth/ChangePassword';
 import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Welcome from './components/auth/Welcome';
 
+//Book adding details
+import BookAdd from './components/BookAdd';
+import BookIssue from './components/BookIssue';
+import NewUser from './components/NewUser';
+
 //Amplify.configure(awsconfig);
 
 
@@ -61,9 +66,6 @@ async componentDidMount(){
 }
 
   render() {
-
- 
-
     const authProps = {
       isAuthenticated: this.state.isAuthenticated,
       user: this.state.user,
@@ -86,9 +88,11 @@ async componentDidMount(){
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
-            
+              <Route exact path="/bookadd" render={(props) => <BookAdd {...props} auth={authProps} />} />
+              <Route exact path="/bookissue" render={(props) => <BookIssue {...props} auth={authProps} />} />
+              <Route exact path="/newuser" render={(props) => <NewUser {...props} auth={authProps} />} />
+
             </Switch>
-          <SearchList/>
          
             <Footer />
           </div>

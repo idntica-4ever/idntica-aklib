@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Hero from './Hero';
 import HomeContent from './HomeContent';
+import SearchList from './SearchList';
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
           <span className="tag is-primary">New</span> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
   </div>*/}
-      <HomeContent />
+      <SearchList />
     </Fragment>
   )
 }
