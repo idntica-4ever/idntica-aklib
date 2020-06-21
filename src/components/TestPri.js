@@ -3,6 +3,7 @@ import Bookquery from './Bookquery';
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Table} from 'react-bootstrap';
+import { queries } from '@testing-library/react';
 
 
 const config = require('../config.json');
@@ -56,6 +57,7 @@ export default class SearchList extends Component {
       
       this.setState({ queries: res.data });
      console.log("Fetched Data", this.state.queries);
+    
 
      this.assignSearchedresults();
      // validating search results
@@ -75,6 +77,8 @@ export default class SearchList extends Component {
   : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
   console.log("Testing value : ", testing);
   
+  
+  
   }
 
   onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
@@ -84,12 +88,6 @@ export default class SearchList extends Component {
 
   render() {
     
-        
-        const booklist = this.state.queries && this.state.queries.length > 0
-        ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
-          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.Author_Title} />)
-        : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div> 
-        
     return (
      
            <div className="bookcontainer">
@@ -119,11 +117,24 @@ export default class SearchList extends Component {
 </form>
       
  </div>
+ <Table>
+  <thead>
+    <tr>
+      <th>Book Title</th>
+      <th>Author Name</th>
+      <th>Clasification</th>
+      <th>Status</th>
+      <th>Scope</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr >
+      
+    </tr>
    
- 
-
-    {booklist}
-    
+  </tbody>
+</Table>
+<Bookquery/> 
 </div>
 
   )

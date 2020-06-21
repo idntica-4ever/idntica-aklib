@@ -81,7 +81,11 @@ class Register extends Component {
     return (
       <section className="section auth">
         <div className="container">
-          <h1>New User Registration</h1>
+
+
+
+          
+          <h1>Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>
