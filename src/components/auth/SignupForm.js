@@ -1,12 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import axios from "axios";
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-import { Auth } from "aws-amplify";
+
+const config = require('../../config.json');
 
 export default class SignupForm extends Component {
 
 
-    state = {
+  state = {
+    newbook: {  
+    "email_id": "",
+    "username": "",
+    "category": "",
+    "batch": ""
+    },
+    newbooks: []
+  }
+
+  handleNewUserRequest = async (email_id, event) => {
+      console.log("function invoked");
+    event.preventDefault();
+    // add call to AWS API Gateway add product endpoint here
+    try {
+        console.log("inside try");
+
+    const now = new Date();
+    const params = {
+    "email_id": email_id,
+    "username": this.state.newbook.username,
+    "category": this.state.newbook.category,
+    "batch":this.state.newbook.batch,
+    "req_date":now
+
+      };
+      console.log("Inputs received :", params);
+      await axios.post(`${config.api.invokeUrl}/newuser/${email_id}`, params);
+      this.setState({ newbooks: [...this.state.newbooks, this.state.newbook] });
+      this.setState({ newbook: { "email_id":"", "username": "", "batch": "", "category": ""}});
+      console.log("Request Submitted Successfully");
+    }catch (err) {
+      console.log(`An error has occurred: ${err}`);
+    }
+  }
+
+
+  onAddEmailIdChange = event => this.setState({ newbook: { ...this.state.newbook, "email_id": event.target.value } });
+  onAddUsernameChange = event => this.setState({ newbook: { ...this.state.newbook, "username": event.target.value } });
+  onAddBatchChange = event => this.setState({ newbook: { ...this.state.newbook, "batch": event.target.value } });
+  onAddBookCategoryChange = event => this.setState({ newbook: { ...this.state.newbook, "category": event.target.value } });
+  
+/*    state = {
         username: "",
         password: "",
         email: "",
@@ -70,27 +114,22 @@ export default class SignupForm extends Component {
           })
         }
       };
-    
+    */
       onInputChange = event => {
         this.setState({
           [event.target.id]: event.target.value
         });
         document.getElementById(event.target.id).classList.remove("is-danger");
       }
-    
-
-
 
     render() {
         return (
            
 <div className="container" fluid="md">
-
-  
 <h1 className="header-text">Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={event => this.handleNewUserRequest(this.state.newbook.email_id, event)}>
 <div className="row">
     <div className="col-6">
     <img className="signupimg" src={require('../../images/signup-img-new.jpg')} /> 
@@ -104,8 +143,8 @@ export default class SignupForm extends Component {
                   id="username"
                   aria-describedby="userNameHelp"
                   placeholder="Enter username"
-                  value={this.state.username}
-                  onChange={this.onInputChange}
+                  value={this.state.newbook.username}
+                  onChange={this.onAddUsernameChange}
                 />
              
         </div>
@@ -117,35 +156,38 @@ export default class SignupForm extends Component {
                   id="email"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
-                  value={this.state.email}
-                  onChange={this.onInputChange}
+                  value={this.state.newbook.email_id}
+                  onChange={this.onAddEmailIdChange}
                 />
                
               
         </div>
         <div className="row">
       
-                <input 
+        <input 
                   className="input" 
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.onInputChange}
+                  type="text"
+                  id="category"
+                  aria-describedby="categoryHelp"
+                  placeholder="Category (Student / Staff)"
+                  value={this.state.newbook.category}
+                  onChange={this.onAddBookCategoryChange}
                 />
+              
                
         </div>
         <div className="row">
        
-                <input 
+        <input 
                   className="input" 
-                  type="password"
-                  id="confirmpassword"
-                  placeholder="Confirm password"
-                  value={this.state.confirmpassword}
-                  onChange={this.onInputChange}
+                  type="text"
+                  id="batch"
+                  aria-describedby="batchHelp"
+                  placeholder="Batch No ?"
+                  value={this.state.newbook.batch}
+                  onChange={this.onAddBatchChange}
                 />
-                
+             
         </div>
 <div className="row">
     <p></p>
@@ -155,9 +197,7 @@ export default class SignupForm extends Component {
 </div>
         <div className="row">
             <div className="col">
-            
                 <a href="/forgotpassword">Forgot password?</a>
-              
             </div>
             <div className="col">
            
@@ -169,9 +209,6 @@ export default class SignupForm extends Component {
         </div>
     </div></div>
     </form>
-
-
-
 </div>
         )
     }
