@@ -89,6 +89,7 @@ class Register extends Component {
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>
+            
             <div className="field">
               <p className="control">
                 <input 
@@ -146,11 +147,6 @@ class Register extends Component {
                 <span className="icon is-small is-left">
                   <i className="fas fa-lock"></i>
                 </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <a href="/forgotpassword">Forgot password?</a>
               </p>
             </div>
             <div className="field">
