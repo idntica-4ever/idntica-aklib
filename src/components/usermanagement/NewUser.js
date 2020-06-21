@@ -3,7 +3,7 @@ import axios from "axios";
 // userquery is used to display the database items to viewable format
 //import Userquery from './UserQuery';
 
-const config = require('../config.json');
+const config = require('../../config.json');
 
 export default class NewUser extends Component {
 

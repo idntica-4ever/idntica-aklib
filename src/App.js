@@ -30,7 +30,10 @@ import SearchList from './components/SearchList';
 //Book adding details
 import BookAdd from './components/BookAdd';
 import BookIssue from './components/BookIssue';
-import NewUser from './components/NewUser';
+
+//User management components
+import NewUser from './components/usermanagement/NewUser';
+import NewUserList from './components/usermanagement/NewUserList';
 
 //Amplify.configure(awsconfig);
 
@@ -98,21 +101,12 @@ async componentDidMount(){
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
-<<<<<<< HEAD
-              <Route exact path="/bookadd" render={(props) => <BookAdd {...props} auth={authProps} />} />
-              <Route exact path="/bookissue" render={(props) => <BookIssue {...props} auth={authProps} />} />
-              <Route exact path="/newuser" render={(props) => <NewUser {...props} auth={authProps} />} />
-
-            </Switch>
-         
-            <Footer />
-=======
               <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
-            
+              <Route exact path="/newuserlist" render={(props) => <NewUserList {...props} auth={authProps} />} />
+           
             </Switch>
            
->>>>>>> 7419178c4c1bd8927c0bce57d8c5d2193b158b0b
           </div>
           
          
