@@ -94,7 +94,7 @@ export default class Navbar extends Component {
                 )}
 
                  
-
+                  <li className="nav-item"><a className="nav-link" href="/signup">Register</a></li>
 
                   <li className="nav-item"><a className="nav-link" href="/search">Search</a></li>
                 </ul>

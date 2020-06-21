@@ -24,6 +24,8 @@ import SearchListGirdView from './components/SearchListGirdView';
 import SearchBar from './components/SearchBar'
 import Search from './components/Search';
 import SearchList from './components/SearchList';
+import TestRegister from './components/auth/TestRegister';
+import SignupForm from './components/auth/SignupForm';
 
 
 
@@ -90,13 +92,14 @@ async componentDidMount(){
             <Switch>
              
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
-              <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
+              <Route exact path="/register" render={(props) => <TestRegister {...props} auth={authProps} />} />
               <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
               <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
               <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
+              <Route exact path="/signup" render={(props) => <SignupForm {...props} auth={authProps} />} />
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
             
             </Switch>
@@ -105,8 +108,7 @@ async componentDidMount(){
           
          
           
-     
-      
+    
           <Footer />
         </Router>
       </div>

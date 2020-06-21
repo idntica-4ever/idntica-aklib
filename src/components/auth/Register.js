@@ -81,6 +81,10 @@ class Register extends Component {
     return (
       <section className="section auth">
         <div className="container">
+
+
+
+          
           <h1>Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
