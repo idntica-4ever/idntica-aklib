@@ -32,7 +32,10 @@ import SignupForm from './components/auth/SignupForm';
 //Book adding details
 import BookAdd from './components/BookAdd';
 import BookIssue from './components/BookIssue';
-import NewUser from './components/NewUser';
+
+//User management components
+import NewUser from './components/usermanagement/NewUser';
+import NewUserList from './components/usermanagement/NewUserList';
 
 //Amplify.configure(awsconfig);
 
@@ -107,7 +110,8 @@ async componentDidMount(){
               <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
              
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
-            
+              <Route exact path="/newuserlist" render={(props) => <NewUserList {...props} auth={authProps} />} />
+           
             </Switch>
            
           </div>
