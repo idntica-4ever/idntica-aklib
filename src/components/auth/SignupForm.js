@@ -84,7 +84,7 @@ export default class SignupForm extends Component {
     render() {
         return (
            
-<div className="container" fluid="md">
+<div className="container-mg" fluid="md">
 
   
 <h1 className="header-text">Register</h1>
@@ -95,7 +95,7 @@ export default class SignupForm extends Component {
     <div className="col-6">
     <img className="signupimg" src={require('../../images/signup-img-new.jpg')} /> 
     </div>
-    <div className="col-6">
+    <div className="col-6 withbg">
         <div className="row">
         
                 <input 
@@ -160,11 +160,12 @@ export default class SignupForm extends Component {
               
             </div>
             <div className="col">
+                <div className = "pull-right">
            
-                <button className="button is-success">
+                <button className="button-is-success">
                   Register
                 </button>
-              
+                </div>
             </div>
         </div>
     </div></div>
