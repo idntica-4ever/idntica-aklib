@@ -88,7 +88,7 @@ export default class Navbar extends Component {
                   </a>  
                     
                     
-                    <SliderEffect/>
+                  
 
                   </div>
                 )}
