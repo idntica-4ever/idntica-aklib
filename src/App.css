@@ -4,6 +4,7 @@
   --mainWhite:#f3f3f3;
   --mainDark:#232528;
   --mainYellow:#ff8400;
+  --mainlightblue:#6d84f6;
 
 }
 
@@ -156,4 +157,10 @@ color: var(--mainBlue);
   background-color: #99012f;
   color: azure;
   border: 0rem !important;
+}
+.AK-sidebar-text{
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-left: 0rem;
 }

@@ -13,6 +13,7 @@ const AuthModalPage = React.lazy(() => import('../../reductcomponents/pages/Auth
 const BadgePage = React.lazy(() => import('../../reductcomponents/pages/BadgePage'));
 const ButtonGroupPage = React.lazy(() => import('../../reductcomponents/pages/ButtonGroupPage'));
 const ButtonPage = React.lazy(() => import('../../reductcomponents/pages/ButtonPage'));
+const UserApprovalPage = React.lazy(() => import('../usermanagement/NewUserList'));
 const CardPage = React.lazy(() => import('../../reductcomponents/pages/CardPage'));
 const ChartPage = React.lazy(() => import('../../reductcomponents/pages/ChartPage'));
 const DashboardPage = React.lazy(() => import('../../reductcomponents/pages/DashboardPage'));
@@ -54,9 +55,10 @@ class MainDashboardView extends React.Component {
 
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/" component={DashboardPage} />
+                <Route exact path="/dashboard" component={DashboardPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
+                <Route exact path="/UserApprovalPage" component={UserApprovalPage} />
                 <Route exact path="/cards" component={CardPage} />
                 <Route exact path="/widgets" component={WidgetPage} />
                 <Route exact path="/typography" component={TypographyPage} />
