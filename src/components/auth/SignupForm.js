@@ -11,9 +11,9 @@ export default class SignupForm extends Component {
   state = {
     newbook: {  
     "email_id": "",
-    "username": "",
-    "category": "",
-    "batch": ""
+    "user_name": "",
+    "user_category": "",
+    "user_batch": ""
     },
     newbooks: []
   }
@@ -28,16 +28,18 @@ export default class SignupForm extends Component {
     const now = new Date();
     const params = {
     "email_id": email_id,
-    "username": this.state.newbook.username,
-    "category": this.state.newbook.category,
-    "batch":this.state.newbook.batch,
-    "req_date":now
+    "user_name": this.state.newbook.user_name,
+    "user_category": this.state.newbook.user_category,
+    "user_batch":this.state.newbook.user_batch,
+    "req_submitted_on":now,
+    "approved_by":"NO",
+    "PK":"AK_Library#001"
 
       };
       console.log("Inputs received :", params);
       await axios.post(`${config.api.invokeUrl}/newuser/${email_id}`, params);
       this.setState({ newbooks: [...this.state.newbooks, this.state.newbook] });
-      this.setState({ newbook: { "email_id":"", "username": "", "batch": "", "category": ""}});
+      this.setState({ newbook: { "email_id":"", "user_name": "", "user_batch": "", "user_category": ""}});
       console.log("Request Submitted Successfully");
     }catch (err) {
       console.log(`An error has occurred: ${err}`);
@@ -46,9 +48,9 @@ export default class SignupForm extends Component {
 
 
   onAddEmailIdChange = event => this.setState({ newbook: { ...this.state.newbook, "email_id": event.target.value } });
-  onAddUsernameChange = event => this.setState({ newbook: { ...this.state.newbook, "username": event.target.value } });
-  onAddBatchChange = event => this.setState({ newbook: { ...this.state.newbook, "batch": event.target.value } });
-  onAddBookCategoryChange = event => this.setState({ newbook: { ...this.state.newbook, "category": event.target.value } });
+  onAddUsernameChange = event => this.setState({ newbook: { ...this.state.newbook, "user_name": event.target.value } });
+  onAddBatchChange = event => this.setState({ newbook: { ...this.state.newbook, "user_batch": event.target.value } });
+  onAddBookCategoryChange = event => this.setState({ newbook: { ...this.state.newbook, "user_category": event.target.value } });
   
 /*    state = {
         username: "",
@@ -114,20 +116,18 @@ export default class SignupForm extends Component {
           })
         }
       };
-    */
+    
       onInputChange = event => {
         this.setState({
           [event.target.id]: event.target.value
         });
         document.getElementById(event.target.id).classList.remove("is-danger");
       }
-
+*/
     render() {
         return (
            
-<div className="container-mg" fluid="md">
-
-  
+<div className="container-mg" fluid="md"> 
 <h1 className="header-text">Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
@@ -138,58 +138,49 @@ export default class SignupForm extends Component {
     </div>
     <div className="col-6 withbg">
         <div className="row">
-        
                 <input 
                   className="input" 
                   type="text"
-                  id="username"
+                  id="user_name"
                   aria-describedby="userNameHelp"
                   placeholder="Enter username"
-                  value={this.state.newbook.username}
+                  value={this.state.newbook.user_name}
                   onChange={this.onAddUsernameChange}
                 />
-             
         </div>
         <div className="row">
         
                 <input 
                   className="input" 
                   type="email"
-                  id="email"
+                  id="email_id"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                   value={this.state.newbook.email_id}
                   onChange={this.onAddEmailIdChange}
-                />
-               
-              
+                />     
         </div>
         <div className="row">
-      
         <input 
                   className="input" 
                   type="text"
-                  id="category"
+                  id="user_category"
                   aria-describedby="categoryHelp"
                   placeholder="Category (Student / Staff)"
-                  value={this.state.newbook.category}
+                  value={this.state.newbook.user_category}
                   onChange={this.onAddBookCategoryChange}
-                />
-              
-               
+                />  
         </div>
         <div className="row">
-       
         <input 
                   className="input" 
                   type="text"
-                  id="batch"
+                  id="user_batch"
                   aria-describedby="batchHelp"
-                  placeholder="Batch No ?"
-                  value={this.state.newbook.batch}
+                  placeholder="Enter Batch Year"
+                  value={this.state.newbook.user_batch}
                   onChange={this.onAddBatchChange}
-                />
-             
+                />   
         </div>
 <div className="row">
     <p></p>

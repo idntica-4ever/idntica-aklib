@@ -15,6 +15,7 @@
     "bootstrap": "^4.5.0",
     "bulma": "^0.8.2",
     "digit-roll-react": "^1.1.0",
+    "font-awesome": "^4.7.0",
     "glyphicons-halflings": "^1.9.1",
     "install": "^0.13.0",
     "react": "^16.13.1",

@@ -7,11 +7,10 @@ export default class NewUserList extends Component {
 
   state = {
     newproduct: { 
-      "username": "", 
+      "user_name": "", 
       "email_id": "",
-      "batch":"",
-      "category":"",
-      "req_status":""
+      "user_batch":"",
+      "user_category":""
     },
     products: []
   }
@@ -31,7 +30,7 @@ export default class NewUserList extends Component {
       console.log(`An error has occurred: ${err}`);
     }
   }
-
+*/
   handleUpdateProduct = async (id, name) => {
     // add call to AWS API Gateway update product endpoint here
     try {
@@ -50,18 +49,19 @@ export default class NewUserList extends Component {
     }
   }
 
-  handleDeleteProduct = async (id, event) => {
+  handleDeleteProduct = async (email_id, event) => {
     event.preventDefault();
     // add call to AWS API Gateway delete product endpoint here
+    console.log ("Delete request received for email ID :", email_id);
     try {
-      await axios.delete(`${config.api.invokeUrl}/products/${id}`);
-      const updatedProducts = [...this.state.products].filter(product => product.id !== id);
+      await axios.delete(`${config.api.invokeUrl}/newuser/${email_id}`);
+      const updatedProducts = [...this.state.products].filter(product => product.email_id !== email_id);
       this.setState({products: updatedProducts});
     }catch (err) {
       console.log(`Unable to delete product: ${err}`);
     }
   }
-*/
+
   fetchProducts = async () => {
     // add call to AWS API Gateway to fetch products here
     // then set them in state
@@ -73,6 +73,7 @@ export default class NewUserList extends Component {
       console.log(`An error has occurred: ${err}`);
     }
   }
+  
 /*
   onAddProductNameChange = event => this.setState({ newproduct: { ...this.state.newproduct, "productname": event.target.value } });
   onAddProductIdChange = event => this.setState({ newproduct: { ...this.state.newproduct, "id": event.target.value } });
@@ -100,9 +101,11 @@ export default class NewUserList extends Component {
                           isAdmin={true}
                           handleUpdateProduct={this.handleUpdateProduct}
                           handleDeleteProduct={this.handleDeleteProduct} 
-                          name={product.productname} 
-                          id={product.id}
-                          key={product.id}
+                          user_name={product.user_name} 
+                          email_id={product.email_id}
+                          user_category={product.user_category}
+                          user_batch={product.user_batch}
+                          key={product.email_id}
                         />)
                     }
                   </div>

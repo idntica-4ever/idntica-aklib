@@ -61,7 +61,7 @@ export default class Navbar extends Component {
               )}
               {this.props.auth.isAuthenticated && ( 
 
-<li><a href="/" className="nav-link">Home</a></li>
+<li><a href="/newuserlist" className="nav-link">Home</a></li>
 
 )}
 
