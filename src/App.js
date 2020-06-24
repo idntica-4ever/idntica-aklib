@@ -26,6 +26,7 @@ import Search from './components/Search';
 import SearchList from './components/SearchList';
 import TestRegister from './components/auth/TestRegister';
 import SignupForm from './components/auth/SignupForm';
+import MainDashboardView from './components/test/MainDashboardView';
 
 
 
@@ -102,7 +103,7 @@ async componentDidMount(){
               <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
-              <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
+              <Route exact path="/welcome" render={(props) => <MainDashboardView {...props} auth={authProps} />} />
               <Route exact path="/bookadd" render={(props) => <BookAdd {...props} auth={authProps} />} />
               <Route exact path="/bookissue" render={(props) => <BookIssue {...props} auth={authProps} />} />
               <Route exact path="/newuser" render={(props) => <NewUser {...props} auth={authProps} />} />
@@ -110,8 +111,8 @@ async componentDidMount(){
               <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
              
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
-              <Route exact path="/newuserlist" render={(props) => <NewUserList {...props} auth={authProps} />} />
-           
+              <Route exact path="/newuserlist" render={(props) => <MainDashboardView {...props} auth={authProps} />} />
+              
             </Switch>
            
           </div>

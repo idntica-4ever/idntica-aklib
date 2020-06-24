@@ -44,7 +44,7 @@ export default class Navbar extends Component {
 <li className="nav-item ml-5">
 <Link to='/' className="nav-link">
 <center>ARUL KADAL LIBRARY </center>
-<h2 >அருள் கடள் நூலகம்</h2>
+
 </Link>
 
 </li>
@@ -88,7 +88,7 @@ export default class Navbar extends Component {
                   </a>  
                     
                     
-                    <SliderEffect/>
+                  
 
                   </div>
                 )}
