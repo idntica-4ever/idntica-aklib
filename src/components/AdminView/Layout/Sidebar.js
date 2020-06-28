@@ -46,15 +46,15 @@ const sidebarBackground = {
 const navComponents = [
   { to: '/UserApprovalPage', name: 'Add User', exact: false, Icon: MdRadioButtonChecked },
   
-  { to: '/forms', name: 'Remove User', exact: false, Icon: MdChromeReaderMode },
+  { to: '/workprog', name: 'Remove User', exact: false, Icon: MdChromeReaderMode },
   
 ];
 
 const navContents = [
   { to: '/forms', name: 'Add Book', exact: false, Icon: MdTextFields },
-  { to: '/tables', name: 'Book Issue', exact: false, Icon: MdBorderAll },
-  { to: '/tables', name: 'Book Return', exact: false, Icon: MdBorderAll },
-  { to: '/tables', name: 'Book Revome', exact: false, Icon: MdBorderAll },
+  { to: '/workprog', name: 'Book Issue', exact: false, Icon: MdBorderAll },
+  { to: '/workprog', name: 'Book Return', exact: false, Icon: MdBorderAll },
+  { to: '/workprog', name: 'Book Revome', exact: false, Icon: MdBorderAll },
 ];
 
 

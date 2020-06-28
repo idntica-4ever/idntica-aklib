@@ -13,8 +13,6 @@ body{
   font-family: 'Oswald', sans-serif !important;
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
-  
-
 }
 
 .text-title{
@@ -142,14 +140,15 @@ color: var(--mainBlue);
   background-color: #d9dfe0;
 }
 
+
 .button-is-success{
-  background-color: #6ff373;
+  background-color: #06b672;
   text-transform: capitalize;
   font-size: 2rem !important;
-  color: var(--mainDark);
+  color: var(--mainWhite);
  
   border-radius: 0.8rem !important;
-  border: 0.1rem solid #6ff373 !important;
+  border: 0.1rem solid #06b672 !important;
 }
 
 
@@ -158,9 +157,35 @@ color: var(--mainBlue);
   color: azure;
   border: 0rem !important;
 }
+
 .AK-sidebar-text{
   font-size: 22px;
   font-weight: bold;
   margin-top: 25px;
   margin-left: 0rem;
+}
+
+/*-----------------Navbar mouse over ---------------*/
+
+#navbar { 
+  transform: translateY(-100%); /* normal, hidden state */
+}
+.navbar:hover #navbar {
+  transform: translateY(0); /* when parent is hovered */
+}
+
+
+.tst-try{
+  background: url(./images/sliderbg.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.work-prog {
+
+  position: relative;
+  text-align: center;
+  color: rgb(55, 9, 139);
+  margin-top: 30px !important;
+  background-color: #ffffff !important;
+  
 }

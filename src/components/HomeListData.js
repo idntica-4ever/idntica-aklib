@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import '../css/Styles.css';
+import styled from 'styled-components';
 import DigitRoll from "digit-roll-react";
 export class HomeListData extends Component {
     render() {
         return (
+            <HomeListDataFrag>
             <div class="parallax section lb">
             <div class="container">
                 <div class="row text-center stat-wrap">
@@ -38,9 +40,49 @@ export class HomeListData extends Component {
                 </div>
             </div>
         </div>
-    
+        </HomeListDataFrag>
         )
     }
 }
 
 export default HomeListData
+const HomeListDataFrag = styled.nav `
+height: 150vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    .DigitRoll__Cell {
+        background-color: #2a2a72;
+        
+      border-color: chartreuse;
+      }
+      .Digit{
+          padding-left: 1rem !important;
+          line-height: 2rem;
+      }
+      .Digit2{
+        padding-left: 3.5rem !important;
+        line-height: 2rem;
+    }
+      .DigitRoll {
+        text-align: center !important;
+        font-size: 38px;
+        color: #fdfdff;
+       
+        font-weight: 300;
+        border: none !important;
+        padding-left: 2.5rem;
+        
+        
+        
+      }
+      
+      .DigitRoll__Divider {
+        width: 100%;
+        
+      }
+      
+
+
+`

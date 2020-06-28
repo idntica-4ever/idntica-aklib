@@ -24,9 +24,10 @@ import SearchListGirdView from './components/SearchListGirdView';
 import SearchBar from './components/SearchBar'
 import Search from './components/Search';
 import SearchList from './components/SearchList';
-import TestRegister from './components/auth/TestRegister';
+
 import SignupForm from './components/auth/SignupForm';
 import MainDashboardView from './components/test/MainDashboardView';
+
 
 
 
@@ -37,6 +38,7 @@ import BookIssue from './components/BookIssue';
 //User management components
 import NewUser from './components/usermanagement/NewUser';
 import NewUserList from './components/usermanagement/NewUserList';
+import WorkinProgress from './components/test/WorkinProgress';
 
 //Amplify.configure(awsconfig);
 
@@ -118,7 +120,7 @@ async componentDidMount(){
           </div>
           
          
-          
+         
     
           <Footer />
         </Router>

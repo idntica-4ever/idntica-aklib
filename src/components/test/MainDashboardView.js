@@ -25,6 +25,7 @@ const ProgressPage = React.lazy(() => import('../../reductcomponents/pages/Progr
 const TablePage = React.lazy(() => import('../../reductcomponents/pages/TablePage'));
 const TypographyPage = React.lazy(() => import('../../reductcomponents/pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('../../reductcomponents/pages/WidgetPage'));
+const WorkProg = React.lazy(() => import('./WorkinProgress'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -64,6 +65,8 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/typography" component={TypographyPage} />
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
+                <Route exact path="/workprog" component={WorkProg} />
+                
                 <Route exact path="/badges" component={BadgePage} />
                 <Route
                   exact
