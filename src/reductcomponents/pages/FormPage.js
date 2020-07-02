@@ -26,23 +26,27 @@ export default class FormPage extends Component {
   }
 
   handleAddBook = async (accession_no, event) => {
-      console.log("function invoked");
+      console.log("function invoked", key_value);
+      //console.log("accession No received : ",accession_no);
+      //const test = document.getElementById("accessionNo").value
+      //console.log ("Data from input field : ", test);
     event.preventDefault();
     // add call to AWS API Gateway add product endpoint here
     try {
         console.log("inside try");
-
+      accession_no=key_value + 1;
+      //accession_no="Test1234";
        const now = new Date();
       const params = {
     "Accession_No": accession_no,
-    "Author_Title": this.state.newbook.Book_Author + " " + "##" + " " + this.state.newbook.Book_Title,
     "Book_Author": this.state.newbook.Book_Author_First + " " + this.state.newbook.Book_Author_Second,
+    "Author_Title": this.state.newbook.Book_Author_First + " " + this.state.newbook.Book_Author_Second + "##" + " " + this.state.newbook.Book_Title,
     "Book_Classification_No": this.state.newbook.Book_Classification_No,
     "Book_Publisher": this.state.newbook.Book_Publisher,    
     "Book_Scope": this.state.newbook.Book_Scope,
     "Book_Status": "Available",
     "Book_Title": this.state.newbook.Book_Title,
-    "Book_Added_On":now,
+    "Book_Added_On": now,
     "PK": "AK_Library#001"
       };
       console.log("Inputs received :", params);
@@ -67,6 +71,7 @@ export default class FormPage extends Component {
       //alert ("Total records", key_value);
       //const products = res.data;
       //this.setState({ products: products });
+      return key_value;
     } catch (err) {
       console.log(`An error has occurred: ${err}`);
     }
@@ -74,10 +79,10 @@ export default class FormPage extends Component {
  
 
   onAddBookTitleChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Title": event.target.value } });
-  onAddBookAuthorChangeFirst = event => this.setState({ newbook: { ...this.state.newbook, "Book_Author": event.target.value } });
-  onAddBookAuthorChangeSecond = event => this.setState({ newbook: { ...this.state.newbook, "Book_Author": event.target.value } });
+  onAddBookAuthorChangeFirst = event => this.setState({ newbook: { ...this.state.newbook, "Book_Author_First": event.target.value } });
+  onAddBookAuthorChangeSecond = event => this.setState({ newbook: { ...this.state.newbook, "Book_Author_Second": event.target.value } });
 
-  //onAddBookAccessionNoChange = event => this.setState({ newbook: { ...this.state.newbook, "accession_no": event.target.value } });
+  onAddBookAccessionNoChange = event => this.setState({ newbook: { ...this.state.newbook, "accession_no": event.target.value } });
   onAddBookClassificationNoChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Classification_No": event.target.value } });
   onAddBookPublisherChangeYear = event => this.setState({ newbook: { ...this.state.newbook, "Book_Publisher_Year": event.target.value } });
   onAddBookPublisherChangePrice = event => this.setState({ newbook: { ...this.state.newbook, "Book_Publisher_Price": event.target.value } });
@@ -86,7 +91,7 @@ export default class FormPage extends Component {
 
   
   componentDidMount = () => {
-    this.fetchProducts();
+    key_value = this.fetchProducts();
   }
 
 render() {
@@ -105,6 +110,7 @@ render() {
                     type="text"
                     name="accessionNo"
                     value={key_value + 1}
+                    onChange={this.onAddBookAccessionNoChange}
                     disabled
                   />
                 </FormGroup>
