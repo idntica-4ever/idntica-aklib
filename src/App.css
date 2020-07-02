@@ -97,8 +97,15 @@ color: var(--mainBlue);
 
 .searchButton{
   color:#2a2a72;
+  border: none;
+  height: 40px;
+  width: 10%;
+  
 }
 
+.searchButton:hover{
+  background-color: #fa912e;
+}
 
 .th {
   padding-top: 12px;
@@ -188,4 +195,64 @@ color: var(--mainBlue);
   margin-top: 30px !important;
   background-color: #ffffff !important;
   
+}
+
+
+.table-head-btitle{
+  width: 40%;
+  background-color: #99e1fd;
+  
+}
+
+
+.table-head-atitle{
+  width: 20%;
+  background-color: #99e1fd;
+  
+}
+
+.table-head-cls{
+  width: 10%;
+  background-color: #99e1fd;
+  
+}
+
+.table-head-stat{
+  width: 15%;
+  background-color: #99e1fd;
+  
+}
+
+.table-head-scope{
+  width: 15%;
+  background-color: #99e1fd;
+  
+}
+
+
+.book-title-sps{
+  width: 40%;
+ 
+  
+}
+.author-title-sps{
+  width: 20%;
+  
+}
+.book-cls-sps{
+  width: 10%;
+}
+.book-status-sps{
+  width: 15%;
+  
+}
+.book-scope-sps{
+  width: 15%;
+  
+}
+.search-input{
+width: 90%;
+border: none;
+height: 40px;
+
 }

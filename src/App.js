@@ -110,7 +110,7 @@ async componentDidMount(){
               <Route exact path="/bookissue" render={(props) => <BookIssue {...props} auth={authProps} />} />
               <Route exact path="/newuser" render={(props) => <NewUser {...props} auth={authProps} />} />
 
-              <Route exact path="/search" render={(props) => <TestPri {...props} auth={authProps} />} />
+              <Route exact path="/search" render={(props) => <SearchList {...props} auth={authProps} />} />
              
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
               <Route exact path="/newuserlist" render={(props) => <MainDashboardView {...props} auth={authProps} />} />
