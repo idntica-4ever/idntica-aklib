@@ -77,8 +77,6 @@ export default class SearchList extends Component {
   : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
   console.log("Testing value : ", testing);
   
-  
-  
   }
 
   onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 

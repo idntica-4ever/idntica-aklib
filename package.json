@@ -18,8 +18,8 @@
     "chart.js": "^2.9.3",
     "d3-scale": "^3.2.1",
     "digit-roll-react": "^1.1.0",
-    "font-awesome": "^4.7.0",
     "faker": "^4.1.0",
+    "font-awesome": "^4.7.0",
     "glyphicons-halflings": "^1.9.1",
     "install": "^0.13.0",
     "node-sass": "^4.14.1",
@@ -38,9 +38,9 @@
     "react-scripts": "3.4.1",
     "react-simple-maps": "^2.1.2",
     "react-sizeme": "^2.6.12",
-    "reactstrap": "^8.4.1",
+    "reactstrap": "^8.5.0",
     "styled-components": "^5.1.1",
-    "victory": "^34.3.11"
+    "victory": "^34.3.12"
   },
   "scripts": {
     "start": "react-scripts start",
