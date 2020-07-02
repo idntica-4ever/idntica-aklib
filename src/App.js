@@ -43,11 +43,11 @@ import NewUserList from './components/usermanagement/NewUserList';
 
 
 
-//import { library } from '@fortawesome/fontawesome-svg-core';
-//import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 
-//library.add(faEdit);
+library.add(faEdit);
 
 class App extends Component {
 

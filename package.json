@@ -18,11 +18,8 @@
     "chart.js": "^2.9.3",
     "d3-scale": "^3.2.1",
     "digit-roll-react": "^1.1.0",
-<<<<<<< HEAD
     "font-awesome": "^4.7.0",
-=======
     "faker": "^4.1.0",
->>>>>>> 8eda09a48f9a51ca2988056521d039677bb8967c
     "glyphicons-halflings": "^1.9.1",
     "install": "^0.13.0",
     "node-sass": "^4.14.1",
