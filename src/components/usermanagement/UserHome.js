@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 
-/*import { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 class Register extends Component {
   state = {
@@ -17,7 +17,7 @@ class Register extends Component {
     }
   }
 
-  clearErrorState = () => {
+ /* clearErrorState = () => {
     this.setState({
       errors: {
         cognito: null,
@@ -101,6 +101,6 @@ class Register extends Component {
       </section>
     );
   }
-
+}
 
 export default Register;

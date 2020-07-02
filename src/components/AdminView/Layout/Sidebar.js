@@ -44,17 +44,17 @@ const sidebarBackground = {
 };
 
 const navComponents = [
-  { to: '/buttons', name: 'Add User', exact: false, Icon: MdRadioButtonChecked },
+  { to: '/UserApprovalPage', name: 'Add User', exact: false, Icon: MdRadioButtonChecked },
   
-  { to: '/forms', name: 'Remove User', exact: false, Icon: MdChromeReaderMode },
+  { to: '/workprog', name: 'Remove User', exact: false, Icon: MdChromeReaderMode },
   
 ];
 
 const navContents = [
   { to: '/forms', name: 'Add Book', exact: false, Icon: MdTextFields },
-  { to: '/tables', name: 'Book Issue', exact: false, Icon: MdBorderAll },
-  { to: '/tables', name: 'Book Return', exact: false, Icon: MdBorderAll },
-  { to: '/tables', name: 'Book Revome', exact: false, Icon: MdBorderAll },
+  { to: '/workprog', name: 'Book Issue', exact: false, Icon: MdBorderAll },
+  { to: '/workprog', name: 'Book Return', exact: false, Icon: MdBorderAll },
+  { to: '/workprog', name: 'Book Revome', exact: false, Icon: MdBorderAll },
 ];
 
 
@@ -70,10 +70,8 @@ const navContents = [
 //];
 
 const navItems = [
-  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
-  { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
-  { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
+  { to: '/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard },
+ 
 ];
 
 const bem = bn.create('sidebar');
@@ -100,23 +98,39 @@ class Sidebar extends React.Component {
       <aside className={bem.b()} data-image={sidebarBgImage}>
         <div className={bem.e('background')} style={sidebarBackground} />
         <div className={bem.e('content')}>
-          <Navbar>
+          
+          <Nav vertical>
+          
+          <NavItem>
             <SourceLink className="navbar-brand d-flex">
               <img
                 src={logo200Image}
-                width="40"
-                height="30"
+                width="50"
+                height="20"
                 className="pr-2"
                 alt=""
               />
-              <span className="text-white">
-                AK LIBRARY <FaGithub />
+              <span className="text-white" >
+                <div className="AK-sidebar-text">AK LIBRARY </div>
               </span>
             </SourceLink>
-          </Navbar>
-          <Nav vertical>
-           
+          </NavItem>
 
+          {navItems.map(({ to, name, exact, Icon }, index) => (
+              <NavItem key={index} className={bem.e('nav-item')}>
+                <BSNavLink
+                  id={`navItem-${name}-${index}`}
+                  className="text-uppercase"
+                  tag={NavLink}
+                  to={to}
+                  activeClassName="active"
+                  exact={exact}
+                >
+                  <Icon className={bem.e('nav-item-icon')} />
+                  <span className="">{name}</span>
+                </BSNavLink>
+              </NavItem>
+            ))}
             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}

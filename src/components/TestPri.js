@@ -10,7 +10,7 @@ const config = require('../config.json');
 
 
 
-export default class SearchList extends Component {
+export default class TestPri extends Component {
   
   constructor(props) {
     super(props);

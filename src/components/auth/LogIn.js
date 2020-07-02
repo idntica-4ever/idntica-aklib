@@ -72,14 +72,24 @@ class LogIn extends Component {
 
   render() {
     return (
-      <section className="section auth">
-        <div className="container">
-          <h1>Log in</h1>
+     
+        <div className="container-mg">
+         <h1 className="header-text">Log In</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>
-            <div className="field">
-              <p className="control">
+
+          <div className="row">
+    <div className="col-6">
+    <img className="signupimg" src={require('../../images/signup-img-new.jpg')} /> 
+    </div>
+    <div className="col-6 withbg">
+        
+        
+        
+        <div className="row">
+            
+              
                 <input 
                   className="input" 
                   type="text"
@@ -89,10 +99,10 @@ class LogIn extends Component {
                   value={this.state.username}
                   onChange={this.onInputChange}
                 />
-              </p>
+              
             </div>
-            <div className="field">
-              <p className="control has-icons-left">
+            <div className="row">
+              
                 <input 
                   className="input" 
                   type="password"
@@ -101,26 +111,30 @@ class LogIn extends Component {
                   value={this.state.password}
                   onChange={this.onInputChange}
                 />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
-              </p>
+               
             </div>
-            <div className="field">
-              <p className="control">
+            <div className="row">
+             
                 <a href="/forgotpassword">Forgot password?</a>
-              </p>
+             
             </div>
-            <div className="field">
-              <p className="control">
+            <div className="row">
+            <div className="col">
+                <div className = "pull-right">
+           
                 <button className="button is-success">
                   Login
                 </button>
-              </p>
+             </div></div>
             </div>
+
+</div>
+</div>
+
+
           </form>
         </div>
-      </section>
+     
     );
   }
 }

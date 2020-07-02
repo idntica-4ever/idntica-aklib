@@ -127,14 +127,16 @@ export default class SignupForm extends Component {
     render() {
         return (
            
-<div className="container-mg" fluid="md"> 
+<div className="container-mg" >
+
+  
 <h1 className="header-text">Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={event => this.handleNewUserRequest(this.state.newbook.email_id, event)}>
 <div className="row">
     <div className="col-6">
-    <img className="signupimg" src={require('../../images/signup-img-new.jpg')} /> 
+    <img className="signupimg" src={require('../../images/reg-img-new.jpg')} /> 
     </div>
     <div className="col-6 withbg">
         <div className="row">
@@ -185,13 +187,9 @@ export default class SignupForm extends Component {
 <div className="row">
     <p></p>
 </div>
-<div className="row">
-    <p></p>
-</div>
+
         <div className="row">
-            <div className="col">
-                <a href="/forgotpassword">Forgot password?</a>
-            </div>
+            
             <div className="col">
                 <div className = "pull-right">
            

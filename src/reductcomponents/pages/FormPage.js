@@ -150,14 +150,36 @@ render() {
                   />
                 </FormGroup>
                 <FormGroup>
+                  <Label for="clsNo" >Department</Label>
+                  
+                </FormGroup>
+                <FormGroup>
                   <Label for="scope">Scope</Label>
-                  <Input type="select" name="select">
+                  <Input type="select" name="scope">
                     <option>Circulation</option>
                     <option>Reference</option>
                   </Input>
                 </FormGroup>
+                
                 <FormGroup>
-                  <Label for="yop">Datetime</Label>
+                  <Label for="publication">Publication</Label>
+                  <Input
+                    type="text"
+                    name="publication"
+                    placeholder="Publication"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="location">Location</Label>
+                  <Input
+                    type="text"
+                    name="location"
+                    placeholder="Location"
+                  />
+                  </FormGroup>
+                
+                <FormGroup>
+                  <Label for="yop">Year of Publication</Label>
                   <Input
                     type="number"
                     type='number'

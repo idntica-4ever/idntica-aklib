@@ -7,7 +7,12 @@ export default class BookqueryDis extends Component {
                 <div className="row">
 
                 <div className="row my-2 text-capitalize text-center">
-                    <p >Book Title: {this.props.Book_Title }</p>
+                    <p >Book Title: 
+                        
+                        {this.props.Book_Title }
+                        
+                        
+                        </p>
             
                     </div>
                     <div className="row my-2 text-capitalize text-center">

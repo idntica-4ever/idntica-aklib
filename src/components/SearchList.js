@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Bookquery from './Bookquery';
+
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {Table} from 'react-bootstrap';
+import { queries } from '@testing-library/react';
+import SearchInput from './AdminView/SearchInput';
 
 
 const config = require('../config.json');
@@ -54,7 +58,7 @@ export default class SearchList extends Component {
       this.setState({ queries: res.data });
      console.log("Fetched Data", this.state.queries);
 
-     this.assignSearchedresults();
+    // this.assignSearchedresults();
      // validating search results
 
     } catch (error) {
@@ -63,7 +67,7 @@ export default class SearchList extends Component {
   }
 
 
-  assignSearchedresults = async () => {
+ /* assignSearchedresults = async () => {
   console.log("Assigning to Bookquery");
   console.log ("Number of results returned :", this.state.queries.length);
   const testing = this.state.queries && this.state.queries.length > 0
@@ -72,7 +76,7 @@ export default class SearchList extends Component {
   : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
   console.log("Testing value : ", testing);
   
-  }
+  } */
 
   onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
     "book_query": event.target.value } });
@@ -84,20 +88,19 @@ export default class SearchList extends Component {
         
         const booklist = this.state.queries && this.state.queries.length > 0
         ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
-          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.Author_Title} />)
-        : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div> 
-        
+          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
+        : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
+       
     return (
      
-           <div className="bookcontainer">
+           <div className="container">
   
-  <div className="col">
+  
 
   <form onSubmit={event => this.handleglobalsearch(this.state.newquery.book_query, event)}>
-          <div class="wrap">
-
-   <div class="search">
-      <input type="text" className="searchTerm" placeholder="Search your books here..."  
+         
+     
+      <input type="text" className="search-input" placeholder="Search your books here..."  
 
       
       value={this.state.newquery.book_query} 
@@ -106,25 +109,40 @@ export default class SearchList extends Component {
       
      <button type="submit" className="searchButton">
 
-      <i className="fa fa-search" />
+      <i className="fa fa-search" /> Search
      </button>
             
      
-   </div>
-</div>
+ 
 
 </form>
       
-    </div>
-   
-        {booklist}
-      
+  
+    <Table >
+                        <tbody>
+                          <tr>
+                          <th className="table-head-btitle">Book Title</th>
+                          <th className="table-head-atitle">Author Name</th>
+                          <th className="table-head-cls">Clasification</th>
+                          <th className="table-head-scope">Scope</th>
+                          <th className="table-head-stat">Status</th>
+                          </tr>
+    
+                        
+                  </tbody></Table>              
+                                {booklist}
+                                  
+                          
+                              
+       
+       
+    <Bookquery/>
     
 </div>
 
   )
  
-  
+ 
  
 }
 

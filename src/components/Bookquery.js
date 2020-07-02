@@ -1,7 +1,32 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {Table} from 'react-bootstrap';
-export default class Bookquery extends Component {
+import UserProgressTable from '../components/AdminView/UserProgressTable';
+import {
+  avatarsData,
+  chartjs,
+  productsData,
+  supportTicketsData,
+  todosData,
+  userProgressTableData,
+} from '../reductcomponents/demos/dashboardPage';
+import {
+  Badge,
+  Button,
+  Card,
+  CardBody,
+  CardDeck,
+  CardGroup,
+  CardHeader,
+  CardTitle,
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Row,
+} from 'reactstrap';
+
+const tableTypes = ['hover'];
+export default class TestPri extends Component {
 /*
   state = {
     isEditMode: false,
@@ -27,55 +52,56 @@ export default class Bookquery extends Component {
  
     return (
        
-      <div>
+      <div className="container">
               
 
 
-              <Table className="mt-4" striped bordered bover size="sm">
+ 
+{tableTypes.map((tableType, index) => (
+        <Row key={index}>
+          
+            
+<Table {...{ [tableType || 'default']: true }}>
+                       
+                        <tbody>
+                       
+                           <tr >
                             
-                            <tbody>
-                           
-               
-                            
-                           <tr>
-                           
-                                <td>
+                              <td className="book-title-sps">
                                 {this.props.Book_Title} 
                                 </td>
-                                <td>
-                                {this.props.Book_Author}
+                            
+                               
+                                
+                                  <td className="author-title-sps">
+                                {this.props.Book_Author} 
                                 </td>
-                                <td>
-                                {this.props.Book_Classification_No}
+                                
+                               
+                                
+                                <td className="book-cls-sps">
+                                {this.props.Book_Classification_No} 
                                 </td>
-                                <td>
+                                
+                                <td className="book-scope-sps">
                                 {this.props.Book_Scope} 
-                                    </td>
-                               <td> {this.props.Book_Status}
-                                   </td>
-                      
-                                
-                                
-                            </tr>
+                                </td>
+                                 
+                                <td className="book-status-sps">
+                                {this.props.Book_Status} 
+                                </td>
+                               
+                           </tr>
                             
-                            
-                            
-                            
-                            
-                            </tbody>
-                        </Table>
+                           
+                          
 
-
-           
-
-
-
-          <div>
-              <p className="product-title">Book Title: {this.props.Book_Title }</p>
-              <p className="product-id">Book Author:{ this.props.Book_Author}</p>
-              
-              <p className="product-id">Book Status: { this.props.Status_Key}</p>
-            </div>
+                         
+                          
+                        </tbody>
+                      </Table>
+                 </Row>
+      ))}
        
 </div>      
     )
