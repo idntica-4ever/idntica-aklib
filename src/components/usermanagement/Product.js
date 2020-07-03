@@ -5,7 +5,7 @@ export default class NewUserList extends Component {
 
   state = {
     isEditMode: false,
-    updatedproductname: this.props.user_name
+    updatedcomments: this.props.updatedcomments
   }
 
   handleProductEdit = event => {
@@ -16,10 +16,10 @@ export default class NewUserList extends Component {
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateProduct(this.props.email_id, this.state.updatedproductname);
+    this.props.handleUpdateProduct(this.props.email_id, this.state.updatedcomments);
   }
 
-  //onAddProductNameChange = event => this.setState({ "updatedproductname": event.target.value });
+  onAddComments = event => this.setState({ "updatedcomments": event.target.value });
 
   render() {
     return (
@@ -28,7 +28,7 @@ export default class NewUserList extends Component {
           this.props.isAdmin && 
           <Fragment>
             <a href="/" onClick={this.handleProductEdit} className="product-edit-icon">
-              <FontAwesomeIcon icon="check" />
+              <FontAwesomeIcon icon="edit" />
             </a>
             <button onClick={event => this.props.handleDeleteProduct(this.props.email_id, event)} className="delete"></button>
           </Fragment>
@@ -40,23 +40,61 @@ export default class NewUserList extends Component {
               <input 
                 className="input is-medium"
                 type="text" 
-                placeholder="Enter name"
-                value={this.state.updatedproductname}
-                onChange={this.onAddProductNameChange}
+                placeholder="Enter Comments"
+                value={this.state.updatedcomments}
+                onChange={this.onAddComments}
               />
               <p className="product-id">id: { this.props.email_id }</p>
               <button type="submit" 
                 className="button is-info is-small"
                 onClick={ this.handleEditSave }
-              >save</button>
+              >Approve</button>
             </div>
-          : <div>
-              <p className="product-title">User Name:{ this.props.user_name }</p>
+          :<div>
+              <p className="product-title"> User Name:{ this.props.user_name }</p>
               <p className="product-id">Email ID: { this.props.email_id }</p>
               <p className="product-id">Category: { this.props.user_category }</p>
               <p className="product-id">Batch Year: { this.props.user_batch }</p>
               
             </div>
+// testing display
+/*
+<div className="container1">
+<div className="row">
+
+<div className="row my-2 text-capitalize text-center">
+    <p >User Name: 
+        
+        {this.props.user_name}
+        
+        
+        </p>
+
+    </div>
+    <div className="row my-2 text-capitalize text-center">
+
+<p >Email ID:{ this.props.email_id}</p>
+
+    </div>
+    <div className="row my-2 text-capitalize text-center">
+  
+<p>User Category:{ this.props.user_category}</p>
+
+    </div>
+    <div className="row my-2 text-capitalize text-center">
+
+
+<p >Batch Year: { this.props.user_batch}</p>
+
+    </div>
+</div>
+
+</div>
+
+
+*/
+
+
         }
       </div>
     )
