@@ -24,9 +24,19 @@ export default class AddBook extends Component {
     },
     newbooks: []
   }
-
+// upercase function
+toUpperCase = () => {
+  const upperCase = this.state.text.toUpperCase();
+  this.setState({
+      text: upperCase
+  });
+}
   handleAddBook = async (accession_no, event) => {
-      console.log("function invoked", key_value);
+
+    console.log ("Function invoked");
+
+    //this.fetchProducts();
+     console.log("function invoked", key_value);
       //console.log("accession No received : ",accession_no);
       //const test = document.getElementById("accessionNo").value
       //console.log ("Data from input field : ", test);
@@ -34,21 +44,34 @@ export default class AddBook extends Component {
     // add call to AWS API Gateway add product endpoint here
     try {
         console.log("inside try");
-      accession_no=key_value + 1;
-      //accession_no="Test1234";
+     accession_no=key_value.toString();
+     // accession_no="333";
        const now = new Date();
+       const book_authorF_upper= this.state.newbook.Book_Author_First.toUpperCase();
+       const book_authorS_upper= this.state.newbook.Book_Author_Second.toUpperCase();
+       const book_booktitle_upper=this.state.newbook.Book_Title.toUpperCase();
+       const book_cls_upper= this.state.newbook.Book_Classification_No.toUpperCase();
+      
+
+
+
       const params = {
     "Accession_No": accession_no,
-    "Book_Author": this.state.newbook.Book_Author_First + " " + this.state.newbook.Book_Author_Second,
-    "Author_Title": this.state.newbook.Book_Author_First + " " + this.state.newbook.Book_Author_Second + "##" + " " + this.state.newbook.Book_Title,
-    "Book_Classification_No": this.state.newbook.Book_Classification_No,
+    "Book_Author": {book_authorF_upper} + " " + {book_authorS_upper},
+    "Author_Title": {book_authorF_upper} + " " + {book_authorS_upper} + "##" + " " + {book_booktitle_upper},
+    "Book_Classification_No": {book_cls_upper},
     "Book_Publisher": this.state.newbook.Book_Publisher,    
     "Book_Scope": this.state.newbook.Book_Scope,
     "Book_Status": "Available",
-    "Book_Title": this.state.newbook.Book_Title,
-    "Book_Added_On": now,
+    "Book_Title": {book_booktitle_upper},
+    "updated_on": now,
     "PK": "AK_Library#001"
       };
+      
+
+
+
+
       console.log("Inputs received :", params);
       console.log("accession No : ",accession_no);
       await axios.post(`${config.api.invokeUrl}/books/${accession_no}`, params);
@@ -65,16 +88,22 @@ export default class AddBook extends Component {
     // then set them in state
     try {
       const res = await axios.get(`${config.api.invokeUrl}/books`);
-      //console.log("data received : ", res.data.Count);
-      key_value = res.data.Count;
-      console.log ("Key value details :", key_value);
+     // console.log("data received : ", res);
+     // console.log("res data : ", res.data);
+      console.log("data received : ", res.data.LastEvaluatedKey.Accession_No);
+      key_value = (res.data.LastEvaluatedKey.Accession_No);
+      key_value=(key_value*1)+1;
+    
+      //console.log ("Key value details :", key_value);
       //alert ("Total records", key_value);
       //const products = res.data;
       //this.setState({ products: products });
-      return key_value;
+      //return key_value;
     } catch (err) {
       console.log(`An error has occurred: ${err}`);
     }
+
+    
   }
  
 
@@ -109,7 +138,8 @@ render() {
                   <Input
                     type="text"
                     name="accessionNo"
-                    value={key_value + 1}
+                    value={key_value}
+                    
                     onChange={this.onAddBookAccessionNoChange}
                     disabled
                   />
@@ -161,7 +191,11 @@ render() {
                 </FormGroup>
                 <FormGroup>
                   <Label for="scope">Scope</Label>
-                  <Input type="select" name="scope">
+                  <Input type="select" name="scope"
+                   value={this.state.newbook.Book_Scope}
+                   onChange={this.onAddBookScopeChange}
+                     
+                  >
                     <option>Circulation</option>
                     <option>Reference</option>
                   </Input>
