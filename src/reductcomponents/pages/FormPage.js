@@ -26,7 +26,11 @@ export default class FormPage extends Component {
   }
 
   handleAddBook = async (accession_no, event) => {
-      console.log("function invoked", key_value);
+
+    console.log ("Function invoked");
+
+    //this.fetchProducts();
+     console.log("function invoked", key_value);
       //console.log("accession No received : ",accession_no);
       //const test = document.getElementById("accessionNo").value
       //console.log ("Data from input field : ", test);
@@ -34,8 +38,8 @@ export default class FormPage extends Component {
     // add call to AWS API Gateway add product endpoint here
     try {
         console.log("inside try");
-      accession_no=key_value + 1;
-      //accession_no="Test1234";
+     accession_no=key_value.toString();
+     // accession_no="333";
        const now = new Date();
       const params = {
     "Accession_No": accession_no,
@@ -46,7 +50,7 @@ export default class FormPage extends Component {
     "Book_Scope": this.state.newbook.Book_Scope,
     "Book_Status": "Available",
     "Book_Title": this.state.newbook.Book_Title,
-    "Book_Added_On": now,
+    "updated_on": now,
     "PK": "AK_Library#001"
       };
       console.log("Inputs received :", params);
@@ -65,16 +69,22 @@ export default class FormPage extends Component {
     // then set them in state
     try {
       const res = await axios.get(`${config.api.invokeUrl}/books`);
-      //console.log("data received : ", res.data.Count);
-      key_value = res.data.Count;
-      console.log ("Key value details :", key_value);
+     // console.log("data received : ", res);
+     // console.log("res data : ", res.data);
+      console.log("data received : ", res.data.LastEvaluatedKey.Accession_No);
+      key_value = (res.data.LastEvaluatedKey.Accession_No);
+      key_value=(key_value*1)+1;
+    
+      //console.log ("Key value details :", key_value);
       //alert ("Total records", key_value);
       //const products = res.data;
       //this.setState({ products: products });
-      return key_value;
+      //return key_value;
     } catch (err) {
       console.log(`An error has occurred: ${err}`);
     }
+
+    
   }
  
 
@@ -109,7 +119,7 @@ render() {
                   <Input
                     type="text"
                     name="accessionNo"
-                    value={key_value + 1}
+                    value={key_value}
                     onChange={this.onAddBookAccessionNoChange}
                     disabled
                   />

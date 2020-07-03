@@ -31,18 +31,23 @@ export default class NewUserList extends Component {
     }
   }
 */
-  handleUpdateProduct = async (id, name) => {
+  handleUpdateProduct = async (email_id, updatedcomments) => {
+
+    const now = new Date();
     // add call to AWS API Gateway update product endpoint here
     try {
       const params = {
-        "id": id,
-        "productname": name
+        "email_id": email_id,
+        "Comments": updatedcomments,
+        "account_status":"Active",
+        "approved_by":"Admin",
+        "approved_on":now
       };
-      await axios.patch(`${config.api.invokeUrl}/products/${id}`, params);
-      const productToUpdate = [...this.state.products].find(product => product.id === id);
-      const updatedProducts = [...this.state.products].filter(product => product.id !== id);
-      productToUpdate.productname = name;
-      updatedProducts.push(productToUpdate);
+      await axios.patch(`${config.api.invokeUrl}/newuser/${email_id}`, params);
+      const productToUpdate = [...this.state.products].find(product => product.email_id === email_id);
+      const updatedProducts = [...this.state.products].filter(product => product.email_id !== email_id);
+      //productToUpdate.productname = user_name;
+      //updatedProducts.push(productToUpdate);
       this.setState({products: updatedProducts});
     }catch (err) {
       console.log(`Error updating product: ${err}`);
