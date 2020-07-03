@@ -5,7 +5,7 @@ export default class NewUserList extends Component {
 
   state = {
     isEditMode: false,
-    updatedproductname: this.props.name
+    updatedproductname: this.props.user_name
   }
 
   handleProductEdit = event => {
@@ -16,10 +16,10 @@ export default class NewUserList extends Component {
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateProduct(this.props.id, this.state.updatedproductname);
+    this.props.handleUpdateProduct(this.props.email_id, this.state.updatedproductname);
   }
 
-  onAddProductNameChange = event => this.setState({ "updatedproductname": event.target.value });
+  //onAddProductNameChange = event => this.setState({ "updatedproductname": event.target.value });
 
   render() {
     return (
@@ -28,9 +28,9 @@ export default class NewUserList extends Component {
           this.props.isAdmin && 
           <Fragment>
             <a href="/" onClick={this.handleProductEdit} className="product-edit-icon">
-              <FontAwesomeIcon icon="edit" />
+              <FontAwesomeIcon icon="check" />
             </a>
-            <button onClick={event => this.props.handleDeleteProduct(this.props.id, event)} className="delete"></button>
+            <button onClick={event => this.props.handleDeleteProduct(this.props.email_id, event)} className="delete"></button>
           </Fragment>
         }
         {
@@ -44,15 +44,18 @@ export default class NewUserList extends Component {
                 value={this.state.updatedproductname}
                 onChange={this.onAddProductNameChange}
               />
-              <p className="product-id">id: { this.props.id }</p>
+              <p className="product-id">id: { this.props.email_id }</p>
               <button type="submit" 
                 className="button is-info is-small"
                 onClick={ this.handleEditSave }
               >save</button>
             </div>
           : <div>
-              <p className="product-title">{ this.props.name }</p>
-              <p className="product-id">Email ID: { this.props.id }</p>
+              <p className="product-title">User Name:{ this.props.user_name }</p>
+              <p className="product-id">Email ID: { this.props.email_id }</p>
+              <p className="product-id">Category: { this.props.user_category }</p>
+              <p className="product-id">Batch Year: { this.props.user_batch }</p>
+              
             </div>
         }
       </div>
