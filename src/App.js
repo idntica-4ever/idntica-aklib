@@ -39,6 +39,7 @@ import BookIssue from './components/BookIssue';
 import NewUser from './components/usermanagement/NewUser';
 import NewUserList from './components/usermanagement/NewUserList';
 import WorkinProgress from './components/test/WorkinProgress';
+import IssueBook from './reductcomponents/pages/IssueBook';
 
 //Amplify.configure(awsconfig);
 
@@ -121,7 +122,7 @@ async componentDidMount(){
           
          
          
-    
+   
           <Footer />
         </Router>
       </div>

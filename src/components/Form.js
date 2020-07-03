@@ -20,6 +20,9 @@ export default ({ handleglobalsearch, onAddBookQueryChange, newquery }) => {
           Submit
         </button>
       
+
+
+      
     </div>
   );
 };

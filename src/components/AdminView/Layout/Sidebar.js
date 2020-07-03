@@ -51,9 +51,9 @@ const navComponents = [
 ];
 
 const navContents = [
-  { to: '/forms', name: 'Add Book', exact: false, Icon: MdTextFields },
-  { to: '/workprog', name: 'Book Issue', exact: false, Icon: MdBorderAll },
-  { to: '/workprog', name: 'Book Return', exact: false, Icon: MdBorderAll },
+  { to: '/addbook', name: 'Add Book', exact: false, Icon: MdTextFields },
+  
+  { to: '/workprog', name: 'Book Edit', exact: false, Icon: MdBorderAll },
   { to: '/workprog', name: 'Book Revome', exact: false, Icon: MdBorderAll },
 ];
 
@@ -71,6 +71,9 @@ const navContents = [
 
 const navItems = [
   { to: '/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard },
+  { to: '/issue', name: 'issue', exact: false, Icon: MdWeb },
+  { to: '/workprog', name: 'return', exact: false, Icon: MdInsertChart },
+  
  
 ];
 

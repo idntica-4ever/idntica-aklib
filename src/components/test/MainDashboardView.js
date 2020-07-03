@@ -14,17 +14,18 @@ const BadgePage = React.lazy(() => import('../../reductcomponents/pages/BadgePag
 const ButtonGroupPage = React.lazy(() => import('../../reductcomponents/pages/ButtonGroupPage'));
 const ButtonPage = React.lazy(() => import('../../reductcomponents/pages/ButtonPage'));
 const UserApprovalPage = React.lazy(() => import('../usermanagement/NewUserList'));
-const CardPage = React.lazy(() => import('../../reductcomponents/pages/CardPage'));
+const IssueBook = React.lazy(() => import('../../reductcomponents/pages/IssueBook'));
 const ChartPage = React.lazy(() => import('../../reductcomponents/pages/ChartPage'));
 const DashboardPage = React.lazy(() => import('../../reductcomponents/pages/DashboardPage'));
 const DropdownPage = React.lazy(() => import('../../reductcomponents/pages/DropdownPage'));
-const FormPage = React.lazy(() => import('../../reductcomponents/pages/FormPage'));
+const AddBook = React.lazy(() => import('../../reductcomponents/pages/AddBook'));
+
 const InputGroupPage = React.lazy(() => import('../../reductcomponents/pages/InputGroupPage'));
 const ModalPage = React.lazy(() => import('../../reductcomponents/pages/ModalPage'));
 const ProgressPage = React.lazy(() => import('../../reductcomponents/pages/ProgressPage'));  
 const TablePage = React.lazy(() => import('../../reductcomponents/pages/TablePage'));
 const TypographyPage = React.lazy(() => import('../../reductcomponents/pages/TypographyPage'));
-const WidgetPage = React.lazy(() => import('../../reductcomponents/pages/WidgetPage'));
+const ReturnBook = React.lazy(() => import('../../reductcomponents/pages/ReturnBook'));
 const WorkProg = React.lazy(() => import('./WorkinProgress'));
 
 const getBasename = () => {
@@ -60,8 +61,8 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/UserApprovalPage" component={UserApprovalPage} />
-                <Route exact path="/cards" component={CardPage} />
-                <Route exact path="/widgets" component={WidgetPage} />
+                <Route exact path="/issue" component={IssueBook} />
+                <Route exact path="/return" component={ReturnBook} />
                 <Route exact path="/typography" component={TypographyPage} />
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
@@ -76,7 +77,8 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/dropdowns" component={DropdownPage} />
                 <Route exact path="/progress" component={ProgressPage} />
                 <Route exact path="/modals" component={ModalPage} />
-                <Route exact path="/forms" component={FormPage} />
+                <Route exact path="/addbook" component={AddBook} />
+                
                 <Route exact path="/input-groups" component={InputGroupPage} />
                 <Route exact path="/charts" component={ChartPage} />
               </React.Suspense>
