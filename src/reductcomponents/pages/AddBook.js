@@ -57,20 +57,16 @@ toUpperCase = () => {
 
       const params = {
     "Accession_No": accession_no,
-    "Book_Author": {book_authorF_upper} + " " + {book_authorS_upper},
-    "Author_Title": {book_authorF_upper} + " " + {book_authorS_upper} + "##" + " " + {book_booktitle_upper},
-    "Book_Classification_No": {book_cls_upper},
+    "Book_Author": book_authorF_upper + " " + book_authorS_upper,
+    "Author_Title": book_authorF_upper + " " + book_authorS_upper + "##" + " " + book_booktitle_upper,
+    "Book_Classification_No": book_cls_upper,
     "Book_Publisher": this.state.newbook.Book_Publisher,    
     "Book_Scope": this.state.newbook.Book_Scope,
     "Book_Status": "Available",
-    "Book_Title": {book_booktitle_upper},
+    "Book_Title": book_booktitle_upper,
     "updated_on": now,
     "PK": "AK_Library#001"
       };
-      
-
-
-
 
       console.log("Inputs received :", params);
       console.log("accession No : ",accession_no);

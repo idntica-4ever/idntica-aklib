@@ -16,7 +16,7 @@ export default class NewUserList extends Component {
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateProduct(this.props.email_id, this.state.updatedcomments);
+    this.props.handleUpdateProduct(this.props.email_id, this.props.user_name, this.state.updatedcomments);
   }
 
   onAddComments = event => this.setState({ "updatedcomments": event.target.value });
@@ -36,7 +36,7 @@ export default class NewUserList extends Component {
         {
           this.state.isEditMode 
           ? <div>
-              <p>Edit product name</p>
+              <p>Enter Comments:</p>
               <input 
                 className="input is-medium"
                 type="text" 

@@ -1,19 +1,94 @@
 import React, { Component, Fragment } from 'react';
 import Product from './Product';
 import axios from "axios";
+import FormErrors from "../FormErrors";
+import Validate from "../utility/FormValidation";
+import { Auth } from "aws-amplify";
+
 const config = require('../../config.json');
 
-export default class NewUserList extends Component {
+
+class NewUserList extends Component {
 
   state = {
     newproduct: { 
       "user_name": "", 
       "email_id": "",
       "user_batch":"",
-      "user_category":""
+      "user_category":"",
+      "comments":"",
+      "approved_by":"",
+      "approved_on":"",
+      "account_status":"",
+      "password":""    
     },
-    products: []
+    products: [],
+    errors: {
+      cognito:null,
+      blankfield:false,
+      passwordmatch:false
+    }
   }
+
+  clearErrorState = () => {
+    this.setState({
+      errors: {
+        cognito: null,
+        blankfield: false,
+        passwordmatch: false
+      }
+    });
+  }
+
+
+  handleSignUp = async (email_id, user_name, event) => {
+   // event.preventDefault();
+   // console.log("coding started");
+    // Form validation
+   /* this.clearErrorState();
+    const error = Validate(event, this.state);
+    if (error) {
+      this.setState({
+        errors: { ...this.state.errors, ...error }
+      });
+    }*/
+
+    // AWS Cognito integration here
+    // this.state will pass the data from the from to the varialbels
+    const username = user_name;
+    const email = email_id;
+    const password = "Aklibrary@123";
+    console.log("Username :", username);
+    try{
+         //console.log("started try method");
+
+     const signUpResponse = await Auth.signUp({
+        username,
+        password,
+        attributes:{
+          email:email
+        }
+      });
+      console.log(signUpResponse);
+      console.log("Cognito account created");
+     // this.props.history.push("/welcome");
+    } catch (error){
+      //console.log("Inside error log");
+
+      let err = null;
+      !error.message ? err = { "message" : error} : err = error;
+      this.setState({
+        errors:{
+          errors:{
+            ...this.state.errors,
+            cognito:err
+          }
+        }
+      })
+    }
+  };
+
+
 /*
   handleAddProduct = async (id, event) => {
     event.preventDefault();
@@ -31,24 +106,29 @@ export default class NewUserList extends Component {
     }
   }
 */
-  handleUpdateProduct = async (email_id, updatedcomments) => {
-
+  handleUpdateProduct = async (email_id, user_name, comments) => {
+    //setting up new login account
+    this.handleSignUp(email_id, user_name);
     const now = new Date();
     // add call to AWS API Gateway update product endpoint here
     try {
       const params = {
         "email_id": email_id,
-        "Comments": updatedcomments,
+        "comments": comments,
         "account_status":"Active",
         "approved_by":"Admin",
-        "approved_on":now
+        "approved_on":now,
+        "PK":"AK_Library#001"
       };
+      console.log("Inputs received :", params);
+      console.log("processing update for email ID : ", email_id);
       await axios.patch(`${config.api.invokeUrl}/newuser/${email_id}`, params);
       const productToUpdate = [...this.state.products].find(product => product.email_id === email_id);
       const updatedProducts = [...this.state.products].filter(product => product.email_id !== email_id);
-      //productToUpdate.productname = user_name;
-      //updatedProducts.push(productToUpdate);
+      productToUpdate.comments = comments;
+      updatedProducts.push(productToUpdate);
       this.setState({products: updatedProducts});
+      this.fetchProducts();
     }catch (err) {
       console.log(`Error updating product: ${err}`);
     }
@@ -123,3 +203,5 @@ export default class NewUserList extends Component {
     )
   }
 }
+
+export default NewUserList;

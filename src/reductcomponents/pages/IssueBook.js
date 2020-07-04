@@ -37,7 +37,8 @@ export default class IssueBook extends Component {
 
     state = {
         newquery: {
-            "book_query": ""
+            "email_id": "",
+            "accession_no":""
         },
         queries: [],
         booklst: []
@@ -54,24 +55,24 @@ export default class IssueBook extends Component {
     
     
     
-      // handle global search
-      handleglobalsearch = async(book_query, event) => {
+      // handle user search
+      handleusersearch = async(email_id, event) => {
         event.preventDefault();
-        const book_query_upper= book_query.toUpperCase();
-        console.log ("Book Query Received", book_query_upper);
+       // const book_query_upper= book_query.toUpperCase();
+        console.log ("Book Query Received", email_id);
     
         try {
     
           const params = {
-            "book_query": book_query
+            "email_id": email_id
           };
     
           console.log("Fetching API");
-          book_query=encodeURIComponent(book_query);
-          const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
-          console.log("Fetching API for query : ", book_query);
-          book_query=encodeURIComponent(book_query);
-          console.log("Encoded URL :", encodeURIComponent(book_query));
+         // book_query=encodeURIComponent(book_query);
+          const res = await axios.get(`${config.api.invokeUrl}/newuser/${email_id}`, params);
+          console.log("Fetching API for query : ", email_id);
+          //book_query=encodeURIComponent(book_query);
+          //console.log("Encoded URL :", encodeURIComponent(book_query));
           
           
           
@@ -86,10 +87,46 @@ export default class IssueBook extends Component {
         }
       }
 
+      handlebooksearch = async(accession_no) => {
 
-    onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
-        "book_query": event.target.value } });
+      //  event.preventDefault();
+        // const book_query_upper= book_query.toUpperCase();
+         console.log ("Book Query Received", accession_no);
+     
+         try {
+     
+           const params = {
+             "accession_no": accession_no
+           };
+     
+           console.log("Fetching API");
+          // book_query=encodeURIComponent(book_query);
+           const res = await axios.get(`${config.api.invokeUrl}/books/${accession_no}`, params);
+           console.log("Fetching API for query : ", accession_no);
+           //book_query=encodeURIComponent(book_query);
+           //console.log("Encoded URL :", encodeURIComponent(book_query));
+           
+           
+           
+           this.setState({ booklst: res.data });
+          console.log("Fetched Data", this.state.booklst);
+     return;
+         // this.assignSearchedresults();
+          // validating search results
+     
+         } catch (error) {
+           console.log(`An error has occurred: ${error}`);
+         }
+
+      }
+
+
+    onAddEmailChange = event => this.setState({ newquery: { ...this.state.newquery, 
+        "email_id": event.target.value } });
     
+        onAddAccessionNoChange = event => this.setState({ newquery: { ...this.state.newquery, 
+          "accession_no": event.target.value } });
+      
 
     render() {
           
@@ -106,17 +143,17 @@ export default class IssueBook extends Component {
           <Card>
             <CardHeader>User Details</CardHeader>
             <CardBody>
-              <Form onSubmit={event => this.handleglobalsearch(this.state.newquery.book_query, event)}>
+              <Form onSubmit={event => this.handleusersearch(this.state.newquery.email_id, event)}>
                 
                 <FormGroup>
                   <Label for="username">User Name</Label>
                   <Input
                     type="text"
                     name="username"
-                    placeholder="Search the User..."
-                    value={this.state.newquery.book_query} 
+                    placeholder="Enter email address to search User..."
+                    value={this.state.newquery.email_id} 
       
-                    onChange={this.onAddBookQueryChange}
+                    onChange={this.onAddEmailChange}
                     
                   />
                 </FormGroup>
@@ -139,12 +176,17 @@ export default class IssueBook extends Component {
                     type="text"
                     name="accno"
                     placeholder="Enter the book Accession No"
+                    value={this.state.newquery.accession_no} 
+                    onChange={this.onAddAccessionNoChange}
+                    
                   />
                 </FormGroup>
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Issue Book</Button>
+                    <Button onClick= {this.handlebooksearch(this.state.newquery.accession_no)}>Search Book
+      
+                    </Button>
                   </Col>
                 </FormGroup>
 
