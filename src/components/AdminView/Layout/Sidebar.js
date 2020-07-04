@@ -53,8 +53,8 @@ const navComponents = [
 const navContents = [
   { to: '/addbook', name: 'Add Book', exact: false, Icon: MdTextFields },
   
-  { to: '/workprog', name: 'Book Edit', exact: false, Icon: MdBorderAll },
-  { to: '/workprog', name: 'Book Revome', exact: false, Icon: MdBorderAll },
+  { to: '/editbook', name: 'Edit Book', exact: false, Icon: MdBorderAll },
+  { to: '/removebook', name: 'Revome Book', exact: false, Icon: MdBorderAll },
 ];
 
 

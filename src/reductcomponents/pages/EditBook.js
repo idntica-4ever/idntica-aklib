@@ -1,12 +1,34 @@
+import React, { Component } from 'react';
 import Page from '../../components/AdminView/Page';
-import React, { Component, Fragment } from 'react';
-import axios from "axios";
-import { Button, Card, CardBody, CardHeader, Col, Form, FormFeedback, FormGroup, FormText, Input, Label, Row, } from 'reactstrap';
+import Bookquery from '../../components/Bookquery';
 
+//import {Link} from 'react-router-dom';
+import axios from 'axios';
+import {Table} from 'react-bootstrap';
+
+
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Form,
+    FormFeedback,
+    FormGroup,
+    FormText,
+    Input,
+    Label,
+    Row,
+  } from 'reactstrap';
+  const userquery='';
+
+  
 const config = require('../../config.json');
 var key_value=0;
-export default class AddBook extends Component {
+export default class EditBook extends Component {
 
+    
   state = {
     newbook: {  
     "accession_no": "",
@@ -22,8 +44,12 @@ export default class AddBook extends Component {
     "Book_Title": "",
     "PK": ""
     },
-    newbooks: []
-
+    newbooks: [],
+    newquery: {
+        "book_query": ""
+    },
+    queries: [],
+    booklst: []
   }
 // upercase function
 toUpperCase = () => {
@@ -32,6 +58,45 @@ toUpperCase = () => {
       text: upperCase
   });
 }
+
+
+
+  // handle global search
+  handleglobalsearch = async(book_query, event) => {
+    event.preventDefault();
+    
+    console.log ("Book Query Received", book_query);
+
+    try {
+
+      const params = {
+        "book_query": book_query
+      };
+
+      console.log("Fetching API");
+      book_query=encodeURIComponent(book_query);
+      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
+      console.log("Fetching API for query : ", book_query);
+      book_query=encodeURIComponent(book_query);
+      console.log("Encoded URL :", encodeURIComponent(book_query));
+      
+      
+      
+      this.setState({ queries: res.data });
+     console.log("Fetched Data", this.state.queries);
+
+
+    } catch (error) {
+      console.log(`An error has occurred: ${error}`);
+    }
+  }
+
+
+
+  onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
+    "book_query": event.target.value } });
+
+
   handleAddBook = async (accession_no, event) => {
 
     console.log ("Function invoked");
@@ -68,6 +133,10 @@ toUpperCase = () => {
     "updated_on": now,
     "PK": "AK_Library#001"
       };
+      
+
+
+
 
       console.log("Inputs received :", params);
       console.log("accession No : ",accession_no);
@@ -80,7 +149,8 @@ toUpperCase = () => {
     }
   }
 
-   fetchProducts = async () => {
+  
+  fetchProducts = async () => {
     // add call to AWS API Gateway to fetch products here
     // then set them in state
     try {
@@ -120,15 +190,44 @@ toUpperCase = () => {
     key_value = this.fetchProducts();
   }
 
-render() {
+    render() {
+        
+        const booklist = this.state.queries && this.state.queries.length > 0
+        ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
+          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
+        : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
 
-  return (
-    <Page title="Add Book" breadcrumbs={[{ name: 'New Book', active: true }]}>
+        return (
+            <div className="container">
+  
+  
+
+
+            <Page title="Edit Book" breadcrumbs={[{ name: 'Edit Book', active: true }]}>
       <Row>
         <Col xl={12} lg={12} md={12}>
           <Card>
             <CardHeader>Book Details</CardHeader>
             <CardBody>
+            <form onSubmit={event => this.handleglobalsearch(this.state.newquery.book_query, event)}>
+         
+     
+         <input type="text" className="search-input-ed" placeholder="Accession No"  
+   
+         
+         value={this.state.newquery.book_query} 
+         
+         onChange={this.onAddBookQueryChange}/>
+         
+        <button type="submit" className="searchButton">
+   
+         <i className="fa fa-search" /> Search
+        </button>
+               
+        
+    
+   
+   </form>
             <form onSubmit={event => this.handleAddBook(this.state.newbook.accession_no, event)}> 
             <FormGroup>
                   <Label for="accessionNo">Accession No</Label>
@@ -141,6 +240,10 @@ render() {
                     disabled
                   />
                 </FormGroup>
+
+
+
+
                 <FormGroup>
                   <Label for="bookTitle">Book Title</Label>
                   <Input
@@ -251,6 +354,7 @@ render() {
         </Col>           
       </Row>
     </Page>
-  );
-};
-};
+    </div>
+        )
+    }
+}

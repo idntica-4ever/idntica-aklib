@@ -21,16 +21,7 @@ import {
     Row,
   } from 'reactstrap';
   const userquery='';
-const users = ['joe', 'xavi', 'alex'];
-const peoples = [
-    "Siri",
-    "Alexa",
-    "Google",
-    "Facebook",
-    "Twitter",
-    "Linkedin",
-    "Sinkedin"
-  ];
+
   
 const config = require('../../config.json');
 export default class IssueBook extends Component {

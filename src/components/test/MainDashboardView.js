@@ -19,7 +19,8 @@ const ChartPage = React.lazy(() => import('../../reductcomponents/pages/ChartPag
 const DashboardPage = React.lazy(() => import('../../reductcomponents/pages/DashboardPage'));
 const DropdownPage = React.lazy(() => import('../../reductcomponents/pages/DropdownPage'));
 const AddBook = React.lazy(() => import('../../reductcomponents/pages/AddBook'));
-
+const EditBook = React.lazy(() => import('../../reductcomponents/pages/EditBook'));
+const RemoveBook = React.lazy(() => import('../../reductcomponents/pages/RemoveBook'));
 const InputGroupPage = React.lazy(() => import('../../reductcomponents/pages/InputGroupPage'));
 const ModalPage = React.lazy(() => import('../../reductcomponents/pages/ModalPage'));
 const ProgressPage = React.lazy(() => import('../../reductcomponents/pages/ProgressPage'));  
@@ -78,7 +79,8 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/progress" component={ProgressPage} />
                 <Route exact path="/modals" component={ModalPage} />
                 <Route exact path="/addbook" component={AddBook} />
-                
+                <Route exact path="/editbook" component={EditBook} />
+                <Route exact path="/removebook" component={RemoveBook} />
                 <Route exact path="/input-groups" component={InputGroupPage} />
                 <Route exact path="/charts" component={ChartPage} />
               </React.Suspense>
