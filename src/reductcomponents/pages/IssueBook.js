@@ -37,6 +37,8 @@ export default class IssueBook extends Component {
       // handle user search
       handleuserbooksearch = async(email_id, event) => {
        event.preventDefault();
+      // email_id ? alert ("Empty") : alert("value is there")
+
        // const book_query_upper= book_query.toUpperCase();
         console.log ("Book Query Received", email_id);
     
@@ -89,8 +91,9 @@ export default class IssueBook extends Component {
            console.log("Fetching API");
           // book_query=encodeURIComponent(book_query);
            await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
-           
            this.handleuserbooksearch(email_id, event);
+           alert ("Book Issued Successfully");
+
         //  console.log("Fetched Data", this.state.booklst);
      //return;
          // this.assignSearchedresults();
@@ -99,8 +102,31 @@ export default class IssueBook extends Component {
          } catch (error) {
            console.log(`An error has occurred: ${error}`);
          }
+      }
+
+      handlereturnbook = async(accession_no, email_id, event) => {
+
+        event.preventDefault();
+        console.log ("Book Query Received", accession_no);
+         try {
+           const params = {
+             "Accession_No": accession_no,
+             "Book_Status":"Available",
+             "issued_by":"",
+             "issued_on":"",
+             "email_id":"NA"
+           };
+           console.log("Fetching API");
+          
+           await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
+           this.handleuserbooksearch(email_id, event);
+           alert ("Book Returned Successfully");
+         } catch (error) {
+           console.log(`An error has occurred: ${error}`);
+         }
 
       }
+
 
 
     onAddEmailChange = event => this.setState({ newquery: { ...this.state.newquery, 

@@ -26,7 +26,13 @@ import {
 const config = require('../../config.json');
 export default class RemoveBook extends Component {
 
-
+    state = {
+        newquery: {
+            "accession_no":""
+        }
+      }
+    
+   
 
      
   handleremovebook = async(accession_no, event) => {
@@ -35,15 +41,11 @@ export default class RemoveBook extends Component {
     console.log ("Book Query Received", accession_no);
      try {
        const params = {
-         "Accession_No": accession_no,
-         "Book_Status":"Available",
-         "issued_by":"",
-         "issued_on":"",
-         "email_id":"NA"
-       };
+         "Accession_No": accession_no
+         };
        console.log("Fetching API");
       
-       await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
+       await axios.delete(`${config.api.invokeUrl}/books/${accession_no}`, params);
        alert ("Book Removed Successfully");
      } catch (error) {
        console.log(`An error has occurred: ${error}`);
