@@ -62,39 +62,37 @@ toUpperCase = () => {
 
 
   // handle global search
-  handleglobalsearch = async(book_query, event) => {
+  handlebooksearch = async(accession_no, event) => {
     event.preventDefault();
     
-    console.log ("Book Query Received", book_query);
+    console.log ("Book Query Received", accession_no);
 
     try {
 
       const params = {
-        "book_query": book_query
+        "Accession_No": accession_no
       };
 
       console.log("Fetching API");
-      book_query=encodeURIComponent(book_query);
-      const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
-      console.log("Fetching API for query : ", book_query);
-      book_query=encodeURIComponent(book_query);
-      console.log("Encoded URL :", encodeURIComponent(book_query));
+     // book_query=encodeURIComponent(book_query);
+      const res = await axios.get(`${config.api.invokeUrl}/books/${accession_no}`, params);
+     // console.log("Fetching API for query : ", book_query);
+      //book_query=encodeURIComponent(book_query);
+      //console.log("Encoded URL :", encodeURIComponent(book_query));
       
       
-      
-      this.setState({ queries: res.data });
-     console.log("Fetched Data", this.state.queries);
-
+     this.setState({ newbooks: res.data });
+     console.log("Books received :" , this.state.newbooks);
+console.log ("Book title received : ", this.state.newbooks.Book_Title);
+//alert("Book Successfully Updated");
 
     } catch (error) {
       console.log(`An error has occurred: ${error}`);
     }
   }
 
-
-
-  onAddBookQueryChange = event => this.setState({ newquery: { ...this.state.newquery, 
-    "book_query": event.target.value } });
+  onAddBookAccessionNoChange = event => this.setState({ newquery: { ...this.state.newquery, 
+    "accession_no": event.target.value } });
 
 
   handleAddBook = async (accession_no, event) => {
@@ -133,11 +131,6 @@ toUpperCase = () => {
     "updated_on": now,
     "PK": "AK_Library#001"
       };
-      
-
-
-
-
       console.log("Inputs received :", params);
       console.log("accession No : ",accession_no);
       await axios.post(`${config.api.invokeUrl}/books/${accession_no}`, params);
@@ -150,29 +143,7 @@ toUpperCase = () => {
   }
 
   
-  fetchProducts = async () => {
-    // add call to AWS API Gateway to fetch products here
-    // then set them in state
-    try {
-      const res = await axios.get(`${config.api.invokeUrl}/books`);
-     // console.log("data received : ", res);
-     // console.log("res data : ", res.data);
-      console.log("data received : ", res.data.LastEvaluatedKey.Accession_No);
-      key_value = (res.data.LastEvaluatedKey.Accession_No);
-      key_value=(key_value*1)+1;
-    
-      //console.log ("Key value details :", key_value);
-      //alert ("Total records", key_value);
-      //const products = res.data;
-      //this.setState({ products: products });
-      //return key_value;
-    } catch (err) {
-      console.log(`An error has occurred: ${err}`);
-    }
-
-    
-  }
- 
+  
 
   onAddBookTitleChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Title": event.target.value } });
   onAddBookAuthorChangeFirst = event => this.setState({ newbook: { ...this.state.newbook, "Book_Author_First": event.target.value } });
@@ -186,10 +157,7 @@ toUpperCase = () => {
   onAddBookScopeChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Scope": event.target.value } });
 
   
-  componentDidMount = () => {
-    key_value = this.fetchProducts();
-  }
-
+ 
     render() {
         
         const booklist = this.state.queries && this.state.queries.length > 0
@@ -209,15 +177,15 @@ toUpperCase = () => {
           <Card>
             <CardHeader>Book Details</CardHeader>
             <CardBody>
-            <form onSubmit={event => this.handleglobalsearch(this.state.newquery.book_query, event)}>
+            <form onSubmit={event => this.handlebooksearch(this.state.newbook.accession_no, event)}>
          
      
          <input type="text" className="search-input-ed" placeholder="Accession No"  
    
          
-         value={this.state.newquery.book_query} 
+         value={this.state.newbook.accession_no} 
          
-         onChange={this.onAddBookQueryChange}/>
+         onChange={this.onAddBookAccessionNoChange}/>
          
         <button type="submit" className="searchButton">
    
@@ -228,21 +196,18 @@ toUpperCase = () => {
     
    
    </form>
-            <form onSubmit={event => this.handleAddBook(this.state.newbook.accession_no, event)}> 
+            <form onSubmit={event => this.handleUpdateBook(this.state.newbook.accession_no, event)}> 
             <FormGroup>
                   <Label for="accessionNo">Accession No</Label>
                   <Input
                     type="text"
                     name="accessionNo"
-                    value={key_value}
+                    value={this.state.newbook.accession_no}
                     
                     onChange={this.onAddBookAccessionNoChange}
                     disabled
                   />
                 </FormGroup>
-
-
-
 
                 <FormGroup>
                   <Label for="bookTitle">Book Title</Label>
@@ -254,6 +219,7 @@ toUpperCase = () => {
                     onChange={this.onAddBookTitleChange}  
                   />
                 </FormGroup>
+
                 <FormGroup>
                   <Label for="bookAuthor">Author</Label>
                   <Input
