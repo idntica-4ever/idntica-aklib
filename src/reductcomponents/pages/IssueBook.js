@@ -5,7 +5,6 @@ import Bookquery from '../../components/Bookquery';
 import axios from 'axios';
 import {Table} from 'react-bootstrap';
 
-
 import {
     Button,
     Card,
@@ -21,9 +20,9 @@ import {
     Row,
   } from 'reactstrap';
   const userquery='';
-
-  
+ 
 const config = require('../../config.json');
+
 export default class IssueBook extends Component {
 
     state = {
@@ -42,12 +41,9 @@ export default class IssueBook extends Component {
             text: upperCase
         });
     }
-    
-    
-    
-    
+      
       // handle user search
-      handleusersearch = async(email_id, event) => {
+      handleuserbooksearch = async(email_id, event) => {
         event.preventDefault();
        // const book_query_upper= book_query.toUpperCase();
         console.log ("Book Query Received", email_id);
@@ -60,8 +56,8 @@ export default class IssueBook extends Component {
     
           console.log("Fetching API");
          // book_query=encodeURIComponent(book_query);
-          const res = await axios.get(`${config.api.invokeUrl}/newuser/${email_id}`, params);
-          console.log("Fetching API for query : ", email_id);
+          const res = await axios.get(`${config.api.invokeUrl}/books/bookings/${email_id}`, params);
+         // console.log("Fetching API for query : ", email_id);
           //book_query=encodeURIComponent(book_query);
           //console.log("Encoded URL :", encodeURIComponent(book_query));
           
@@ -78,7 +74,7 @@ export default class IssueBook extends Component {
         }
       }
 
-      handlebooksearch = async(accession_no) => {
+     handleissuebook = async(accession_no) => {
 
       //  event.preventDefault();
         // const book_query_upper= book_query.toUpperCase();
@@ -92,16 +88,16 @@ export default class IssueBook extends Component {
      
            console.log("Fetching API");
           // book_query=encodeURIComponent(book_query);
-           const res = await axios.get(`${config.api.invokeUrl}/books/${accession_no}`, params);
+           const res = await axios.get(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
            console.log("Fetching API for query : ", accession_no);
            //book_query=encodeURIComponent(book_query);
            //console.log("Encoded URL :", encodeURIComponent(book_query));
            
            
            
-           this.setState({ booklst: res.data });
-          console.log("Fetched Data", this.state.booklst);
-     return;
+           this.setState({ queries: res.data });
+        //  console.log("Fetched Data", this.state.booklst);
+     //return;
          // this.assignSearchedresults();
           // validating search results
      
@@ -134,7 +130,7 @@ export default class IssueBook extends Component {
           <Card>
             <CardHeader>User Details</CardHeader>
             <CardBody>
-              <Form onSubmit={event => this.handleusersearch(this.state.newquery.email_id, event)}>
+              <Form onSubmit={event => this.handleuserbooksearch(this.state.newquery.email_id, event)}>
                 
                 <FormGroup>
                   <Label for="username">User Name</Label>
@@ -175,7 +171,7 @@ export default class IssueBook extends Component {
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button onClick= {this.handlebooksearch(this.state.newquery.accession_no)}>Search Book
+                    <Button>Issue Book
       
                     </Button>
                   </Col>
