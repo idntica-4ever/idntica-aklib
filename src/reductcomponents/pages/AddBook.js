@@ -75,6 +75,7 @@ toUpperCase = () => {
       this.setState({ newbooks: [...this.state.newbooks, this.state.newbook] });
       this.setState({ newbook: { "Accession_No":"", "Author_Title": "", "Book_Author": "", "Book_Classification_No": "", "Book_Publisher": "", "Book_Scope": "" , "Book_Status": "", "Book_Title": "", "PK": ""}});
       console.log("Books Added Successfully");
+      alert ("Book Added Successfully");
     }catch (err) {
       console.log(`An error has occurred: ${err}`);
     }
