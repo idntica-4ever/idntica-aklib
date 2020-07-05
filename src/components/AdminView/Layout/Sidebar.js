@@ -72,7 +72,7 @@ const navContents = [
 const navItems = [
   { to: '/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard },
   { to: '/issue', name: 'issue', exact: false, Icon: MdWeb },
-  { to: '/workprog', name: 'return', exact: false, Icon: MdInsertChart },
+  { to: '/return', name: 'return', exact: false, Icon: MdInsertChart },
   
  
 ];

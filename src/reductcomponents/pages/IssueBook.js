@@ -33,18 +33,10 @@ export default class IssueBook extends Component {
         queries: [],
         booklst: []
       }
-    
-    // upercase function
-      toUpperCase = () => {
-        const upperCase = this.state.text.toUpperCase();
-        this.setState({
-            text: upperCase
-        });
-    }
-      
+       
       // handle user search
       handleuserbooksearch = async(email_id, event) => {
-        event.preventDefault();
+       event.preventDefault();
        // const book_query_upper= book_query.toUpperCase();
         console.log ("Book Query Received", email_id);
     
@@ -52,6 +44,7 @@ export default class IssueBook extends Component {
     
           const params = {
             "email_id": email_id
+            
           };
     
           console.log("Fetching API");
@@ -74,28 +67,29 @@ export default class IssueBook extends Component {
         }
       }
 
-     handleissuebook = async(accession_no) => {
+     handleissuebook = async(accession_no, email_id) => {
 
       //  event.preventDefault();
         // const book_query_upper= book_query.toUpperCase();
          console.log ("Book Query Received", accession_no);
+         const now = new Date();
      
          try {
      
            const params = {
-             "accession_no": accession_no
+             "accession_no": accession_no,
+             "Book_Status":"Issued",
+             "issued_by":"Admin",
+             "issued_on":now,
+             "email_id":email_id
+
            };
      
            console.log("Fetching API");
           // book_query=encodeURIComponent(book_query);
-           const res = await axios.get(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
-           console.log("Fetching API for query : ", accession_no);
-           //book_query=encodeURIComponent(book_query);
-           //console.log("Encoded URL :", encodeURIComponent(book_query));
+           await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
            
            
-           
-           this.setState({ queries: res.data });
         //  console.log("Fetched Data", this.state.booklst);
      //return;
          // this.assignSearchedresults();
@@ -130,9 +124,8 @@ export default class IssueBook extends Component {
           <Card>
             <CardHeader>User Details</CardHeader>
             <CardBody>
-              <Form onSubmit={event => this.handleuserbooksearch(this.state.newquery.email_id, event)}>
-                
-                <FormGroup>
+            <Form onSubmit={event => this.handleuserbooksearch(this.state.newquery.email_id, event)}>
+                             <FormGroup>
                   <Label for="username">User Name</Label>
                   <Input
                     type="text"
@@ -147,10 +140,7 @@ export default class IssueBook extends Component {
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button type="submit">Search User
-
-
-
+                    <Button>Search User
                     </Button>
                   </Col>
                 </FormGroup>
