@@ -1,5 +1,6 @@
 import React, { Component, Fragment }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {Table} from 'react-bootstrap';
 
 export default class NewUserList extends Component {
 
@@ -47,7 +48,7 @@ export default class NewUserList extends Component {
               <p className="product-id">id: { this.props.email_id }</p>
               <button type="submit" 
                 className="button is-info is-small"
-                onClick={ this.handleEditSave }
+                onClick={ this.handleProductEdit }
               >Approve</button>
             </div>
           :<div>
@@ -56,6 +57,70 @@ export default class NewUserList extends Component {
               <p className="product-id">Category: { this.props.user_category }</p>
               <p className="product-id">Batch Year: { this.props.user_batch }</p>
               
+              
+        <Table>
+                       
+                       <tbody>
+                      
+                          <tr >
+                           
+                             <td className="book-title-sps">
+                               {this.props.user_name} 
+                               </td>
+                           
+                              
+                               
+                                 <td className="author-title-sps">
+                               {this.props.email_id} 
+                               </td>
+                               
+                               <td className="book-title-sps">
+                               {this.props.user_category} 
+                               </td>
+                           
+                              
+                               
+                               <td className="book-title-sps">
+                               {this.props.user_batch} 
+                               </td>
+                           
+                              
+                               
+                                 <td className="author-title-sps">
+                                 {
+          this.props.isAdmin && 
+          <Fragment>
+           
+            <button type="submit" 
+                className="button-approve is-info is-small"
+                onClick={ this.handleEditSave }
+              >Approve</button>
+             </Fragment>
+        }
+                               </td>
+                               
+                               <td className="author-title-sps">
+                               {
+          this.props.isAdmin && 
+          <Fragment>
+            
+            <button type="submit"  className="button-del is-info is-small" 
+            onClick={event => this.props.handleDeleteProduct(this.props.email_id, event)} >Delete</button>
+          </Fragment>
+        }
+                               </td>
+                          </tr>
+                           
+                          
+                         
+
+                        
+                         
+                       </tbody>
+                     </Table>
+
+
+
             </div>
 // testing display
 /*

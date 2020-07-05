@@ -4,6 +4,7 @@ import axios from "axios";
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
+import {Table} from 'react-bootstrap';
 
 const config = require('../../config.json');
 
@@ -199,7 +200,12 @@ class NewUserList extends Component {
             </div>
           </div>
         </section>
+
+
       </Fragment>
+
+
+
     )
   }
 }

@@ -261,3 +261,23 @@ height: 40px;
 
 height: 40px;
 }
+.button-approve{
+  background-color: #7108b8;
+  border: #ffffff;
+  border-radius: 0.3rem;
+  color: aliceblue;
+}
+.button-approve:hover{
+  background-color: #048821 !important;
+  
+}
+.button-del{
+  background-color: #7108b8;
+  border: #ffffff;
+  border-radius: 0.3rem;
+  color: aliceblue;
+}
+.button-del:hover{
+  background-color: #e90606 !important;
+  
+}
