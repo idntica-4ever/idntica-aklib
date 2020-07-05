@@ -107,7 +107,7 @@ class NewUserList extends Component {
     }
   }
 */
-  handleUpdateProduct = async (email_id, user_name, comments) => {
+  handleUpdateProduct = async (email_id, user_name, event) => {
     //setting up new login account
     this.handleSignUp(email_id, user_name);
     const now = new Date();
@@ -115,7 +115,6 @@ class NewUserList extends Component {
     try {
       const params = {
         "email_id": email_id,
-        "comments": comments,
         "account_status":"Active",
         "approved_by":"Admin",
         "approved_on":now,
@@ -126,9 +125,9 @@ class NewUserList extends Component {
       await axios.patch(`${config.api.invokeUrl}/newuser/${email_id}`, params);
       const productToUpdate = [...this.state.products].find(product => product.email_id === email_id);
       const updatedProducts = [...this.state.products].filter(product => product.email_id !== email_id);
-      productToUpdate.comments = comments;
-      updatedProducts.push(productToUpdate);
-      this.setState({products: updatedProducts});
+     // productToUpdate.comments = comments;
+    //  updatedProducts.push(productToUpdate);
+      //this.setState({products: updatedProducts});
       this.fetchProducts();
     }catch (err) {
       console.log(`Error updating product: ${err}`);

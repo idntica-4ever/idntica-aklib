@@ -93,7 +93,7 @@ export default class NewUserList extends Component {
            
             <button type="submit" 
                 className="button-approve is-info is-small"
-                onClick={ this.handleEditSave }
+                onClick={event => this.props.handleUpdateProduct(this.props.email_id,this.props.user_name, event)}
               >Approve</button>
              </Fragment>
         }
