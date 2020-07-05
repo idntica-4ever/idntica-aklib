@@ -25,16 +25,18 @@ import {
  
 const config = require('../../config.json');
 
+
+  
+   
+
 export default class RemoveBook extends Component {
 
-    state = {
-        newquery: {
-            "email_id": "",
-            "accession_no":""
-        },
-        queries: [],
-        booklst: []
-      }
+  state = {
+    newquery: {
+        "accession_no":""
+    }
+  }
+
     
     // upercase function
       toUpperCase = () => {
@@ -45,32 +47,31 @@ export default class RemoveBook extends Component {
     }
       
    
-     handlereturnbook = async(accession_no, event) => {
+     handleremovebook = async(accession_no, event) => {
 
-        event.preventDefault();
-        console.log ("Book Query Received", accession_no);
-         try {
-           const params = {
-             "Accession_No": accession_no,
-             "Book_Status":"Available",
-             "issued_by":"",
-             "issued_on":"",
-             "email_id":"NA"
-           };
-           console.log("Fetching API");
-          
-           await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
-           alert ("Book Returned Successfully");
-         } catch (error) {
-           console.log(`An error has occurred: ${error}`);
-         }
-
-      }
-
-
-        onAddAccessionNoChange = event => this.setState({ newquery: { ...this.state.newquery, 
-          "accession_no": event.target.value } });
       
+    event.preventDefault();
+    console.log ("Book Query Received", accession_no);
+     try {
+       const params = {
+         "Accession_No": accession_no
+         };
+       console.log("Fetching API");
+      
+       await axios.delete(`${config.api.invokeUrl}/books/${accession_no}`, params);
+       alert ("Book Removed Successfully");
+     } catch (error) {
+       console.log(`An error has occurred: ${error}`);
+     }
+
+  }
+
+
+    onAddAccessionNoChange = event => this.setState({ newquery: { ...this.state.newquery, 
+      "accession_no": event.target.value } });
+
+
+
 
     render() {
           
@@ -87,7 +88,7 @@ export default class RemoveBook extends Component {
           <Card>
             <CardHeader>User Details</CardHeader>
             <CardBody>
-              <Form onSubmit={event => this.handlereturnbook(this.state.newquery.accession_no, event)}>
+              <Form onSubmit={event => this.handleremovebook(this.state.newquery.accession_no, event)}>
                 
              
 
