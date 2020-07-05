@@ -124,7 +124,7 @@ export default class IssueBook extends Component {
           <Card>
             <CardHeader>User Details</CardHeader>
             <CardBody>
-            <Form onSubmit={event => this.handleuserbooksearch(this.state.newquery.email_id, event)}>
+            <Form >
                              <FormGroup>
                   <Label for="username">User Name</Label>
                   <Input
@@ -140,7 +140,9 @@ export default class IssueBook extends Component {
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Search User
+                    <Button
+                    onClick={event => this.handleuserbooksearch(this.state.newquery.email_id, event)}
+                    >Search User
                     </Button>
                   </Col>
                 </FormGroup>
@@ -161,7 +163,9 @@ export default class IssueBook extends Component {
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Issue Book
+                    <Button
+                    onClick={event => this.handleuserbooksearch(this.state.newquery.accession_no, event)}
+                    >Issue Book
       
                     </Button>
                   </Col>
