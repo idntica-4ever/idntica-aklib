@@ -24,39 +24,6 @@ export default class NewUserList extends Component {
 
   render() {
     return (
-      <div className="tile is-child box notification is-success">
-        {
-          this.props.isAdmin && 
-          <Fragment>
-            <a href="/" onClick={this.handleProductEdit} className="product-edit-icon">
-              <FontAwesomeIcon icon="edit" />
-            </a>
-            <button onClick={event => this.props.handleDeleteProduct(this.props.email_id, event)} className="delete"></button>
-          </Fragment>
-        }
-        {
-          this.state.isEditMode 
-          ? <div>
-              <p>Enter Comments:</p>
-              <input 
-                className="input is-medium"
-                type="text" 
-                placeholder="Enter Comments"
-                value={this.state.updatedcomments}
-                onChange={this.onAddComments}
-              />
-              <p className="product-id">id: { this.props.email_id }</p>
-              <button type="submit" 
-                className="button is-info is-small"
-                onClick={ this.handleProductEdit }
-              >Approve</button>
-            </div>
-          :<div>
-              <p className="product-title"> User Name:{ this.props.user_name }</p>
-              <p className="product-id">Email ID: { this.props.email_id }</p>
-              <p className="product-id">Category: { this.props.user_category }</p>
-              <p className="product-id">Batch Year: { this.props.user_batch }</p>
-              
               
         <Table>
                        
@@ -121,7 +88,7 @@ export default class NewUserList extends Component {
 
 
 
-            </div>
+            
 // testing display
 /*
 <div className="container1">
@@ -160,8 +127,7 @@ export default class NewUserList extends Component {
 */
 
 
-        }
-      </div>
+        
     )
   }
 }
