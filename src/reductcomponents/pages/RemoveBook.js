@@ -25,17 +25,49 @@ import {
   
 const config = require('../../config.json');
 export default class RemoveBook extends Component {
+
+
+
+     
+  handleremovebook = async(accession_no, event) => {
+
+    event.preventDefault();
+    console.log ("Book Query Received", accession_no);
+     try {
+       const params = {
+         "Accession_No": accession_no,
+         "Book_Status":"Available",
+         "issued_by":"",
+         "issued_on":"",
+         "email_id":"NA"
+       };
+       console.log("Fetching API");
+      
+       await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
+       alert ("Book Removed Successfully");
+     } catch (error) {
+       console.log(`An error has occurred: ${error}`);
+     }
+
+  }
+
+
+    onAddAccessionNoChange = event => this.setState({ newquery: { ...this.state.newquery, 
+      "accession_no": event.target.value } });
+
+
+
+
     render() {
         return (
             <div>
 
-<div>
-                <Row>
+<Row>
         <Col xl={12} lg={12} md={12}>
           <Card>
-            <CardHeader>User Details</CardHeader>
+            <CardHeader>Remove Book</CardHeader>
             <CardBody>
-              <Form onSubmit={event => this.handlereturnbook(this.state.newquery.accession_no, event)}>
+              <Form onSubmit={event => this.handleremovebook(this.state.newquery.accession_no, event)}>
                 
              
 
@@ -54,7 +86,7 @@ export default class RemoveBook extends Component {
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Issue Book
+                    <Button>Delete Book
       
                     </Button>
                   </Col>
@@ -68,10 +100,10 @@ export default class RemoveBook extends Component {
 
            
       </Row> 
-       
-        </div>
-                
-            </div>
+
+
+</div>
+           
         )
     }
 }

@@ -164,7 +164,7 @@ export default class IssueBook extends Component {
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
                     <Button
-                    onClick={event => this.handleuserbooksearch(this.state.newquery.accession_no, event)}
+                    onClick={event => this.handleissuebook(this.state.newquery.accession_no, this.state.newquery.email_id, event)}
                     >Issue Book
       
                     </Button>
