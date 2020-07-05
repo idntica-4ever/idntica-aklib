@@ -123,7 +123,7 @@ export default class IssueBook extends Component {
                 <Row>
         <Col xl={12} lg={12} md={12}>
           <Card>
-            <CardHeader>User Details</CardHeader>
+            <CardHeader>Issue or Retrun Books</CardHeader>
             <CardBody>
             <Form >
                              <FormGroup>
@@ -163,10 +163,22 @@ export default class IssueBook extends Component {
                 </FormGroup>
 
                 <FormGroup check row>
-                  <Col sm={{ size: 10, offset: 2 }}>
+                  <Col sm={{ size: 5, offset: 2 }}>
                     <Button
                     onClick={event => this.handleissuebook(this.state.newquery.accession_no, this.state.newquery.email_id, event)}
                     >Issue Book
+      
+                    </Button>
+                    
+                    
+                    
+                 
+                  
+                    
+                    
+                    <Button
+                    onClick={event => this.handlereturnbook(this.state.newquery.accession_no, this.state.newquery.email_id, event)}
+                    >Return Book
       
                     </Button>
                   </Col>
