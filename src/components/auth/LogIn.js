@@ -42,7 +42,7 @@ class LogIn extends Component {
    const user= await Auth.signIn(this.state.username, this.state.password);
    console.log("success");
    console.log(user);
-   //console.log("success");
+   console.log("success");
    this.props.auth.setAuthStatus(true);
    this.props.auth.setUser(user);
    console.log("success");

@@ -28,9 +28,6 @@ import SearchList from './components/SearchList';
 import SignupForm from './components/auth/SignupForm';
 import MainDashboardView from './components/test/MainDashboardView';
 
-
-
-
 //Book adding details
 import BookAdd from './components/BookAdd';
 import BookIssue from './components/BookIssue';
@@ -42,9 +39,6 @@ import WorkinProgress from './components/test/WorkinProgress';
 import IssueBook from './reductcomponents/pages/IssueBook';
 
 //Amplify.configure(awsconfig);
-
-
-
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -120,9 +114,6 @@ async componentDidMount(){
            
           </div>
           
-         
-         
-   
           <Footer />
         </Router>
       </div>
