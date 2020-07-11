@@ -46,7 +46,6 @@ export default class RemoveBook extends Component {
         });
     }
       
-   
      handleremovebook = async(accession_no, event) => {
 
       
@@ -71,7 +70,32 @@ export default class RemoveBook extends Component {
       "accession_no": event.target.value } });
 
 
+      submit = () => {
+        
+        confirmAlert({
+          customUI: ({ onClose }) => {
+            return (
 
+
+              
+              <div className='custom-ui'>
+                <h1>Are you sure?</h1>
+                <p>You want to delete this Book?</p>
+                <button className="button-approve" onClick={onClose}>No</button>
+                <p></p>
+                <button className="button-del"
+                  onClick={(event) => {this.handleremovebook(this.state.newquery.accession_no, event);
+                      onClose();
+                  }}
+                >
+                  Yes, Delete it!
+                </button>
+              </div>
+            );
+          }
+        });
+       
+      };
 
     render() {
           
@@ -79,6 +103,8 @@ export default class RemoveBook extends Component {
         ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
           Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
         : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
+       
+       
         return (
 
             
@@ -88,7 +114,7 @@ export default class RemoveBook extends Component {
           <Card>
             <CardHeader>User Details</CardHeader>
             <CardBody>
-              <Form onSubmit={event => this.handleremovebook(this.state.newquery.accession_no, event)}>
+              <Form >
                 
              
 
@@ -107,7 +133,7 @@ export default class RemoveBook extends Component {
 
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Delete Book
+                    <Button onClick={this.submit}>Delete Book
       
                     </Button>
                   </Col>
