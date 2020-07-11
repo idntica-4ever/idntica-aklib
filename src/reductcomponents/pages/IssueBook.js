@@ -85,7 +85,7 @@ export default class IssueBook extends Component {
              "Book_Status":"Issued",
              "issued_by":"Admin",
              "issued_on":now,
-             "email_id":username
+             "username":username
 
            };
      
@@ -115,7 +115,7 @@ export default class IssueBook extends Component {
              "Book_Status":"Available",
              "issued_by":"",
              "issued_on":"",
-             "email_id":"NA"
+             "username":"NA"
            };
            console.log("Fetching API");
           

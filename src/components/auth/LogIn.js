@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
+import axios from 'axios';
+const config = require('../../config.json');
 
 class LogIn extends Component {
   state = {
@@ -10,8 +12,14 @@ class LogIn extends Component {
     errors: {
       cognito: null,
       blankfield: false
-    }
+    },
+    newquery: {
+        "username": "",
+    },
+    queries: [],
+    userlist: []
   };
+
 
   clearErrorState = () => {
     this.setState({
@@ -43,6 +51,7 @@ class LogIn extends Component {
    console.log("success");
    console.log(user);
    console.log("success");
+   this.handleusercategorysearch(this.state.username);
    this.props.auth.setAuthStatus(true);
    this.props.auth.setUser(user);
    console.log("success");
@@ -62,6 +71,53 @@ class LogIn extends Component {
    })
  }
   };
+
+   // handle user search
+   handleusercategorysearch = async(username) => {
+  //event.preventDefault();
+   // email_id ? alert ("Empty") : alert("value is there")
+
+    // const book_query_upper= book_query.toUpperCase();
+     //console.log ("Book Query Received", username);
+ 
+     try {
+ 
+       const params = {
+         "username": username
+         
+       };
+ 
+       console.log("Fetching API");
+       console.log("username received : ", username)
+      // book_query=encodeURIComponent(book_query);
+       const res = await axios.get(`${config.api.invokeUrl}/user/${username}`, params);
+      // console.log("Fetching API for query : ", email_id);
+       //book_query=encodeURIComponent(book_query);
+       //console.log("Encoded URL :", encodeURIComponent(book_query));
+       
+       //console.log("UserName:",this.props.auth.user.username);
+       //console.log("Username");
+       //this.setState({ queries: res.data });
+       //console.log("data received:", res.data);
+       //const arrBirdID = birds.map(bird => bird.ID);	     // Or, simply use bird.Name to get the values from the "Name" object in the JSON array.
+
+       const category = res.data.map(query => query.user_category);
+                    
+       console.log("User Category :", category);
+       
+       category="Admin" ? this.props.auth.setAdmin(true) : this.props.auth.setAdmin(false);
+
+
+     // console.log("Fetched Data from User table", this.state.queries);
+ 
+     // this.assignSearchedresults();
+      // validating search results
+ 
+     } catch (error) {
+       console.log(`An error has occurred: ${error}`);
+     }
+   }
+
 
   onInputChange = event => {
     this.setState({

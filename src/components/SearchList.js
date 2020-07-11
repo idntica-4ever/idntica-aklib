@@ -38,7 +38,7 @@ export default class SearchList extends Component {
   handleglobalsearch = async(book_query, event) => {
     event.preventDefault();
     const book_query_upper= book_query.toUpperCase();
-    console.log ("Book Query Received", book_query_upper);
+    console.log ("Book Query Received - Upper Case : ", book_query_upper);
 
     try {
 
@@ -49,14 +49,18 @@ export default class SearchList extends Component {
       console.log("Fetching API");
       book_query=encodeURIComponent(book_query);
       const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
-      console.log("Fetching API for query : ", book_query);
-      book_query=encodeURIComponent(book_query);
+      
       console.log("Encoded URL :", encodeURIComponent(book_query));
+      
+      //const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
+      
+      //console.log("Fetching API for query : ", book_query);
+     // book_query=encodeURIComponent(book_query);
       
       
       
       this.setState({ queries: res.data });
-     console.log("Fetched Data", this.state.queries);
+     console.log("Fetched Data : ", this.state.queries);
 
     // this.assignSearchedresults();
      // validating search results
@@ -88,7 +92,7 @@ export default class SearchList extends Component {
         
         const booklist = this.state.queries && this.state.queries.length > 0
         ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
-          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
+          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.Author_Title} />)
         : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
        
     return (

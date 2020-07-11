@@ -122,7 +122,7 @@ class NewUserList extends Component {
         "account_status":"Active",
         "approved_by":"Admin",
         "approved_on":now,
-        "PK":"AK_Library#001"
+        "PK":"AKLibrary"
       };
       console.log("Inputs received :", params);
       console.log("processing update for email ID : ", username);

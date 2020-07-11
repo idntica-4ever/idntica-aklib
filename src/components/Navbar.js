@@ -22,7 +22,10 @@ export default class Navbar extends Component {
       Auth.signOut();
       this.props.auth.setAuthStatus(false);
       this.props.auth.setUser(null);
+      this.props.auth.setAdmin(false);
       console.log(this);
+      this.props.history.push("/search");
+
       //Add home page redirection command
     }catch(error){
       console.log(error.message);
@@ -43,9 +46,14 @@ export default class Navbar extends Component {
 </Link>
 <ul className="navbar-nav align-items-center" >
 <li className="nav-item ml-5">
-<Link to='/' className="nav-link">
-<center>ARUL KADAL LIBRARY </center>
+<Link to='/' className="nav-link-title">
+  <center>ARULKADAL INIGO LIBRARY</center>
+   
 
+</Link>
+<Link to='/' className="nav-link-title">
+
+அருள்கடல் இனிகோ நூலகம் 
 </Link>
 
 </li>

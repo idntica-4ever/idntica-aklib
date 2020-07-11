@@ -1,6 +1,6 @@
 {
     "api": { 
-      "invokeUrl": "https://xmxjdte239.execute-api.ap-south-1.amazonaws.com/v1"
+      "invokeUrl": "https://bm03ffi298.execute-api.ap-south-1.amazonaws.com/v1"
     },
     "cognito": {
       "REGION": "ap-south-1",
