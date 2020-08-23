@@ -5,8 +5,10 @@ import { Auth } from 'aws-amplify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo1 from '../logo2.png'
 import styled from 'styled-components';
+
 import {ButtonContainer} from "./Button";
 import SliderEffect from './SliderEffect'
+import {Button, Collapse} from 'react-bootstrap'
 
 
 
@@ -14,6 +16,10 @@ import SliderEffect from './SliderEffect'
 
 
 export default class Navbar extends Component {
+
+  state={ 
+    open:false
+   }
 
   //handle logout
   handleLogOut = async event => {
@@ -30,32 +36,44 @@ export default class Navbar extends Component {
   }
 
 
-
   render() {
     return (
       
       <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
-     
+     <div className="nav-logo">
 <Link to='/'>
 
-<img src={logo1} style={{width:"7rem", height: "5rem"}} alt="store" className="navbar-brand"/>
+<img src={logo1} style={{width:"7rem", height: "5rem"}} alt="store" className="navbar-brand-ak"/>
 
-</Link>
+</Link></div>
 <ul className="navbar-nav align-items-center" >
 <li className="nav-item ml-5">
-<Link to='/' className="nav-link">
-<center>ARUL KADAL LIBRARY </center>
+<Link to='/' className="nav-link-title">
+  <center>ARUL KADAL INIGO LIBRARY</center>
+   
 
 </Link>
+<Link to='/' className="nav-link-title">
 
+அருள்கடல் இனிகோ நூலகம் 
+</Link>
 </li>
+
+<Link to='/' className="nav-link-title-small">
+  <center>ARUL KADAL INIGO LIBRARY</center> <br/>
+   
+
+
+அருள்கடல் இனிகோ நூலகம் 
+</Link>
+
 </ul>
 
 
                
 <header className="top-navbar">
           <nav className="navbar1 navbar-expand-lg navbar-light bg-light">
-              <div className="collapse navbar-collapse" id="navbars-seo">
+              
                 <ul className="navbar-nav ml-auto">
                 {!this.props.auth.isAuthenticated && (    
               <li className="nav-item active"><a className="nav-link" href="/" >Home</a></li>
@@ -99,19 +117,20 @@ export default class Navbar extends Component {
 
                   <li className="nav-item"><a className="nav-link" href="/search">Search</a></li>
                 </ul>
-              </div>
+              
            
         </nav></header>
           
+   
     
+   
 
-
-
+ 
 
 
   </NavWrapper>
 
- 
+  
 
      
     )
