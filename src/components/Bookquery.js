@@ -26,7 +26,7 @@ import {
 } from 'reactstrap';
 
 const tableTypes = ['hover'];
-export default class TestPri extends Component {
+export default class SearchList extends Component {
 /*
   state = {
     isEditMode: false,

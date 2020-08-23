@@ -13,7 +13,7 @@ class NewUserList extends Component {
 
   state = {
     newproduct: { 
-      "user_name": "", 
+      "username": "", 
       "email_id": "",
       "user_batch":"",
       "user_category":"",
@@ -42,7 +42,7 @@ class NewUserList extends Component {
   }
 
 
-  handleSignUp = async (email_id, user_name, event) => {
+  handleSignUp = async (email_id, username, event) => {
    // event.preventDefault();
    // console.log("coding started");
     // Form validation
@@ -56,15 +56,17 @@ class NewUserList extends Component {
 
     // AWS Cognito integration here
     // this.state will pass the data from the from to the varialbels
-    const username = user_name;
+    //const username = username;
     const email = email_id;
+    //const username = "idntica"
     const password = "Aklibrary@123";
     console.log("Username :", username);
     try{
          //console.log("started try method");
 
      const signUpResponse = await Auth.signUp({
-        username,
+       username,
+        email,
         password,
         attributes:{
           email:email
@@ -107,24 +109,26 @@ class NewUserList extends Component {
     }
   }
 */
-  handleUpdateProduct = async (email_id, user_name, event) => {
+  handleUpdateProduct = async (email_id, username, event) => {
     //setting up new login account
-    this.handleSignUp(email_id, user_name);
+    this.handleSignUp(email_id, username);
     const now = new Date();
+   // const username = user_name;
     // add call to AWS API Gateway update product endpoint here
     try {
       const params = {
-        "email_id": email_id,
+        "username": username,
+        "email_id":email_id,
         "account_status":"Active",
         "approved_by":"Admin",
         "approved_on":now,
-        "PK":"AK_Library#001"
+        "PK":"AKLibrary"
       };
       console.log("Inputs received :", params);
-      console.log("processing update for email ID : ", email_id);
-      await axios.patch(`${config.api.invokeUrl}/newuser/${email_id}`, params);
-      const productToUpdate = [...this.state.products].find(product => product.email_id === email_id);
-      const updatedProducts = [...this.state.products].filter(product => product.email_id !== email_id);
+      console.log("processing update for email ID : ", username);
+      await axios.patch(`${config.api.invokeUrl}/user/${username}`, params);
+      const productToUpdate = [...this.state.products].find(product => product.username === username);
+      const updatedProducts = [...this.state.products].filter(product => product.username !== username);
      // productToUpdate.comments = comments;
     //  updatedProducts.push(productToUpdate);
       //this.setState({products: updatedProducts});
@@ -134,13 +138,14 @@ class NewUserList extends Component {
     }
   }
 
-  handleDeleteProduct = async (email_id, event) => {
+  handleDeleteProduct = async (email_id, username, event) => {
     event.preventDefault();
     // add call to AWS API Gateway delete product endpoint here
-    console.log ("Delete request received for email ID :", email_id);
+    console.log ("Delete request received for email ID :", username);
+   // const username = user_name;
     try {
-      await axios.delete(`${config.api.invokeUrl}/newuser/${email_id}`);
-      const updatedProducts = [...this.state.products].filter(product => product.email_id !== email_id);
+      await axios.delete(`${config.api.invokeUrl}/user/${username}`);
+      const updatedProducts = [...this.state.products].filter(product => product.username !== username);
       this.setState({products: updatedProducts});
     }catch (err) {
       console.log(`Unable to delete product: ${err}`);
@@ -151,7 +156,7 @@ class NewUserList extends Component {
     // add call to AWS API Gateway to fetch products here
     // then set them in state
     try {
-      const res = await axios.get(`${config.api.invokeUrl}/newuser`);
+      const res = await axios.get(`${config.api.invokeUrl}/user`);
       const products = res.data;
       this.setState({ products: products });
     } catch (err) {
@@ -186,11 +191,11 @@ class NewUserList extends Component {
                           isAdmin={true}
                           handleUpdateProduct={this.handleUpdateProduct}
                           handleDeleteProduct={this.handleDeleteProduct} 
-                          user_name={product.user_name} 
+                          username={product.username} 
                           email_id={product.email_id}
                           user_category={product.user_category}
                           user_batch={product.user_batch}
-                          key={product.email_id}
+                          key={product.username}
                         />)
                     }
                   </div>

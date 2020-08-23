@@ -11,14 +11,14 @@ export default class SignupForm extends Component {
   state = {
     newbook: {  
     "email_id": "",
-    "user_name": "",
+    "username": "",
     "user_category": "",
     "user_batch": ""
     },
     newbooks: []
   }
 
-  handleNewUserRequest = async (email_id, event) => {
+  handleNewUserRequest = async (username, event) => {
       console.log("function invoked");
     event.preventDefault();
     // add call to AWS API Gateway add product endpoint here
@@ -27,19 +27,19 @@ export default class SignupForm extends Component {
 
     const now = new Date();
     const params = {
-    "email_id": email_id,
-    "user_name": this.state.newbook.user_name,
+    "email_id": this.state.newbook.email_id,
+    "username": username,
     "user_category": this.state.newbook.user_category,
     "user_batch":this.state.newbook.user_batch,
     "req_submitted_on":now,
     "approved_by":"NO",
-    "PK":"AK_Library#001"
+    "PK":"AKLibrary"
 
       };
       console.log("Inputs received :", params);
-      await axios.post(`${config.api.invokeUrl}/newuser/${email_id}`, params);
+      await axios.post(`${config.api.invokeUrl}/user/${username}`, params);
       this.setState({ newbooks: [...this.state.newbooks, this.state.newbook] });
-      this.setState({ newbook: { "email_id":"", "user_name": "", "user_batch": "", "user_category": ""}});
+      this.setState({ newbook: { "email_id":"", "username": "", "user_batch": "", "user_category": ""}});
       console.log("Request Submitted Successfully");
     }catch (err) {
       console.log(`An error has occurred: ${err}`);
@@ -48,7 +48,7 @@ export default class SignupForm extends Component {
 
 
   onAddEmailIdChange = event => this.setState({ newbook: { ...this.state.newbook, "email_id": event.target.value } });
-  onAddUsernameChange = event => this.setState({ newbook: { ...this.state.newbook, "user_name": event.target.value } });
+  onAddUsernameChange = event => this.setState({ newbook: { ...this.state.newbook, "username": event.target.value } });
   onAddBatchChange = event => this.setState({ newbook: { ...this.state.newbook, "user_batch": event.target.value } });
   onAddBookCategoryChange = event => this.setState({ newbook: { ...this.state.newbook, "user_category": event.target.value } });
   
@@ -133,7 +133,7 @@ export default class SignupForm extends Component {
 <h1 className="header-text">Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
-          <form onSubmit={event => this.handleNewUserRequest(this.state.newbook.email_id, event)}>
+          <form onSubmit={event => this.handleNewUserRequest(this.state.newbook.username, event)}>
 <div className="row">
     <div className="col-6">
     <img className="signupimg" src={require('../../images/reg-img-new.jpg')} /> 
@@ -143,10 +143,10 @@ export default class SignupForm extends Component {
                 <input 
                   className="input" 
                   type="text"
-                  id="user_name"
+                  id="username"
                   aria-describedby="userNameHelp"
                   placeholder="Enter username"
-                  value={this.state.newbook.user_name}
+                  value={this.state.newbook.username}
                   onChange={this.onAddUsernameChange}
                 />
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Bookquery from '../../components/Bookquery';
+import { Auth } from 'aws-amplify';
 
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
@@ -27,7 +28,7 @@ export default class IssueBook extends Component {
 
     state = {
         newquery: {
-            "email_id": "",
+            "username": "",
             "accession_no":""
         },
         queries: [],
@@ -35,29 +36,29 @@ export default class IssueBook extends Component {
       }
        
       // handle user search
-      handleuserbooksearch = async(email_id, event) => {
+      handleuserbooksearch = async(username, event) => {
        event.preventDefault();
       // email_id ? alert ("Empty") : alert("value is there")
 
        // const book_query_upper= book_query.toUpperCase();
-        console.log ("Book Query Received", email_id);
+        console.log ("Book Query Received", username);
     
         try {
     
           const params = {
-            "email_id": email_id
+            "username": username
             
           };
     
           console.log("Fetching API");
          // book_query=encodeURIComponent(book_query);
-          const res = await axios.get(`${config.api.invokeUrl}/books/bookings/${email_id}`, params);
+          const res = await axios.get(`${config.api.invokeUrl}/books/bookings/${username}`, params);
          // console.log("Fetching API for query : ", email_id);
           //book_query=encodeURIComponent(book_query);
           //console.log("Encoded URL :", encodeURIComponent(book_query));
           
-          
-          
+          //console.log("UserName:",this.props.auth.user.username);
+          //console.log("Username");
           this.setState({ queries: res.data });
          console.log("Fetched Data", this.state.queries);
     
@@ -69,12 +70,12 @@ export default class IssueBook extends Component {
         }
       }
 
-     handleissuebook = async(accession_no, email_id, event) => {
+     handleissuebook = async(accession_no, username, event) => {
 
         event.preventDefault();
         // const book_query_upper= book_query.toUpperCase();
          console.log ("Book Query Received", accession_no);
-         console.log("Email received :", email_id);
+         console.log("Username received :", username);
          const now = new Date();
      
          try {
@@ -84,14 +85,14 @@ export default class IssueBook extends Component {
              "Book_Status":"Issued",
              "issued_by":"Admin",
              "issued_on":now,
-             "email_id":email_id
+             "username":username
 
            };
      
            console.log("Fetching API");
           // book_query=encodeURIComponent(book_query);
            await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
-           this.handleuserbooksearch(email_id, event);
+           this.handleuserbooksearch(username, event);
            alert ("Book Issued Successfully");
 
         //  console.log("Fetched Data", this.state.booklst);
@@ -104,7 +105,7 @@ export default class IssueBook extends Component {
          }
       }
 
-      handlereturnbook = async(accession_no, email_id, event) => {
+      handlereturnbook = async(accession_no, username, event) => {
 
         event.preventDefault();
         console.log ("Book Query Received", accession_no);
@@ -114,12 +115,12 @@ export default class IssueBook extends Component {
              "Book_Status":"Available",
              "issued_by":"",
              "issued_on":"",
-             "email_id":"NA"
+             "username":"NA"
            };
            console.log("Fetching API");
           
            await axios.patch(`${config.api.invokeUrl}/books/bookings/transaction/${accession_no}`, params);
-           this.handleuserbooksearch(email_id, event);
+           this.handleuserbooksearch(username, event);
            alert ("Book Returned Successfully");
          } catch (error) {
            console.log(`An error has occurred: ${error}`);
@@ -129,8 +130,8 @@ export default class IssueBook extends Component {
 
 
 
-    onAddEmailChange = event => this.setState({ newquery: { ...this.state.newquery, 
-        "email_id": event.target.value } });
+    onAddUsernameChange = event => this.setState({ newquery: { ...this.state.newquery, 
+        "username": event.target.value } });
     
         onAddAccessionNoChange = event => this.setState({ newquery: { ...this.state.newquery, 
           "accession_no": event.target.value } });
@@ -149,7 +150,7 @@ export default class IssueBook extends Component {
                 <Row>
         <Col xl={12} lg={12} md={12}>
           <Card>
-            <CardHeader>Issue or Retrun Books</CardHeader>
+            <CardHeader>Issue or Return Books</CardHeader>
             <CardBody>
             <Form >
                              <FormGroup>
@@ -157,10 +158,10 @@ export default class IssueBook extends Component {
                   <Input
                     type="text"
                     name="username"
-                    placeholder="Enter email address to search User..."
-                    value={this.state.newquery.email_id} 
+                    placeholder="Enter username to search..."
+                    value={this.state.newquery.username} 
       
-                    onChange={this.onAddEmailChange}
+                    onChange={this.onAddUsernameChange}
                     
                   />
                 </FormGroup>
@@ -168,7 +169,7 @@ export default class IssueBook extends Component {
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
                     <Button
-                    onClick={event => this.handleuserbooksearch(this.state.newquery.email_id, event)}
+                    onClick={event => this.handleuserbooksearch(this.state.newquery.username, event)}
                     >Search User
                     </Button>
                   </Col>
@@ -191,7 +192,7 @@ export default class IssueBook extends Component {
                 <FormGroup check row>
                   <Col sm={{ size: 5, offset: 2 }}>
                     <Button
-                    onClick={event => this.handleissuebook(this.state.newquery.accession_no, this.state.newquery.email_id, event)}
+                    onClick={event => this.handleissuebook(this.state.newquery.accession_no, this.state.newquery.username, event)}
                     >Issue Book
       
                     </Button>
@@ -203,7 +204,7 @@ export default class IssueBook extends Component {
                     
                     
                     <Button
-                    onClick={event => this.handlereturnbook(this.state.newquery.accession_no, this.state.newquery.email_id, event)}
+                    onClick={event => this.handlereturnbook(this.state.newquery.accession_no, this.state.newquery.username, event)}
                     >Return Book
       
                     </Button>

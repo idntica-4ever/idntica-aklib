@@ -17,7 +17,7 @@ export default class NewUser extends Component {
     newbooks: []
   }
 
-  handleNewUserRequest = async (email_id, event) => {
+  handleNewUserRequest = async (username, event) => {
       console.log("function invoked");
     event.preventDefault();
     // add call to AWS API Gateway add product endpoint here
@@ -26,15 +26,15 @@ export default class NewUser extends Component {
 
     const now = new Date();
     const params = {
-    "email_id": email_id,
-    "username": this.state.newbook.username,
+    "email_id": this.state.newbook.email_id,
+    "username": username,
     "category": this.state.newbook.category,
     "batch":this.state.newbook.batch,
     "req_date":now
 
       };
       console.log("Inputs received :", params);
-      await axios.post(`${config.api.invokeUrl}/newuser/${email_id}`, params);
+      await axios.post(`${config.api.invokeUrl}/user/${username}`, params);
       this.setState({ newbooks: [...this.state.newbooks, this.state.newbook] });
       this.setState({ newbook: { "email_id":"", "username": "", "batch": "", "category": ""}});
       console.log("Request Submitted Successfully");
@@ -65,7 +65,7 @@ export default class NewUser extends Component {
             <br />
             <div className="columns">
               <div className="column is-one-third">
-                <form onSubmit={event => this.handleNewUserRequest(this.state.newbook.email_id, event)}>
+                <form onSubmit={event => this.handleNewUserRequest(this.state.newbook.username, event)}>
                       
                     <div className="field">
                     <p className="control">

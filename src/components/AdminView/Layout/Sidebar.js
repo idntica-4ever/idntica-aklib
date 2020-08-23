@@ -1,6 +1,10 @@
 import logo200Image from '../../../reductcomponents/assets/img/logo/logo_200.png';
 import sidebarBgImage from '../../../reductcomponents/assets/img/sidebar/sidebar-4.jpg';
 import SourceLink from '../SourceLink';
+import {Link} from 'react-router-dom';
+
+import { Auth } from 'aws-amplify';
+
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import {
@@ -98,6 +102,8 @@ class Sidebar extends React.Component {
 
   render() {
     return (
+
+
       <aside className={bem.b()} data-image={sidebarBgImage}>
         <div className={bem.e('background')} style={sidebarBackground} />
         <div className={bem.e('content')}>
@@ -216,8 +222,10 @@ class Sidebar extends React.Component {
 
            
           </Nav>
+                  
         </div>
       </aside>
+      
     );
   }
 }

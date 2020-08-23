@@ -17,7 +17,7 @@ export default class NewUserList extends Component {
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateProduct(this.props.email_id, this.props.user_name, this.state.updatedcomments);
+    this.props.handleUpdateProduct(this.props.email_id, this.props.username, this.state.updatedcomments);
   }
 
   onAddComments = event => this.setState({ "updatedcomments": event.target.value });
@@ -32,7 +32,7 @@ export default class NewUserList extends Component {
                           <tr >
                            
                              <td className="book-title-sps">
-                               {this.props.user_name} 
+                               {this.props.username} 
                                </td>
                            
                               
@@ -60,7 +60,7 @@ export default class NewUserList extends Component {
            
             <button type="submit" 
                 className="button-approve is-info is-small"
-                onClick={event => this.props.handleUpdateProduct(this.props.email_id,this.props.user_name, event)}
+                onClick={event => this.props.handleUpdateProduct(this.props.email_id, this.props.username, event)}
               >Approve</button>
              </Fragment>
         }
@@ -72,7 +72,7 @@ export default class NewUserList extends Component {
           <Fragment>
             
             <button type="submit"  className="button-del is-info is-small" 
-            onClick={event => this.props.handleDeleteProduct(this.props.email_id, event)} >Delete</button>
+            onClick={event => this.props.handleDeleteProduct(this.props.email_id, this.props.username, event)} >Delete</button>
           </Fragment>
         }
                                </td>

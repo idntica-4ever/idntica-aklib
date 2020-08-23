@@ -28,9 +28,6 @@ import SearchList from './components/SearchList';
 import SignupForm from './components/auth/SignupForm';
 import MainDashboardView from './components/test/MainDashboardView';
 
-
-
-
 //Book adding details
 import BookAdd from './components/BookAdd';
 import BookIssue from './components/BookIssue';
@@ -42,9 +39,6 @@ import WorkinProgress from './components/test/WorkinProgress';
 import IssueBook from './reductcomponents/pages/IssueBook';
 
 //Amplify.configure(awsconfig);
-
-
-
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -59,7 +53,8 @@ class App extends Component {
   state = {
     isAuthenticated: false,
     isAuthenticating: true,
-    user: null
+    user: null,
+    isAdmin:false
   }
 
 setAuthStatus = authenticated => {
@@ -70,6 +65,11 @@ setUser = user => {
   this.setState({user: user});
 }
 
+setAdmin = isAdmin => {
+  this.setState({isAdmin: false});
+}
+
+
 // to keep session active
 async componentDidMount(){
   try{
@@ -78,6 +78,7 @@ async componentDidMount(){
     console.log(session);
     const user = await Auth.currentAuthenticatedUser();
     this.setUser(user);
+    this.setAdmin(false);
   }catch(error){
     console.log(error);
   }
@@ -89,10 +90,11 @@ async componentDidMount(){
       isAuthenticated: this.state.isAuthenticated,
       user: this.state.user,
       setAuthStatus: this.setAuthStatus,
-      setUser: this.setUser
+      setUser: this.setUser,
+      setAdmin:this.setAdmin
     }
 
-    return (
+    return (  
       !this.state.isAuthenticating &&
       <div className="App">
         <Router>
@@ -120,9 +122,6 @@ async componentDidMount(){
            
           </div>
           
-         
-         
-   
           <Footer />
         </Router>
       </div>
