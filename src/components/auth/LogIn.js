@@ -45,7 +45,7 @@ class LogIn extends Component {
     // AWS Cognito integration here
 
     try{
-      //console.log("started try method");
+      console.log("inside submit method");
 
    const user= await Auth.signIn(this.state.username, this.state.password);
    console.log("success");
@@ -105,8 +105,13 @@ class LogIn extends Component {
                     
        console.log("User Category :", category);
        
-       category="Admin" ? this.props.auth.setAdmin(true) : this.props.auth.setAdmin(false);
-
+       //category="Admin" ? this.props.auth.setAdmin(true) : this.props.auth.setAdmin(false);
+// fetch logged in user details
+       const user = await Auth.currentAuthenticatedUser()
+       console.log('user:', user)
+       console.log('user info:', user.signInUserSession.idToken.payload)
+       console.log('user name :', user.signInUserSession.idToken.payload.cognito.username)
+       console.log("testing")
 
      // console.log("Fetched Data from User table", this.state.queries);
  

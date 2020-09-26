@@ -81,6 +81,11 @@ async componentDidMount(){
     const user = await Auth.currentAuthenticatedUser();
     this.setUser(user);
     this.setAdmin(false);
+    console.log('user1:', user)
+    console.log('user info:', user.signInUserSession.idToken.payload)
+    console.log('user name :', user.signInUserSession.idToken.payload)
+    console.log("testing")
+
   }catch(error){
     console.log(error);
   }
