@@ -172,14 +172,7 @@ color: var(--mainBlue);
   margin-left: 0rem;
 }
 
-/*-----------------Navbar mouse over ---------------*/
 
-#navbar { 
-  transform: translateY(-100%); /* normal, hidden state */
-}
-.navbar:hover #navbar {
-  transform: translateY(0); /* when parent is hovered */
-}
 
 
 .tst-try{
@@ -286,3 +279,95 @@ height: 40px;
   font-size: 18px;
   color: rgb(255, 255, 255);
 }
+
+@media only screen and ( min-width: 680px ) {   
+  .nav-link-title-small{
+    display: none !important;
+    
+    
+  }
+  }
+
+
+/* start templatemo 600 media quires */
+@media only screen and ( max-width: 860px ) {   
+  .navbar-brand-ak{
+    display: none;
+  }
+  .nav-link-title{
+    font-size: 12px !important;
+    color: rgb(252, 252, 252);
+  }
+  .top-navbar{
+    position: absolute;
+    top: 10px !important;
+    right: 10px;
+    
+
+}
+
+
+}
+@media only screen and ( max-width: 680px ) {   
+  .navbar-brand-ak{
+    display: none;
+  }
+  .nav-link-title{
+    display: none;
+    
+    
+  }
+  .nav-link-title-small{
+    font-size: 12px !important;
+    color: rgb(252, 252, 252);
+    position: absolute !important;
+    left: 3px !important;
+    line-height: 0.8 !important;
+    
+    
+  }
+  .top-navbar{
+    position: absolute;
+    top: 10px !important;
+    right: 10px;
+    
+    
+
+}
+
+
+}
+
+@media only screen and ( max-width: 500px ) {   
+  .navbar-brand-ak{
+    display: none;
+  }
+  .nav-link-title{
+    display: none;
+    
+    
+  }
+  .nav-link-title-small{
+    font-size: 12px !important;
+    color: rgb(252, 252, 252);
+    position: absolute !important;
+    left: 15px !important;
+   top: 15px !important;
+    
+    
+  }
+  .top-navbar{
+    position: absolute;
+    top: 10px !important;
+    right: 10px;
+    
+    
+
+}
+li{
+  font-size: 10px !important;
+}
+
+}
+/* end templatemo 600 media quires */
+
