@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
+import MobileNavbar from './components/MobileNavbar';
 import Home from './components/Home';
 import HomeContent from './components/HomeContent';
 import Footer from './components/Footer';
@@ -42,6 +43,7 @@ import IssueBook from './reductcomponents/pages/IssueBook';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 
 library.add(faEdit);
@@ -99,7 +101,9 @@ async componentDidMount(){
       <div className="App">
         <Router>
           <div>
-            <Navbar auth={authProps} />
+            <MobileNavbar auth={authProps} />
+           
+            
             <Switch>
              
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />

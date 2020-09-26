@@ -279,15 +279,21 @@ height: 40px;
   font-size: 18px;
   color: rgb(255, 255, 255);
 }
-
-@media only screen and ( min-width: 680px ) {   
-  .nav-link-title-small{
-    display: none !important;
-    
-    
-  }
+.navigation__navlinks{
+  background-color:black;
+  color: white !important;
   }
 
+.navigation__navlinks:hover{
+background-color: rgb(55, 9, 139);
+color: white !important;
+}
+
+@media only screen and (min-width:580px){
+.navbar-mobile{
+  display:none;
+}
+}
 
 /* start templatemo 600 media quires */
 @media only screen and ( max-width: 860px ) {   
@@ -338,15 +344,13 @@ height: 40px;
 
 }
 
-@media only screen and ( max-width: 500px ) {   
-  .navbar-brand-ak{
-    display: none;
+@media only screen and ( max-width: 580px ) {   
+ 
+  .navbar-bg{
+    display:none;
   }
-  .nav-link-title{
-    display: none;
-    
-    
-  }
+ 
+
   .nav-link-title-small{
     font-size: 12px !important;
     color: rgb(252, 252, 252);
