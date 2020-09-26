@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
+import { Auth } from "aws-amplify";
+
 // userquery is used to display the database items to viewable format
 //import Userquery from './UserQuery';
 
@@ -24,6 +26,12 @@ export default class BookAdd extends Component {
 
   handleAddBook = async (accession_no, event) => {
       console.log("function invoked");
+      const user = await Auth.currentAuthenticatedUser()
+      console.log('user:', user)
+      //console.log('user info:', user.signInUserSession.idToken.payload)
+      console.log("testing")
+
+
     event.preventDefault();
     // add call to AWS API Gateway add product endpoint here
     try {

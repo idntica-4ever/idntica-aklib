@@ -1,6 +1,8 @@
 import Page from '../../components/AdminView/Page';
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
+import { Auth } from "aws-amplify";
+
 import { Button, Card, CardBody, CardHeader, Col, Form, FormFeedback, FormGroup, FormText, Input, Label, Row, } from 'reactstrap';
 
 const config = require('../../config.json');
@@ -41,6 +43,7 @@ toUpperCase = () => {
       //console.log("accession No received : ",accession_no);
       //const test = document.getElementById("accessionNo").value
       //console.log ("Data from input field : ", test);
+
     event.preventDefault();
     // add call to AWS API Gateway add product endpoint here
     try {
@@ -117,8 +120,14 @@ toUpperCase = () => {
   onAddBookScopeChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Scope": event.target.value } });
 
   
-  componentDidMount = () => {
+  componentDidMount = async() => {
     key_value = this.fetchProducts();
+    const user = await Auth.currentAuthenticatedUser()
+    console.log('user:', user)
+    console.log('user info:', user.signInUserSession.idToken.payload)
+    //console.log('user name :', user.signInUserSession.idToken.payload.cognito:username)
+    console.log("testing")
+
   }
 
 render() {

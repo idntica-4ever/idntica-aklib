@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Bookquery from '../../components/Bookquery';
-//import { confirmAlert } from 'react-confirm-alert'; // Import
-//import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
