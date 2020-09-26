@@ -183,7 +183,7 @@ class LogIn extends Component {
             <div className="col">
                 <div className = "pull-right">
            
-                <button className="button is-success">
+                <button className="button-is-success">
                   Login
                 </button>
              </div></div>

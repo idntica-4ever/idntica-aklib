@@ -99,12 +99,15 @@ color: var(--mainBlue);
   color:#2a2a72;
   border: none;
   height: 40px;
-  width: 10%;
+  width: 20%;
   
 }
 
 .searchButton:hover{
   background-color: #fa912e;
+}
+.searchText{
+  font-size: 12px;
 }
 
 .th {
@@ -151,9 +154,9 @@ color: var(--mainBlue);
 .button-is-success{
   background-color: #06b672;
   text-transform: capitalize;
-  font-size: 2rem !important;
+  font-size: 18px !important;
   color: var(--mainWhite);
- 
+  margin-right: 50px;
   border-radius: 0.8rem !important;
   border: 0.1rem solid #06b672 !important;
 }
@@ -163,6 +166,7 @@ color: var(--mainBlue);
   background-color: #99012f;
   color: azure;
   border: 0rem !important;
+  border: 0.1rem solid #99012f !important;
 }
 
 .AK-sidebar-text{
@@ -173,6 +177,10 @@ color: var(--mainBlue);
 }
 
 
+
+.input{
+  width:90%;
+}
 
 
 .tst-try{
@@ -244,13 +252,13 @@ color: var(--mainBlue);
   
 }
 .search-input{
-width: 90%;
+width: 80%;
 border: none;
 height: 40px;
 
 }
 .search-input-ed{
-  width: 90%;
+  width: 80%;
 
 height: 40px;
 }
@@ -280,8 +288,8 @@ height: 40px;
   color: rgb(255, 255, 255);
 }
 .navigation__navlinks{
-  background-color:black;
-  color: white !important;
+  background-color: white;
+  color: rgb(55, 9, 139) !important;
   }
 
 .navigation__navlinks:hover{
@@ -346,6 +354,7 @@ color: white !important;
 
 @media only screen and ( max-width: 580px ) {   
  
+
   .navbar-bg{
     display:none;
   }
@@ -372,6 +381,24 @@ li{
   font-size: 10px !important;
 }
 
+.search-input{
+width: 70%;
+border: none;
+height: 30px;
+
+}
+.search-input-ed{
+  width: 70%;
+
+height: 30px;
+}
+
+.searchButton{
+  
+  height: 30px;
+  width: 30%;
+  
+}
 }
 /* end templatemo 600 media quires */
 
