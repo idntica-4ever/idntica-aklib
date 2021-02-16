@@ -34,11 +34,12 @@ export default class SearchList extends Component {
 
 
 
+
   // handle global search
   handleglobalsearch = async(book_query, event) => {
     event.preventDefault();
     const book_query_upper= book_query.toUpperCase();
-    console.log ("Book Query Received - Upper Case : ", book_query_upper);
+    //console.log ("Book Query Received - Upper Case : ", book_query_upper);
 
     try {
 
@@ -46,11 +47,11 @@ export default class SearchList extends Component {
         "book_query": book_query
       };
 
-      console.log("Fetching API");
+      //console.log("Fetching API");
       book_query=encodeURIComponent(book_query);
       const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query_upper}`, params);
       
-      console.log("Encoded URL :", encodeURIComponent(book_query));
+     // console.log("Encoded URL :", encodeURIComponent(book_query));
       
       //const res = await axios.get(`${config.api.invokeUrl}/books/global-book-search/${book_query}`, params);
       
@@ -60,7 +61,7 @@ export default class SearchList extends Component {
       
       
       this.setState({ queries: res.data });
-     console.log("Fetched Data : ", this.state.queries);
+    // console.log("Fetched Data : ", res);
 
     // this.assignSearchedresults();
      // validating search results
