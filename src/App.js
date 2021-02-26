@@ -29,6 +29,8 @@ import SearchList from './components/SearchList';
 import SignupForm from './components/auth/SignupForm';
 import MainDashboardView from './components/test/MainDashboardView';
 
+import {ProductConsumer} from './Context';
+
 //Book adding details
 import BookAdd from './components/BookAdd';
 import BookIssue from './components/BookIssue';
@@ -49,6 +51,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit);
 
 class App extends Component {
+
+  static contextType = ProductConsumer;
 
   //AWS Cognitto code to declare global value to validate signed user
 
@@ -77,14 +81,17 @@ async componentDidMount(){
   try{
     const session = await Auth.currentSession();
     this.setAuthStatus(true);
-    console.log(session);
+    //console.log(session);
     const user = await Auth.currentAuthenticatedUser();
     this.setUser(user);
     this.setAdmin(false);
-    console.log('user1:', user)
-    console.log('user info:', user.signInUserSession.idToken.payload)
-    console.log('user name :', user.signInUserSession.idToken.payload)
-    console.log("testing")
+   // this.context.setIsAuthenticated(true);
+
+    this.context.setuserGroup(user.signInUserSession.idToken.payload['cognito:groups']);
+    console.log('user1:', user);
+    //console.log('user info:', user.signInUserSession.idToken.payload)
+    //console.log('user name :', user.signInUserSession.idToken.payload)
+    //console.log("testing")
 
   }catch(error){
     console.log(error);
@@ -137,5 +144,7 @@ async componentDidMount(){
     );
   }
 }
+
+App.contextType = ProductConsumer;
 
 export default App;

@@ -3,6 +3,8 @@ import sidebarBgImage from '../../../reductcomponents/assets/img/sidebar/sidebar
 import SourceLink from '../SourceLink';
 import {Link} from 'react-router-dom';
 
+import {ProductConsumer} from '../../../Context';
+
 import { Auth } from 'aws-amplify';
 
 import React from 'react';
@@ -58,7 +60,7 @@ const navContents = [
   { to: '/addbook', name: 'Add Book', exact: false, Icon: MdTextFields },
   
   { to: '/editbook', name: 'Edit Book', exact: false, Icon: MdBorderAll },
-  { to: '/removebook', name: 'Revome Book', exact: false, Icon: MdBorderAll },
+  { to: '/removebook', name: 'Remove Book', exact: false, Icon: MdBorderAll },
 ];
 
 
@@ -74,12 +76,13 @@ const navContents = [
 //];
 
 const navItems = [
-  { to: '/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/issue', name: 'issue / return', exact: false, Icon: MdWeb },
-  
-  
- 
+  { to: '/dashboard', name: 'dashboard', exact: true, Icon: MdDashboard }, 
 ];
+
+const navItemsAdmin = [
+  { to: '/issue', name: 'issue / return', exact: false, Icon: MdWeb }, 
+];
+
 
 const bem = bn.create('sidebar');
 
@@ -108,6 +111,11 @@ class Sidebar extends React.Component {
         <div className={bem.e('background')} style={sidebarBackground} />
         <div className={bem.e('content')}>
           
+        <ProductConsumer>
+                        {(value)=>{
+                                const {userGroup, isAdmin, isLibrarian} = value;
+                                console.log("products", userGroup);
+return(
           <Nav vertical>
           
           <NavItem>
@@ -140,6 +148,27 @@ class Sidebar extends React.Component {
                 </BSNavLink>
               </NavItem>
             ))}
+
+          {isAdmin? <div>
+
+          {navItemsAdmin.map(({ to, name, exact, Icon }, index) => (
+              <NavItem key={index} className={bem.e('nav-item')}>
+                <BSNavLink
+                  id={`navItem-${name}-${index}`}
+                  className="text-uppercase"
+                  tag={NavLink}
+                  to={to}
+                  activeClassName="active"
+                  exact={exact}
+                >
+                  <Icon className={bem.e('nav-item-icon')} />
+                  <span className="">{name}</span>
+                </BSNavLink>
+              </NavItem>
+            ))}</div>:""}
+
+
+            {isAdmin? <div>
             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
@@ -178,8 +207,9 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse></div>:""}
 
+                {isAdmin||isLibrarian?<div>
             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Contents')}
@@ -219,9 +249,14 @@ class Sidebar extends React.Component {
                 </NavItem>
               ))}
             </Collapse>
-
+            </div>:""}
            
-          </Nav>
+          </Nav>)
+               }
+              }
+
+          </ProductConsumer>
+
                   
         </div>
       </aside>

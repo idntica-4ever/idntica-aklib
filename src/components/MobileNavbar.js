@@ -135,18 +135,9 @@ export default class MobileNavbar extends Component {
                   <li className="nav-item"><a className="nav-link" href="/search">Search</a></li>
                 </ul>
               
-           
         </nav></header>
           
-   
-    
-   
-
- 
-
-
   </NavWrapper>
-
   
   </div>
   <div className="navbar-mobile">
@@ -204,16 +195,12 @@ export default class MobileNavbar extends Component {
                     Log Out
                   </a>  
                     
-                    
-                  
-
                   </div>
                 )}
 
 </NavItem>
 
 <NavItem>
-                 
 
                  <Link 
                   onClick={this.closeNavbar}

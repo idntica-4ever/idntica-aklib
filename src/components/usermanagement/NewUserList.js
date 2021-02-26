@@ -60,16 +60,20 @@ class NewUserList extends Component {
     const email = email_id;
     //const username = "idntica"
     const password = "Aklibrary@123";
+    const source="AKLibrary";
+    const role="admin";
     console.log("Username :", username);
     try{
          //console.log("started try method");
 
      const signUpResponse = await Auth.signUp({
        username,
-        email,
+       email,
         password,
         attributes:{
-          email:email
+          email:email,
+        'custom:source':source,
+        'custom:role':role
         }
       });
       console.log(signUpResponse);

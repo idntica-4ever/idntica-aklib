@@ -12,9 +12,6 @@ export default function Home() {
       <div className="tst-try">
          <img className="home-bg" src={require('../images/sliderbg1.jpg')} /> 
 </div>
-    
-        
-
    
   )
 }

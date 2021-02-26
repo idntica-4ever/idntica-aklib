@@ -13,17 +13,26 @@ export default class SignupForm extends Component {
     "email_id": "",
     "username": "",
     "user_category": "",
-    "user_batch": ""
+    "user_batch": "",
+    "userSource":""
     },
+    "displayMsg":"",
     newbooks: []
   }
 
   handleNewUserRequest = async (username, event) => {
-      console.log("function invoked");
     event.preventDefault();
     // add call to AWS API Gateway add product endpoint here
     try {
-        console.log("inside try");
+       // console.log("inside try");
+        this.setState({displayMsg:""});
+        if (this.state.newbook.username==="" || this.state.newbook.email_id==="" || this.state.newbook.user_category === "" || this.state.newbook.user_batch ==="")
+        {
+          this.setState({displayMsg:"Fill all the required details to submit the request"});
+        }
+        else
+        {
+       // console.log("email_id", this.state.newbook.username);
 
     const now = new Date();
     const params = {
@@ -36,94 +45,26 @@ export default class SignupForm extends Component {
     "PK":"AKLibrary"
 
       };
-      console.log("Inputs received :", params);
+      //console.log("Inputs received :", params);
       await axios.post(`${config.api.invokeUrl}/user/${username}`, params);
       this.setState({ newbooks: [...this.state.newbooks, this.state.newbook] });
       this.setState({ newbook: { "email_id":"", "username": "", "user_batch": "", "user_category": ""}});
-      console.log("Request Submitted Successfully");
+      this.setState({displayMsg:"Your Request has been submitted successfully. Admin will review your request and action it accordingly. Check your emails for further updates..."});
+      //console.log("Request Submitted Successfully");
+    }
     }catch (err) {
-      console.log(`An error has occurred: ${err}`);
+      const errmsg = "Error Occured : " + err.error;
+      this.setState({displayMsg:errmsg});
+     // console.log(`An error has occurred: ${err}`);
     }
   }
 
+  onAddUserSource = event => this.setState({ newbook: { ...this.state.newbook, "userSource": event.target.value } });
 
   onAddEmailIdChange = event => this.setState({ newbook: { ...this.state.newbook, "email_id": event.target.value } });
   onAddUsernameChange = event => this.setState({ newbook: { ...this.state.newbook, "username": event.target.value } });
   onAddBatchChange = event => this.setState({ newbook: { ...this.state.newbook, "user_batch": event.target.value } });
   onAddBookCategoryChange = event => this.setState({ newbook: { ...this.state.newbook, "user_category": event.target.value } });
-  
-/*    state = {
-        username: "",
-        password: "",
-        email: "",
-        confirmpassword: "",
-        errors: {
-          cognito: null,
-          blankfield: false,
-          passwordmatch: false
-        }
-      }
-    
-      clearErrorState = () => {
-        this.setState({
-          errors: {
-            cognito: null,
-            blankfield: false,
-            passwordmatch: false
-          }
-        });
-      }
-    
-      handleSubmit = async event => {
-        event.preventDefault();
-       console.log("coding started");
-        // Form validation
-        this.clearErrorState();
-        const error = Validate(event, this.state);
-        if (error) {
-          this.setState({
-            errors: { ...this.state.errors, ...error }
-          });
-        }
-    
-        // AWS Cognito integration here
-        // this.state will pass the data from the from to the varialbels
-        const {username, email, password } = this.state;
-        try{
-             console.log("started try method");
-    
-          const signUpResponse = await Auth.signUp({
-            username,
-            password,
-            attributes:{
-              email:email
-            }
-          });
-          console.log(signUpResponse);
-          this.props.history.push("/welcome");
-        } catch (error){
-          //console.log("Inside error log");
-    
-          let err = null;
-          !error.message ? err = { "message" : error} : err = error;
-          this.setState({
-            errors:{
-              errors:{
-                ...this.state.errors,
-                cognito:err
-              }
-            }
-          })
-        }
-      };
-    
-      onInputChange = event => {
-        this.setState({
-          [event.target.id]: event.target.value
-        });
-        document.getElementById(event.target.id).classList.remove("is-danger");
-      }
-*/
     render() {
         return (
            
@@ -184,6 +125,17 @@ export default class SignupForm extends Component {
                   onChange={this.onAddBatchChange}
                 />   
         </div>
+        <div className="row">
+        <input 
+                  className="input" 
+                  type="text"
+                  id="userSource"
+                  aria-describedby="batchHelp"
+                  placeholder="Enter your Library Code"
+                  value={this.state.newbook.userSource}
+                  onChange={this.onAddUserSource}
+                />   
+        </div>
 <div className="row">
     <p></p>
 </div>
@@ -191,6 +143,7 @@ export default class SignupForm extends Component {
         <div className="row">
             
             <div className="col">
+              {this.state.displayMsg}
                 <div className = "pull-right">
            
                 <button className="button-is-success">

@@ -3,7 +3,10 @@ import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
 import axios from 'axios';
+import {ProductConsumer} from '../../Context';
+
 const config = require('../../config.json');
+
 
 class LogIn extends Component {
   state = {
@@ -13,6 +16,7 @@ class LogIn extends Component {
       cognito: null,
       blankfield: false
     },
+    dispMsg:"",
     newquery: {
         "username": "",
     },
@@ -45,20 +49,21 @@ class LogIn extends Component {
     // AWS Cognito integration here
 
     try{
-      console.log("inside submit method");
-
+    //  console.log("inside submit method");
+      this.setState({dispMsg:""});
    const user= await Auth.signIn(this.state.username, this.state.password);
-   console.log("success");
-   console.log(user);
-   console.log("success");
+   //console.log("success");
+   //console.log(user);
+   //console.log("success");
    this.handleusercategorysearch(this.state.username);
    this.props.auth.setAuthStatus(true);
    this.props.auth.setUser(user);
-   console.log("success");
+  // console.log("success");
    this.props.history.push("/newuserlist");
  } catch (error){
    //console.log("Inside error log");
-
+    const errmsg = "Error Occurred : " + error.message;
+    this.setState({dispMsg:errmsg});
    let err = null;
    !error.message ? err = { "message" : error} : err = error;
    this.setState({
@@ -180,6 +185,7 @@ class LogIn extends Component {
              
             </div>
             <div className="row">
+              {this.state.dispMsg}
             <div className="col">
                 <div className = "pull-right">
            
