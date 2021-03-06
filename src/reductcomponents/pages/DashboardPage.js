@@ -67,6 +67,7 @@ class DashboardPage extends React.Component {
         title="Dashboard"
         breadcrumbs={[{ name: 'Dashboard', active: true }]}
       >
+        TESTING
         <Row>
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget

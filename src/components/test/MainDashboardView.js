@@ -14,9 +14,14 @@ const BadgePage = React.lazy(() => import('../../reductcomponents/pages/BadgePag
 const ButtonGroupPage = React.lazy(() => import('../../reductcomponents/pages/ButtonGroupPage'));
 const ButtonPage = React.lazy(() => import('../../reductcomponents/pages/ButtonPage'));
 const UserApprovalPage = React.lazy(() => import('../usermanagement/NewUserList'));
+const SearchUser = React.lazy(() => import('../../reductcomponents/pages/SearchUser'));
+const ManageUser = React.lazy(() => import('../../reductcomponents/pages/ManageUser'));
+
+
 const IssueBook = React.lazy(() => import('../../reductcomponents/pages/IssueBook'));
 const ChartPage = React.lazy(() => import('../../reductcomponents/pages/ChartPage'));
 const DashboardPage = React.lazy(() => import('../../reductcomponents/pages/DashboardPage'));
+const DashboardTest = React.lazy(() => import('../../reductcomponents/pages/DashboardTest'));
 const DropdownPage = React.lazy(() => import('../../reductcomponents/pages/DropdownPage'));
 const AddBook = React.lazy(() => import('../../reductcomponents/pages/AddBook'));
 const EditBook = React.lazy(() => import('../../reductcomponents/pages/EditBook'));
@@ -55,13 +60,17 @@ class MainDashboardView extends React.Component {
                 <AuthPage {...props} authState={STATE_SIGNUP} />
               )}
             />
-
+            
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/dashboard" component={DashboardPage} />
+                <Route exact path="/dashboard" component={DashboardTest} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/UserApprovalPage" component={UserApprovalPage} />
+                <Route exact path="/usersearch" component={SearchUser} />
+                <Route exact path="/manageuser" component={ManageUser} />
+
+
                 <Route exact path="/issue" component={IssueBook} />
                 <Route exact path="/return" component={ReturnBook} />
                 <Route exact path="/typography" component={TypographyPage} />
@@ -70,11 +79,7 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/workprog" component={WorkProg} />
                 
                 <Route exact path="/badges" component={BadgePage} />
-                <Route
-                  exact
-                  path="/button-groups"
-                  component={ButtonGroupPage}
-                />
+                <Route exact path="/button-groups" component={ButtonGroupPage}/>
                 <Route exact path="/dropdowns" component={DropdownPage} />
                 <Route exact path="/progress" component={ProgressPage} />
                 <Route exact path="/modals" component={ModalPage} />
@@ -85,7 +90,7 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/charts" component={ChartPage} />
               </React.Suspense>
             </MainLayout>
-            <Redirect to="/" />
+            <Redirect to="/dashboard" />
           </Switch>
         </GAListener>
       </BrowserRouter>

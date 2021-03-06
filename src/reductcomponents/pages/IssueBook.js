@@ -31,28 +31,57 @@ export default class IssueBook extends Component {
             "username": "",
             "accession_no":""
         },
+        privilagedUser:"",
+        dispMsg:"",
         queries: [],
         booklst: []
       }
-       
+
+      componentDidMount(){
+        this.fetchLoggedUserDetails();
+       }
+       fetchLoggedUserDetails = async() =>{
+        const session =  await Auth.currentSession();
+        // console.log("Session :", session.accessToken.payload.username);
+        // console.log("Session :", session.idToken.jwtToken);
+        const access_token=session.idToken.jwtToken;
+         const privilagedUser=session.accessToken.payload.username;
+       this.setState({privilagedUser:privilagedUser});
+      
+       }
+
       // handle user search
       handleuserbooksearch = async(username, event) => {
-       event.preventDefault();
+      // event.preventDefault();
       // email_id ? alert ("Empty") : alert("value is there")
 
        // const book_query_upper= book_query.toUpperCase();
         console.log ("Book Query Received", username);
+        if(username==="")
+        {
+          this.setState({dispMsg:"Enter the username"});
+        }else{
     
-        try {
-    
+        try {   
           const params = {
             "username": username
-            
-          };
+            };
     
           console.log("Fetching API");
+          const validateResponse = await axios.get(`${config.api.invokeUrl}/user/validateuser/${username}`);
+            console.log("Validate Response :", validateResponse);
+            if(validateResponse.data.Users.length<1)
+            {
+              this.setState({dispMsg:"Incorrect UserName"});
+            }else {
+              console.log("Testing",validateResponse.data.Users[0].UserStatus);
+            }
          // book_query=encodeURIComponent(book_query);
           const res = await axios.get(`${config.api.invokeUrl}/books/bookings/${username}`, params);
+          console.log("res:", res);
+          if (res.length<1){
+            this.setState({dispMsg:"No Books Issued to this user"});
+          }else{
          // console.log("Fetching API for query : ", email_id);
           //book_query=encodeURIComponent(book_query);
           //console.log("Encoded URL :", encodeURIComponent(book_query));
@@ -60,19 +89,20 @@ export default class IssueBook extends Component {
           //console.log("UserName:",this.props.auth.user.username);
           //console.log("Username");
           this.setState({ queries: res.data });
-         console.log("Fetched Data", this.state.queries);
+        // console.log("Fetched Data", this.state.queries);
     
         // this.assignSearchedresults();
          // validating search results
-    
+          }
         } catch (error) {
           console.log(`An error has occurred: ${error}`);
         }
       }
+      }
 
      handleissuebook = async(accession_no, username, event) => {
 
-        event.preventDefault();
+       // event.preventDefault();
         // const book_query_upper= book_query.toUpperCase();
          console.log ("Book Query Received", accession_no);
          console.log("Username received :", username);
@@ -83,7 +113,7 @@ export default class IssueBook extends Component {
            const params = {
              "Accession_No": accession_no,
              "Book_Status":"Issued",
-             "issued_by":"Admin",
+             "issued_by": this.state.privilagedUser,
              "issued_on":now,
              "username":username
 
@@ -141,8 +171,9 @@ export default class IssueBook extends Component {
           
         const booklist = this.state.queries && this.state.queries.length > 0
         ?this.state.queries.map(searchresult => <Bookquery Book_Title= {searchresult.Book_Title} 
-          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
-        : <div className="tile notification is-warning">NO BOOKS / AUTHOR found.... Try again...</div>   
+          Book_Author={searchresult.Book_Author} Book_Classification_No={searchresult.Book_Classification_No} 
+          Book_Status={searchresult.Book_Status} Book_Scope={searchresult.Book_Scope} key={searchresult.author_title} />)
+        : <div className="tile notification is-warning">NO BOOKS Issued </div>   
         return (
 
             
@@ -165,7 +196,7 @@ export default class IssueBook extends Component {
                     
                   />
                 </FormGroup>
-
+            {this.state.dispMsg}
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
                     <Button

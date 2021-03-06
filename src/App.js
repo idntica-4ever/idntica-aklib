@@ -26,8 +26,12 @@ import SearchBar from './components/SearchBar'
 import Search from './components/Search';
 import SearchList from './components/SearchList';
 
+import SignUp from './components/auth/SignUp';
 import SignupForm from './components/auth/SignupForm';
+
 import MainDashboardView from './components/test/MainDashboardView';
+
+import {ProductConsumer} from './Context';
 
 //Book adding details
 import BookAdd from './components/BookAdd';
@@ -49,6 +53,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit);
 
 class App extends Component {
+
+  static contextType = ProductConsumer;
 
   //AWS Cognitto code to declare global value to validate signed user
 
@@ -77,14 +83,19 @@ async componentDidMount(){
   try{
     const session = await Auth.currentSession();
     this.setAuthStatus(true);
-    console.log(session);
+    //console.log(session);
     const user = await Auth.currentAuthenticatedUser();
     this.setUser(user);
     this.setAdmin(false);
-    console.log('user1:', user)
-    console.log('user info:', user.signInUserSession.idToken.payload)
-    console.log('user name :', user.signInUserSession.idToken.payload)
-    console.log("testing")
+   // this.context.setIsAuthenticated(true);
+   const userLevel=user.signInUserSession.idToken.payload['cognito:groups'];
+   const familyname=user.signInUserSession.idToken.payload.family_name;
+   const username=user.username;
+    this.context.setuserGroup(userLevel,familyname,username);
+    console.log('user1:', user);
+    //console.log('user info:', user.signInUserSession.idToken.payload)
+    //console.log('user name :', user.signInUserSession.idToken.payload)
+    //console.log("testing")
 
   }catch(error){
     console.log(error);
@@ -112,6 +123,8 @@ async componentDidMount(){
             <Switch>
              
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
+              <Route exact path="/signuptest" render={(props) => <SignUp {...props} auth={authProps} />} />
+
               <Route exact path="/signup" render={(props) => <SignupForm {...props} auth={authProps} />} />
               <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
               <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
@@ -137,5 +150,7 @@ async componentDidMount(){
     );
   }
 }
+
+App.contextType = ProductConsumer;
 
 export default App;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Page from '../../components/AdminView/Page';
 import Bookquery from '../../components/Bookquery';
+import {Auth} from "aws-amplify";
 
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
@@ -21,12 +22,14 @@ import {
     Label,
     Row,
   } from 'reactstrap';
+  require('dotenv').config();
+
   const userquery='';
 
 var firstName, secondName="";  
 const config = require('../../config.json');
 var key_value=0;
-export default class EditBook extends Component {
+export default class DashboardTest extends Component {
 
     
   state = {
@@ -63,8 +66,37 @@ toUpperCase = () => {
   });
 }
 
+componentDidMount(){
+    this.handleFetchDetails();
+}
 
 
+//fetching books for the user
+handleFetchDetails = async () => {
+        // add call to AWS API Gateway to fetch products here
+        try {
+          const session = await Auth.currentSession();
+         // console.log("Session :", session.accessToken.payload.username);
+         // console.log("Session :", session.idToken.jwtToken);
+         const access_token=session.idToken.jwtToken;
+          const username=session.accessToken.payload.username;
+       console.log("Username :", username);
+          await axios.get(`${process.env.REACT_APP_API_URL}/books/bookings/${username}`).then((response) => {
+           console.log("Response : ", response);
+            if(response.data.length>0)
+            {
+                console.log("Data fetched : ",response);
+            this.setState({queries:response.data});
+            }
+          }, (error) => {
+            console.log("Error : ", error);
+          });
+         //console.log("inside if", res.data.length);
+          } catch (err) {
+          console.log(`An error has occurred: ${err}`);
+        }  
+      
+}
   // handle global search
   handlebooksearch = async(accession_no, event) => {
     event.preventDefault();
@@ -183,154 +215,27 @@ toUpperCase = () => {
   
 
 
-            <Page title="Edit Book" breadcrumbs={[{ name: 'Edit Book', active: true }]}>
-      <Row>
-        <Col xl={12} lg={12} md={12}>
-          <Card>
-            <CardHeader>Book Details</CardHeader>
-            <CardBody>
-            <form onSubmit={event => this.handlebooksearch(this.state.Search_Value, event)}>
-         
-     
-         <input type="text" className="search-input-ed" 
-         placeholder="Enter the Accession No to Search"  
-         name="Search_Value"
-         value={this.state.Search_Value}          
-         onChange={this.handleChange}/>
-         
-        <button type="submit" className="searchButton">
-   
-         <i className="fa fa-search" /> Search
-        </button>
-               
-     <h3>  {this.state.Search_Output_Msg} </h3>
+            <Page title="Dashboard" breadcrumbs={[{ name: 'Dashboard', active: true }]}>
+            <Table >
+                        <tbody>
+                          <tr>
+                          <th className="table-head-btitle">Book Title</th>
+                          <th className="table-head-atitle">Author Name</th>
+                          <th className="table-head-cls">Clasification</th>
+                          <th className="table-head-scope">Scope</th>
+                          <th className="table-head-stat">Status</th>
+                          </tr>
     
-   
-   </form>
-            <form onSubmit={event => this.handleUpdateSubmit(event)}> 
-            <FormGroup>
-                  <Label for="accessionNo">Accession No</Label>
-                  <Input
-                    type="text"
-                    name="Accession_No"
-                    value={this.state.Accession_No}
-                    
-                    onChange={this.handleChange}
-                    disabled
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="bookTitle">Book Title</Label>
-                  <Input
-                    type="text"
-                    name="Book_Title"
-                    placeholder="Book Title"
-                    value={this.state.Book_Title}
-
-                    onChange={this.handleChange}  
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="bookAuthor">Author</Label>
-                  <Input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={this.state.firstName}
-                    onChange={this.handleChange}
-                      
-                  />
-                  <Input
-                    type="text"
-                    name="secondName"
-                    placeholder="Second Name"
-                    value={this.state.secondName}
-                    onChange={this.handleChange}
-                      
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="clsNo">Classification</Label>
-                  <Input
-                    type="text"
-                    name="Book_Classification_No"
-                    id="clsId"
-                    placeholder="Classification"
-                    value={this.state.Book_Classification_No}
-                    onChange={this.handleChange}
-                      
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="clsNo" >Department</Label>
-                  
-                </FormGroup>
-                <FormGroup>
-                  <Label for="scope">Scope</Label>
-                  <Input type="select" name="Book_Scope"
-                   value={this.state.Book_Scope}
-                   onChange={this.handleChange}
-                     
-                  >
-                    <option>Circulation</option>
-                    <option>Reference</option>
-                  </Input>
-                </FormGroup>
-                
-                <FormGroup>
-                  <Label for="publication">Publication</Label>
-                  <Input
-                    type="text"
-                    name="Book_Publisher"
-                    value={this.state.Book_Publisher}
-                    onChange={this.handleChange}
-                 
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="location">Location</Label>
-                  <Input
-                    type="text"
-                    name="location"
-                  />
-                  </FormGroup>
-                
-                <FormGroup>
-                  <Label for="yop">Year of Publication</Label>
-                  <Input
-                    type="number"
-                    name="Publishing_Year"
-                      min={1000}
-                      max={9999}
-                    value={this.state.Publishing_Year}
-                    onChange={this.handleChange}
-                      
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="price">Price</Label>
-                  <Input
-                    type="number"
-                    name="price"
-                    
-                    placeholder="Price"
-                    value={this.state.newbook.Book_Publisher_Price}
-                    onChange={this.onAddBookPublisherChangePrice}
-                    
-                  />
-                </FormGroup>
-                <FormGroup check row>
-                  <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Submit</Button>
-                  </Col>
-                </FormGroup>
-              </form>
-            </CardBody>
-          </Card>
-        </Col>           
-      </Row>
+                        
+                  </tbody></Table>              
+                                {booklist}
+                                  
+                          
+                              
+       
+       
+    <Bookquery/>
+    
     </Page>
     </div>
         )

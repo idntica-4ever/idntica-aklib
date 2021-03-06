@@ -17,7 +17,7 @@ export default class NewUserList extends Component {
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateProduct(this.props.email_id, this.props.username, this.state.updatedcomments);
+    this.props.handleEnableProduct(this.props.Username);
   }
 
   onAddComments = event => this.setState({ "updatedcomments": event.target.value });
@@ -31,26 +31,10 @@ export default class NewUserList extends Component {
                       
                           <tr >
                            
-                             <td className="book-title-sps">
-                               {this.props.username} 
-                               </td>
-                           
-                              
-                               
                                  <td className="author-title-sps">
-                               {this.props.email_id} 
+                               {this.props.Username} 
                                </td>
                                
-                               <td className="book-title-sps">
-                               {this.props.user_category} 
-                               </td>
-                           
-                              
-                               
-                               <td className="book-title-sps">
-                               {this.props.user_batch} 
-                               </td>
-                           
                               
                                
                                  <td className="author-title-sps">
@@ -60,7 +44,7 @@ export default class NewUserList extends Component {
            
             <button type="submit" 
                 className="button-approve is-info is-small"
-                onClick={event => this.props.handleUpdateProduct(this.props.email_id, this.props.username, event)}
+                onClick={event => this.props.handleEnableProduct(this.props.Username, event)}
               >Approve</button>
              </Fragment>
         }
@@ -72,7 +56,7 @@ export default class NewUserList extends Component {
           <Fragment>
             
             <button type="submit"  className="button-del is-info is-small" 
-            onClick={event => this.props.handleDeleteProduct(this.props.email_id, this.props.username, event)} >Delete</button>
+            onClick={event => this.props.handleDeleteProduct(this.props.email_id, event)} >Delete</button>
           </Fragment>
         }
                                </td>

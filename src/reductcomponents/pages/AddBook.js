@@ -2,27 +2,28 @@ import Page from '../../components/AdminView/Page';
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
 import { Auth } from "aws-amplify";
-
 import { Button, Card, CardBody, CardHeader, Col, Form, FormFeedback, FormGroup, FormText, Input, Label, Row, } from 'reactstrap';
 
 const config = require('../../config.json');
 var key_value=0;
+
 export default class AddBook extends Component {
 
   state = {
     newbook: {  
-    "accession_no": "",
+    "Accession_No": "",
     "Author_Title": "",
     "Book_Author":"",
     "Book_Author_First": "",
     "Book_Author_Second":"",
     "Book_Classification_No": "",
-    "Book_Publisher_Year": "",
+    "Publishing_Year": "",
     "Book_Publisher_Price": "",
     "Book_Scope": "",
     "Book_Status": "",
     "Book_Title": "",
-    "PK": ""
+    "PK": "",
+    "username":""
     },
     newbooks: []
 
@@ -68,8 +69,10 @@ toUpperCase = () => {
     "Book_Scope": this.state.newbook.Book_Scope,
     "Book_Status": "Available",
     "Book_Title": book_booktitle_upper,
+    "Publishing_Year":this.state.newbook.Publishing_Year,
     "updated_on": now,
-    "PK": "AK_Library#001"
+    "username": "NA",
+    "PK": "AKLibrary"
       };
 
       console.log("Inputs received :", params);
@@ -114,7 +117,7 @@ toUpperCase = () => {
 
   onAddBookAccessionNoChange = event => this.setState({ newbook: { ...this.state.newbook, "accession_no": event.target.value } });
   onAddBookClassificationNoChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Classification_No": event.target.value } });
-  onAddBookPublisherChangeYear = event => this.setState({ newbook: { ...this.state.newbook, "Book_Publisher_Year": event.target.value } });
+  onAddBookPublisherChangeYear = event => this.setState({ newbook: { ...this.state.newbook, "Publishing_Year": event.target.value } });
   onAddBookPublisherChangePrice = event => this.setState({ newbook: { ...this.state.newbook, "Book_Publisher_Price": event.target.value } });
 
   onAddBookScopeChange = event => this.setState({ newbook: { ...this.state.newbook, "Book_Scope": event.target.value } });
@@ -229,11 +232,11 @@ render() {
                   <Label for="yop">Year of Publication</Label>
                   <Input
                     type="number"
-                    type='number'
+                    name='pub_year'
                       min={1000}
                       max={9999}
                     placeholder="Year of Publication"
-                    value={this.state.newbook.Book_Publisher_year}
+                    value={this.state.newbook.Publishing_year}
                     onChange={this.onAddBookPublisherChangeYear}
                       
                   />
