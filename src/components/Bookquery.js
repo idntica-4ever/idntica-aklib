@@ -55,8 +55,8 @@ export default class SearchList extends Component {
       <div className="container">
               
 
-
- 
+<div className="bg-container">
+  
 {tableTypes.map((tableType, index) => (
         <Row key={index}>
           
@@ -103,6 +103,63 @@ export default class SearchList extends Component {
                  </Row>
       ))}
        
+</div>
+
+
+<div className="sm-container">
+  
+{tableTypes.map((tableType, index) => (
+        <Row key={index}>
+          
+            
+<Table {...{ [tableType || 'default']: true }}>
+                       
+                        <tbody>
+                       
+                           <tr >
+                            
+                              <td className="book-title-sps">
+                                {this.props.Book_Title} 
+                                </td>
+                            
+                               
+                                
+                                  <td className="author-title-sps">
+                                {this.props.Book_Author} 
+                                </td>
+                                
+                               
+                                
+                                <td className="book-cls-sps">
+                                {this.props.Book_Classification_No} 
+                                </td>
+                                
+                               
+                                <td className="book-scope-sps">
+                                {this.props.Book_Scope} 
+                                </td>
+                               
+                                
+                                <td className="book-status-sps">
+                                {this.props.Book_Status} 
+                                </td>
+                               
+                              
+                               
+                           </tr>
+                            
+                           
+                          
+
+                         
+                          
+                        </tbody>
+                      </Table>
+                 </Row>
+      ))}
+       
+</div>
+ 
 </div>      
     )
   }

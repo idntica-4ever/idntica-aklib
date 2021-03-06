@@ -200,20 +200,20 @@ color: var(--mainBlue);
 
 
 .table-head-btitle{
-  width: 40%;
+  width: 50%;
   background-color: #99e1fd;
   
 }
 
 
 .table-head-atitle{
-  width: 20%;
+  width: 15%;
   background-color: #99e1fd;
   
 }
 
 .table-head-cls{
-  width: 10%;
+  width: 5%;
   background-color: #99e1fd;
   
 }
@@ -232,16 +232,16 @@ color: var(--mainBlue);
 
 
 .book-title-sps{
-  width: 40%;
+  width: 50%;
  
   
 }
 .author-title-sps{
-  width: 20%;
+  width: 15%;
   
 }
 .book-cls-sps{
-  width: 10%;
+  width: 5%;
 }
 .book-status-sps{
   width: 15%;
@@ -296,7 +296,10 @@ height: 40px;
 background-color: rgb(55, 9, 139);
 color: white !important;
 }
-
+.brand_name{
+  color: #2a2a72;
+  font-weight: bold;
+}
 @media only screen and (min-width:580px){
 .navbar-mobile{
   display:none;
@@ -349,7 +352,9 @@ color: white !important;
 
 }
 
-
+.sm-container{
+  display: none;
+}
 }
 
 @media only screen and ( max-width: 580px ) {   
@@ -399,6 +404,80 @@ height: 30px;
   width: 30%;
   
 }
+
+.book-title-sps{
+  width: 50% !important;
+ font-size: 10px;
+ 
+  
 }
-/* end templatemo 600 media quires */
+.author-title-sps{
+  width: 15% !important;
+  font-size: 10px;
+  
+}
+.book-cls-sps{
+  width: 5% !important;
+  font-size: 10px;
+}
+.book-status-sps{
+  width: 15% !important;
+  font-size: 10px;
+  
+}
+.book-scope-sps{
+ 
+  width: 15%;
+  font-size: 10px;
+  
+
+  
+}
+
+.table-head-btitle{
+  width: 50% !important;
+  font-size: 10px;
+}
+
+.table-head-atitle{
+  width: 15% !important;
+  font-size: 10px;
+  
+}
+
+.table-head-cls{
+  width: 5% !important;
+  font-size: 10px;
+  
+}
+
+.table-head-stat{
+  width: 15% !important;
+  font-size: 10px;
+  
+}
+
+.table-head-scope{
+  width: 15% !important;
+  font-size: 10px;
+  
+}
+
+
+.bg-container{
+  display: none;
+}
+.sm-container{
+  display: inherit !important;
+  font-size: 10px;
+ width: 100% !important;
+  
+  
+}
+.brand_name{
+  font-size: 14px !important;
+}
+
+}
+
 
