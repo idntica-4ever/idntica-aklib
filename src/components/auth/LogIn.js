@@ -53,9 +53,10 @@ class LogIn extends Component {
       this.setState({dispMsg:""});
    const user= await Auth.signIn(this.state.username, this.state.password);
    //console.log("success");
-   //console.log(user);
+   console.log(user);
    //console.log("success");
-   this.handleusercategorysearch(this.state.username);
+   //this.handleusercategorysearch(this.state.username);
+   this.context.setuserGroup(user.signInUserSession.idToken.payload['cognito:groups']);
    this.props.auth.setAuthStatus(true);
    this.props.auth.setUser(user);
   // console.log("success");
@@ -95,7 +96,7 @@ class LogIn extends Component {
        console.log("Fetching API");
        console.log("username received : ", username)
       // book_query=encodeURIComponent(book_query);
-       const res = await axios.get(`${config.api.invokeUrl}/user/${username}`, params);
+      // const res = await axios.get(`${config.api.invokeUrl}/user/${username}`, params);
       // console.log("Fetching API for query : ", email_id);
        //book_query=encodeURIComponent(book_query);
        //console.log("Encoded URL :", encodeURIComponent(book_query));
@@ -106,9 +107,9 @@ class LogIn extends Component {
        //console.log("data received:", res.data);
        //const arrBirdID = birds.map(bird => bird.ID);	     // Or, simply use bird.Name to get the values from the "Name" object in the JSON array.
 
-       const category = res.data.map(query => query.user_category);
+      // const category = res.data.map(query => query.user_category);
                     
-       console.log("User Category :", category);
+       //console.log("User Category :", category);
        
        //category="Admin" ? this.props.auth.setAdmin(true) : this.props.auth.setAdmin(false);
 // fetch logged in user details

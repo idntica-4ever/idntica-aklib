@@ -10,12 +10,11 @@ const ProductContext = React.createContext();;
 class ProductProvider extends Component {
     state={
         loggedUser:"Guest",
-        loggedPhone:"",
-        loggedEmail:"",
         userGroup:"NA",
         isAdmin:false,
         isLibrarian:false,
-        isAuthenticated:false
+        isAuthenticated:false,
+        familyName:""
         };
 
             setloggedUser=(type) => {
@@ -23,9 +22,6 @@ class ProductProvider extends Component {
                this.setState({loggedUser:tempType});
             
             }  
-
-      
-
             setIsAdmin=(type) => {
                 let tempType=type;
                 console.log("value received", type);
@@ -39,9 +35,11 @@ class ProductProvider extends Component {
             
             }
 
-            setuserGroup= async(type) => {
+            setuserGroup= async(type,familyname, username) => {
                 let tempType;
                 console.log("value received", type);
+                this.setState({loggedUser:username});
+                this.setState({familyName:familyname});
 
                 if (type===undefined){
                     tempType="NA";

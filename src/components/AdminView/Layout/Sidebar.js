@@ -50,8 +50,10 @@ const sidebarBackground = {
 };
 
 const navComponents = [
-  { to: '/UserApprovalPage', name: 'Add User', exact: false, Icon: MdRadioButtonChecked },
-  
+  { to: '/workprog', name: 'Add User', exact: false, Icon: MdRadioButtonChecked },
+  { to: '/usersearch', name: 'Search User', exact: false, Icon: MdRadioButtonChecked },
+  { to: '/manageuser', name: 'Manage User', exact: false, Icon: MdRadioButtonChecked },
+
   { to: '/workprog', name: 'Remove User', exact: false, Icon: MdChromeReaderMode },
   
 ];
@@ -114,7 +116,6 @@ class Sidebar extends React.Component {
         <ProductConsumer>
                         {(value)=>{
                                 const {userGroup, isAdmin, isLibrarian} = value;
-                                console.log("products", userGroup);
 return(
           <Nav vertical>
           

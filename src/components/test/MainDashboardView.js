@@ -14,6 +14,10 @@ const BadgePage = React.lazy(() => import('../../reductcomponents/pages/BadgePag
 const ButtonGroupPage = React.lazy(() => import('../../reductcomponents/pages/ButtonGroupPage'));
 const ButtonPage = React.lazy(() => import('../../reductcomponents/pages/ButtonPage'));
 const UserApprovalPage = React.lazy(() => import('../usermanagement/NewUserList'));
+const SearchUser = React.lazy(() => import('../../reductcomponents/pages/SearchUser'));
+const ManageUser = React.lazy(() => import('../../reductcomponents/pages/ManageUser'));
+
+
 const IssueBook = React.lazy(() => import('../../reductcomponents/pages/IssueBook'));
 const ChartPage = React.lazy(() => import('../../reductcomponents/pages/ChartPage'));
 const DashboardPage = React.lazy(() => import('../../reductcomponents/pages/DashboardPage'));
@@ -56,13 +60,17 @@ class MainDashboardView extends React.Component {
                 <AuthPage {...props} authState={STATE_SIGNUP} />
               )}
             />
-
+            
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/dashboard" component={DashboardTest} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/UserApprovalPage" component={UserApprovalPage} />
+                <Route exact path="/usersearch" component={SearchUser} />
+                <Route exact path="/manageuser" component={ManageUser} />
+
+
                 <Route exact path="/issue" component={IssueBook} />
                 <Route exact path="/return" component={ReturnBook} />
                 <Route exact path="/typography" component={TypographyPage} />

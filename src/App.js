@@ -26,7 +26,9 @@ import SearchBar from './components/SearchBar'
 import Search from './components/Search';
 import SearchList from './components/SearchList';
 
+import SignUp from './components/auth/SignUp';
 import SignupForm from './components/auth/SignupForm';
+
 import MainDashboardView from './components/test/MainDashboardView';
 
 import {ProductConsumer} from './Context';
@@ -86,8 +88,10 @@ async componentDidMount(){
     this.setUser(user);
     this.setAdmin(false);
    // this.context.setIsAuthenticated(true);
-
-    this.context.setuserGroup(user.signInUserSession.idToken.payload['cognito:groups']);
+   const userLevel=user.signInUserSession.idToken.payload['cognito:groups'];
+   const familyname=user.signInUserSession.idToken.payload.family_name;
+   const username=user.username;
+    this.context.setuserGroup(userLevel,familyname,username);
     console.log('user1:', user);
     //console.log('user info:', user.signInUserSession.idToken.payload)
     //console.log('user name :', user.signInUserSession.idToken.payload)
@@ -119,6 +123,8 @@ async componentDidMount(){
             <Switch>
              
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
+              <Route exact path="/signuptest" render={(props) => <SignUp {...props} auth={authProps} />} />
+
               <Route exact path="/signup" render={(props) => <SignupForm {...props} auth={authProps} />} />
               <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
               <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
