@@ -169,7 +169,7 @@ return(
             <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
-            >
+   >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdExtension className={bem.e('nav-item-icon')} />
@@ -238,8 +238,7 @@ return(
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
-                    exact={exact}
-                  >
+                    exact={exact} >
                     <Icon className={bem.e('nav-item-icon')} />
                     <span className="">{name}</span>
                   </BSNavLink>

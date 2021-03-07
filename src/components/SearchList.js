@@ -123,18 +123,31 @@ export default class SearchList extends Component {
 </form>
       
   
-    <Table >
+    <Table className="bg-container">
                         <tbody>
                           <tr>
                           <th className="table-head-btitle">Book Title</th>
-                          <th className="table-head-atitle">Author Name</th>
+                          <th className="table-head-atitle">Author</th>
                           <th className="table-head-cls">Clasification</th>
                           <th className="table-head-scope">Scope</th>
                           <th className="table-head-stat">Status</th>
                           </tr>
     
                         
-                  </tbody></Table>              
+                  </tbody></Table>      
+
+                  <Table className="sm-container">
+                        <tbody>
+                          <tr>
+                          <th className="table-head-btitle">Title</th>
+                          <th className="table-head-atitle">Author</th>
+                          <th className="table-head-cls">CLS</th>
+                          <th className="table-head-scope">Scope</th>
+                          <th className="table-head-stat">Status</th>
+                          </tr>
+    
+                        
+                  </tbody></Table>        
                                 {booklist}
                                   
                           

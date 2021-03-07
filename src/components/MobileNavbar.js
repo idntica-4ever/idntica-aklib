@@ -142,10 +142,13 @@ export default class MobileNavbar extends Component {
   </div>
   <div className="navbar-mobile">
   <Navbar className="navigation__navbar" light expand="md">
-      <center>ARULKADAL INIGO LIBRARY <br></br>
+    <div className="brand_name">
+    <center>ARULKADAL INIGO LIBRARY <br></br>
    
 
-அருள்கடல் இனிகோ நூலகம் </center>      
+   அருள்கடல் இனிகோ நூலகம் </center>    
+    </div>
+       
            <NavbarToggler onClick={this.toggleNavbar}  />
             <Collapse isOpen={!this.state.collapsed} navbar>   
             <Nav className="ml-auto" navbar> 
@@ -157,7 +160,8 @@ export default class MobileNavbar extends Component {
                     
                     {!this.props.auth.isAuthenticated && (    
                    
-                    <Link  className="nav-link navigation__navlinks" to="/">
+                    <Link  className="nav-link navigation__navlinks" to="/"
+                    onClick={this.toggleNavbar} >
                           Home
                     </Link>
                    
@@ -182,7 +186,7 @@ export default class MobileNavbar extends Component {
                  
 {!this.props.auth.isAuthenticated && (
                   <Link  className="nav-link navigation__navlinks" 
-                  onClick={this.closeNavbar}
+                  onClick={this.toggleNavbar} 
                   to="/login">
                   Login
               </Link>
@@ -203,7 +207,7 @@ export default class MobileNavbar extends Component {
 <NavItem>
 
                  <Link 
-                  onClick={this.closeNavbar}
+                   onClick={this.toggleNavbar} 
                   className="nav-link navigation__navlinks" to="/signup">
                  Register
              </Link>
@@ -216,7 +220,7 @@ export default class MobileNavbar extends Component {
                  
 
                   <Link  
-                  onClick={this.closeNavbar}
+                   onClick={this.toggleNavbar} 
                   className="nav-link navigation__navlinks" to="/search">
                   Search
               </Link>
