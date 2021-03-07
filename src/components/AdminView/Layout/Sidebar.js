@@ -51,11 +51,7 @@ const sidebarBackground = {
 
 const navComponents = [
   { to: '/workprog', name: 'Add User', exact: false, Icon: MdRadioButtonChecked },
-  { to: '/usersearch', name: 'Search User', exact: false, Icon: MdRadioButtonChecked },
-  { to: '/manageuser', name: 'Manage User', exact: false, Icon: MdRadioButtonChecked },
-
-  { to: '/workprog', name: 'Remove User', exact: false, Icon: MdChromeReaderMode },
-  
+  { to: '/manageuser', name: 'Manage User', exact: false, Icon: MdRadioButtonChecked },  
 ];
 
 const navContents = [

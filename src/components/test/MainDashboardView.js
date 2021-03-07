@@ -67,8 +67,7 @@ class MainDashboardView extends React.Component {
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/UserApprovalPage" component={UserApprovalPage} />
-                <Route exact path="/usersearch" component={SearchUser} />
-                <Route exact path="/manageuser" component={ManageUser} />
+                <Route exact path="/manageuser" component={SearchUser} />
 
 
                 <Route exact path="/issue" component={IssueBook} />
