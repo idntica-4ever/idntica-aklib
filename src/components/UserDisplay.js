@@ -10,6 +10,7 @@ import {
   todosData,
   userProgressTableData,
 } from '../reductcomponents/demos/dashboardPage';
+
 import {
   Badge,
   Button,
@@ -22,6 +23,7 @@ import {
   Col,
   ListGroup,
   ListGroupItem,
+  Input,
   Row,
 } from 'reactstrap';
 
@@ -29,24 +31,34 @@ const tableTypes = ['hover'];
 export default class UserDisplay extends Component {
 
   state = {
-    isEditMode: false,
+    isEditMode: true,
     updatedname: this.props.query_followup,
-    updatedquery: this.props.query_status
+    updatedquery: this.props.query_status,
+    user_role:this.props.user_role,
+    buttonValue:"Edit"
+
   }
 
-  handleProductEdit = event => {
+  componentDidMount(){
+    this.setState({user_role:this.props.user_role});
+  }
+  handleUserEdit = event => {
     event.preventDefault();
-    this.setState({ isEditMode: true });
+    this.setState({buttonValue:"Save"});
+    this.setState({ isEditMode: false });
   }
 
   handleEditSave = event => {
     event.preventDefault();
-    this.setState({ isEditMode: false });
-    this.props.handleUpdateProduct(this.props.query_id, this.state.updatedname, this.state.updatedquery);
+    this.setState({buttonValue:"Edit"});
+    this.setState({ isEditMode: true });
+    console.log("User Role :", this.state.user_role);
+    this.props.handleUpdateUser(this.props.loginid, this.state.user_role);
   }
 
   onAddProductNameChange = event => this.setState({ "updatedname": event.target.value });
   onAddProductQueryChange = event => this.setState({ "updatedquery": event.target.value });
+  onInputChange = event => this.setState({[event.target.id]:event.target.value});
 
   render() {
  
@@ -78,7 +90,14 @@ export default class UserDisplay extends Component {
                                 {this.props.phoneno} 
                                 </td>
                                 <td className="book-cls-sps">
-                                {this.props.role} 
+                                <Input type="select" name="user_role" id="user_role"
+                   value={this.props.user_role} 
+                   onChange={this.onInputChange} disabled={this.state.isEditMode}>
+                    <option>Guest</option>
+                    <option>Student</option>
+                    <option>Staff</option>
+
+                  </Input>
                                 </td>
                                 <td className="book-cls-sps">
                                 {this.props.status} 
@@ -86,8 +105,8 @@ export default class UserDisplay extends Component {
                                 <td>
            <button type="submit" 
                className="button-approve is-info is-small"
-               onClick={event => this.props.handleEditUser(this.props.loginid, event)}
-             >Edit</button>
+               onClick={event => {this.state.buttonValue==="Edit"?this.handleUserEdit(event):this.handleEditSave(event)}}
+             >{this.state.buttonValue}</button>
             </td>                                
             <td>  <button type="submit"  className="button-del is-info is-small" 
             onClick={event => this.props.handleDeleteUser(this.props.loginid, event)} >Delete</button></td>

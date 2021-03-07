@@ -9,6 +9,8 @@ const config = require('../../config.json');
 
 
 class LogIn extends Component {
+  static contextType = ProductConsumer;
+
   state = {
     username: "",
     password: "",
@@ -51,12 +53,20 @@ class LogIn extends Component {
     try{
     //  console.log("inside submit method");
       this.setState({dispMsg:""});
-   const user= await Auth.signIn(this.state.username, this.state.password);
+   const user1= await Auth.signIn(this.state.username, this.state.password);
    //console.log("success");
-   console.log(user);
+   //console.log(user1);
    //console.log("success");
    //this.handleusercategorysearch(this.state.username);
-   this.context.setuserGroup(user.signInUserSession.idToken.payload['cognito:groups']);
+   const user = await Auth.currentAuthenticatedUser();
+   // this.setUser(user);
+    //this.setAdmin(false);
+   // this.context.setIsAuthenticated(true);
+   const userLevel=user.signInUserSession.idToken.payload['cognito:groups'];
+   const familyname=user.signInUserSession.idToken.payload.family_name;
+   const username=user.username;
+    
+   this.context.setuserGroup(userLevel,familyname,username);
    this.props.auth.setAuthStatus(true);
    this.props.auth.setUser(user);
   // console.log("success");

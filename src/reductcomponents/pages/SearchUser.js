@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 import UserDisplay from '../../components/UserDisplay';
 import { Auth } from 'aws-amplify';
-
 //import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Table} from 'react-bootstrap';
 import {ProductConsumer} from '../../Context';
-
-
-import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Form,
-    FormFeedback,
-    FormGroup,
-    FormText,
-    Input,
-    Label,
-    Row,
-  } from 'reactstrap';
-  const userquery='';
-  require('dotenv').config();
+import {Button,Card,CardBody,CardHeader,Col,Form,FormFeedback,FormGroup,FormText,Input,Label,Row,} from 'reactstrap';
+const userquery='';
+require('dotenv').config();
 
 const config = require('../../config.json');
 
@@ -38,9 +22,53 @@ export default class SearchUser extends Component {
         },
         privilagedUser:"",
         dispMsg:"",
+        familyName:"",
         users: [],
         booklst: []
       }
+
+      handleUpdateUser = async (loginid, user_role) => {
+        //setting up new login account
+       // await this.fetchUserId();
+       // const now = new Date();
+       // const username = user_name;
+        // add call to AWS API Gateway update product endpoint here
+        const familyname=this.state.familyName;
+        const session = await Auth.currentSession();
+      // console.log("Session :", session.accessToken.payload.username);
+      // console.log("Session :", session.idToken.jwtToken);
+      const access_token=session.idToken.jwtToken;
+      const username=session.accessToken.payload.username;
+      
+
+        try {
+          const params = {
+            "loginid": loginid,
+            "user_role":user_role,
+            "familyname":familyname
+          };
+          console.log("Inputs received :", params);
+          const userid=loginid
+          //console.log("processing update for email ID : ", this.state.loginid);
+          await axios.patch(`${process.env.REACT_APP_API_URL}/inigolibrary/users/manage/${userid}`, params,{
+            headers: {
+              Authorization: access_token,
+              'x-api-key':process.env.REACT_APP_API_KEY
+            }
+          });
+        //  this.handleSignUp(email_id);inigolibrary/users/manage/{userid}  
+    
+          const productToUpdate = [...this.state.users].find(searchresult => searchresult.loginid === loginid);
+          const updatedProducts = [...this.state.users].filter(searchresult => searchresult.loginid !== loginid);
+          productToUpdate.user_role = this.state.user_role;
+          updatedProducts.push(productToUpdate);
+          this.setState({users: updatedProducts});
+          //this.fetchProducts();
+        }catch (err) {
+          console.log(`Error updating product: ${err}`);
+        }
+      }
+    
 
       handleDeleteUser = async (loginid, event) => {
         event.preventDefault();
@@ -52,9 +80,16 @@ export default class SearchUser extends Component {
       // console.log("Session :", session.accessToken.payload.username);
       // console.log("Session :", session.idToken.jwtToken);
       const access_token=session.idToken.jwtToken;
+      const username=session.accessToken.payload.username;
+      const familyname=this.state.familyName;
+
+      if (username===loginid)
+      {
+      alert("You cannot delete your own account");
+        }else{
       
        try {
-          await axios.delete(`${process.env.REACT_APP_API_URL}/inigolibrary/users/manage/${userid}`,{
+          await axios.delete(`${process.env.REACT_APP_API_URL}/inigolibrary/users/manage?loginid=${userid}&familyname=${familyname}`,{
             headers: {
               Authorization: access_token,
               'x-api-key':process.env.REACT_APP_API_KEY
@@ -66,27 +101,19 @@ export default class SearchUser extends Component {
           console.log(`Unable to delete product: ${err}`);
         }
       }
+      }
     
 
       // handle user search
       handleusersearch = async(familyname, event) => {
        event.preventDefault();
-      // email_id ? alert ("Empty") : alert("value is there")
-
-       // const book_query_upper= book_query.toUpperCase();
        this.setState({dispMsg:""});
        this.setState({users:[]});
-
+       this.setState({familyName:familyname});
        const searchvalue = this.state.searchvalue;
        const searchoption= this.state.searchoption;
-      // console.log ("Book Query Received", this.state.searchoption);
       const session = await Auth.currentSession();
-      // console.log("Session :", session.accessToken.payload.username);
-      // console.log("Session :", session.idToken.jwtToken);
       const access_token=session.idToken.jwtToken;
-      // const orderedby=session.accessToken.payload.username;
-    
-
         if(searchvalue==="")
         {
           this.setState({dispMsg:"Enter the value to search"});
@@ -98,26 +125,18 @@ export default class SearchUser extends Component {
             "searchoption": searchoption,
             "familyName": familyname
             };
-    
-          console.log("PArams API", searchParams);
-         // const validateResponse = await axios.get(`${config.api.invokeUrl}/user/search?searchkey=${username}&searchoption=${searchoption}`, params);
-         // const validateResponse = await axios.get(`${config.api.invokeUrl}/user/search`, { params:{searchparams}});
-          const validateResponse = await axios.get(`${process.env.REACT_APP_API_URL}/inigolibrary/users/manage?searchkey=${searchvalue}&searchoption=${searchoption}&familyName=${familyname}`,{
+           const validateResponse = await axios.get(`${process.env.REACT_APP_API_URL}/inigolibrary/users/manage?searchkey=${searchvalue}&searchoption=${searchoption}&familyName=${familyname}`,{
             headers: {
               Authorization: access_token,
               'x-api-key':process.env.REACT_APP_API_KEY
             }
           });
-
-        //  console.log("Validate Response :", validateResponse);
             if(validateResponse.data.length<1)
             {
               this.setState({dispMsg:"No User Records found"});
             }else {
                 this.setState({users:validateResponse.data})
-             // console.log("Testing",validateResponse);
-            }
-         
+            }         
         } catch (error) {
           console.log(`An error has occurred: ${error}`);
         }
@@ -230,7 +249,7 @@ return(
                   {this.state.users && this.state.users.length > 0
         ?this.state.users.map(searchresult => <UserDisplay loginid= {searchresult.loginid} 
           userfullname={searchresult.userfullname} emailid={searchresult.emailid} 
-          phoneno={searchresult.phoneno} role={searchresult.role}
+          phoneno={searchresult.phoneno} user_role={searchresult.user_role}
           status={searchresult.account_status} 
           handleUpdateUser={this.handleUpdateUser}
           handleDeleteUser={this.handleDeleteUser} 
